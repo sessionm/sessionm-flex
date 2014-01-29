@@ -1,0 +1,9 @@
+target
+build
+
+syntax: glob
+*-local.xml
+*.iml
+.DS_Store
+.idea
+
