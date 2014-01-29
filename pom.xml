@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.ludia.client</groupId>
+        <artifactId>flash-pom</artifactId>
+        <version>0.3</version>
+    </parent>
+
+    <groupId>com.ludia.client</groupId>
+    <artifactId>sessionm-parent</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0.0-SNAPSHOT</version>
+    <description>AIR SessionM SDK</description>
+
+    <scm>
+        <connection>scm:hg:ssh://hg@bitbucket.org/Ludia/air-ship</connection>
+        <url>https://bitbucket.org/Ludia/air-ship</url>
+    </scm>
+
+    <properties>
+        <android.version>4.1.1.4</android.version>
+        <android.sdk>/opt/android-sdk/</android.sdk>
+        <extension.versionNumber>0.0.1</extension.versionNumber>
+        <air.version>4.0</air.version>
+        <flex.sdk.version>4.6.b.23201</flex.sdk.version>
+    </properties>
+
+    <modules>
+        <module>sessionm-android</module>
+        <module>sessionm-actionscript</module>
+        <module>sessionm</module>
+        <module>sessionm-example</module>
+    </modules>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.yelbota.plugins</groupId>
+                <artifactId>adt-maven-plugin</artifactId>
+                <version>1.0.7</version>
+                <executions>
+                    <execution>
+                        <id>unpack-air-sdk</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${user.home}</outputDirectory>
+                            <sdkVersion>${air.version}</sdkVersion>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.adobe.air</groupId>
+                        <artifactId>air-sdk</artifactId>
+                        <version>${air.version}</version>
+                        <type>tbz2</type>
+                        <classifier>mac</classifier>
+                    </dependency>
+                </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>add-flash-runtime-extensions-jar</id>
+                        <phase>validate</phase>
+                        <goals>
+                            <goal>install-file</goal>
+                        </goals>
+                        <configuration>
+                            <file>${user.home}/air-sdk-${air.version}/lib/android/FlashRuntimeExtensions.jar</file>
+                            <groupId>com.adobe.air</groupId>
+                            <artifactId>flash-runtime-extensions</artifactId>
+                            <version>${air.version}</version>
+                            <packaging>jar</packaging>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>ludia-public</id>
+            <name>Ludia Public Repository</name>
+            <url>https://nexus.socialludia.com/content/groups/public/</url>
+            <snapshots>
+                <updatePolicy>never</updatePolicy>
+            </snapshots>
+            <releases>
+                <updatePolicy>always</updatePolicy>
+            </releases>
+        </repository>
+    </repositories>
+
+</project>

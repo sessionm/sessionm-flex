@@ -1,0 +1,16 @@
+<extension xmlns="http://ns.adobe.com/air/extension/3.5">
+    <id>${project.groupId}.${project.artifactId}</id>
+    <versionNumber>${extension.versionNumber}</versionNumber>
+    <platforms>
+        <platform name="Android-ARM">
+            <applicationDeployment>
+                <nativeLibrary>sessionm-android.jar</nativeLibrary>
+                <initializer>ludia.sessionm.SessionMExtension</initializer>
+                <finalizer>ludia.sessionm.SessionMExtension</finalizer>
+            </applicationDeployment>
+        </platform>
+        <platform name="default">
+            <applicationDeployment/>
+        </platform>
+    </platforms>
+</extension>

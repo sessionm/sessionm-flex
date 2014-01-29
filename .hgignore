@@ -1,5 +1,7 @@
 target
 build
+gen
+dependency-reduced-pom.xml
 
 syntax: glob
 *-local.xml

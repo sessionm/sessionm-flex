@@ -1,0 +1,67 @@
+<assembly xmlns="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/plugins/maven-assembly-plugin/assembly/1.1.0 http://maven.apache.org/xsd/assembly-1.1.0.xsd">
+
+    <!-- Very important : the name of the folder when the created archive is unpacked -->
+    <formats>
+        <format>dir</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <baseDirectory></baseDirectory>
+    <!-- Produces an output of the form :
+        sessionm/target/
+        |~~ extension.xml
+        |~~ sessionm
+        |   |~~ android
+        |   |   |~~ library.swf
+        |   |   `~~ sessionm-android.jar
+        |   |~~ default
+        |   |   `~~ library.swf
+        |   `~~ sessionm-actionscript.swc
+        `~~ sessionm-1.0-SNAPSHOT.ane
+    -->
+    <!-- Prepare files for ANE packaging (SWC and JAR are project dependencies) -->
+    <dependencySets>
+        <!-- Android: Copies the JAR file into /sessionm/android/ -->
+        <dependencySet>
+            <outputDirectory>android</outputDirectory>
+            <includes>
+                <include>*:sessionm-android</include>
+            </includes>
+            <outputFileNameMapping>${artifact.artifactId}.jar</outputFileNameMapping>
+        </dependencySet>
+        <!-- Android: Unzips the SWC file into /sessionm/android for AS wrapper -->
+        <dependencySet>
+            <outputDirectory>android</outputDirectory>
+            <includes>
+                <include>*:sessionm-actionscript</include>
+            </includes>
+            <unpack>true</unpack>
+            <unpackOptions>
+                <includes>
+                    <include>*.swf</include>
+                </includes>
+            </unpackOptions>
+        </dependencySet>
+        <!-- Default: Unzips the SWC file into /sessionm/default (the AS code handles unavailable context) -->
+        <dependencySet>
+            <outputDirectory>default</outputDirectory>
+            <includes>
+                <include>*:sessionm-actionscript</include>
+            </includes>
+            <unpack>true</unpack>
+            <unpackOptions>
+                <includes>
+                    <include>*.swf</include>
+                </includes>
+            </unpackOptions>
+        </dependencySet>
+        <!-- Copies the AS wrapper SWC file (also required by ADT to package the ANE) -->
+        <dependencySet>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>*:sessionm-actionscript</include>
+            </includes>
+            <outputFileNameMapping>${artifact.artifactId}.swc</outputFileNameMapping>
+        </dependencySet>
+    </dependencySets>
+</assembly>
