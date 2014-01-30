@@ -10,6 +10,7 @@ import ludia.sessionm.ActivityType;
 
 import ludia.sessionm.SessionM;
 import ludia.sessionm.event.AchievementEvent;
+import ludia.sessionm.event.ActivityEvent;
 import ludia.sessionm.event.SessionEvent;
 import ludia.sessionm.event.UserEvent;
 
@@ -43,15 +44,15 @@ public class Main extends Sprite {
     }
 
     protected function sessionM_sessionStateChangedHandler(event:SessionEvent):void {
-        txtStatus.appendText("\n" + event.state);
+        txtStatus.appendText("\nSession state updated: " + event.state);
     }
 
     protected function sessionM_userUpdatedHandler(event:UserEvent):void {
-        txtStatus.appendText("\n" + event.user.toString());
+        txtStatus.appendText("\nUser updated: " + event.user.pointBalance + " mPOINTS, " + event.user.unclaimedAchievementCount + " unclaimed achievement(s)");
     }
 
     private function sessionM_unclaimedAchievementHandler(event:AchievementEvent):void {
-        txtStatus.appendText("\n" + event.achievement);
+        txtStatus.appendText("\nUnclaimed achievement: " + event.achievement.name);
     }
 
     public function logAction():void {
@@ -59,15 +60,37 @@ public class Main extends Sprite {
     }
 
     public function getSessionState():void {
-        txtStatus.appendText("\n" + sessionM.getSessionState());
+        txtStatus.appendText("\nSession state: " + sessionM.getSessionState());
     }
 
     private function presentPortal():void {
+        sessionM.addEventListener(ActivityEvent.ACTIVITY_DISMISSED, sessionM_activityDismissedHandler);
+        sessionM.addEventListener(ActivityEvent.ACTIVITY_PRESENTED, sessionM_activityPresentedHandler);
+        sessionM.addEventListener(ActivityEvent.USER_ACTION, sessionM_userActionHandler);
         sessionM.presentActivity(ActivityType.PORTAL);
     }
 
     private function presentAchievement():void {
+        sessionM.addEventListener(ActivityEvent.ACTIVITY_DISMISSED, sessionM_activityDismissedHandler);
+        sessionM.addEventListener(ActivityEvent.ACTIVITY_PRESENTED, sessionM_activityPresentedHandler);
+        sessionM.addEventListener(ActivityEvent.USER_ACTION, sessionM_userActionHandler);
         sessionM.presentActivity(ActivityType.ACHIEVEMENT);
+    }
+
+    protected function sessionM_activityDismissedHandler(event:ActivityEvent):void {
+        txtStatus.appendText("\nActivity dismissed");
+    }
+
+    protected function sessionM_activityPresentedHandler(event:ActivityEvent):void {
+        txtStatus.appendText("\nActivity presented");
+    }
+
+    protected function sessionM_userActionHandler(event:ActivityEvent):void {
+        txtStatus.appendText("\nUser action: " + event.userAction);
+    }
+
+    private function getActivityType():void {
+        txtStatus.appendText("\nActivity type: " + sessionM.getCurrentActivityType());
     }
 
     /** Create UI */
@@ -75,7 +98,7 @@ public class Main extends Sprite {
     {
         stage.align = StageAlign.TOP_LEFT;
         txtStatus=new TextField();
-        txtStatus.defaultTextFormat=new TextFormat("Arial",25);
+        txtStatus.defaultTextFormat=new TextFormat("Arial",20);
         txtStatus.width=stage.stageWidth;
         txtStatus.height=400;
         txtStatus.multiline=true;
@@ -95,6 +118,7 @@ public class Main extends Sprite {
         layout.addButton(new SimpleButton(new Command("Present portal", presentPortal)));
         layout.addButton(new SimpleButton(new Command("Present achievement", presentAchievement)));
         layout.addButton(new SimpleButton(new Command("Get session state", getSessionState)));
+        layout.addButton(new SimpleButton(new Command("Get activity type", getActivityType)));
 
         layout.attach(buttonContainer);
         layout.layout();
