@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>sessionm-parent</artifactId>
         <groupId>com.ludia.client</groupId>
@@ -47,20 +48,37 @@
             <plugin>
                 <groupId>com.yelbota.plugins</groupId>
                 <artifactId>adt-maven-plugin</artifactId>
-                <version>1.0.7</version>
+                <version>${adtMavenPlugin.version}</version>
                 <configuration>
-                    <sdkVersion>3.5</sdkVersion>
+                    <sdkVersion>${air.version}</sdkVersion>
                 </configuration>
                 <executions>
                     <execution>
+                        <id>package-extension</id>
                         <goals>
-                            <goal>command</goal>
+                            <goal>package-ane</goal>
                         </goals>
-                        <phase>package</phase>
                         <configuration>
-                            <sdkVersion>${air.version}</sdkVersion>
-                            <arguments>-package -target ane ${project.build.outputDirectory}/${build.finalName}.ane ${project.build.outputDirectory}/extension.xml -swc ${project.build.outputDirectory}/sessionm/sessionm-actionscript.swc -platform Android-ARM -C ${project.build.outputDirectory}/sessionm/android . -platform default -C ${project.build.outputDirectory}/sessionm/default library.swf
-                            </arguments>
+                            <extensionSwc>${project.build.directory}/sessionm/default/sessionm-actionscript-${project.version}.swc</extensionSwc>
+                            <extensionDescriptor>${project.build.directory}/extension.xml</extensionDescriptor>
+                            <platforms>
+                                <platform>
+                                    <name>default</name>
+                                    <directory>${project.build.directory}/sessionm/default/</directory>
+                                    <extractLibrarySwf>true</extractLibrarySwf>
+                                </platform>
+                                <platform>
+                                    <name>Android-ARM</name>
+                                    <directory>${project.build.directory}/sessionm/android/</directory>
+                                    <extractLibrarySwf>true</extractLibrarySwf>
+                                </platform>
+                                <platform>
+                                    <name>iPhone-ARM</name>
+                                    <directory>${project.build.directory}/sessionm/ios/</directory>
+                                    <options>${project.build.directory}/platform-ios.xml</options>
+                                    <extractLibrarySwf>true</extractLibrarySwf>
+                                </platform>
+                            </platforms>
                         </configuration>
                     </execution>
                 </executions>
@@ -105,6 +123,19 @@
                     <artifactId>flash-runtime-extensions</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>sessionm-ios</artifactId>
+            <version>${project.version}</version>
+            <classifier>${ios.activeConfiguration}-iphoneos</classifier>
+            <type>a</type>
+        </dependency>
+        <dependency>
+            <groupId>com.sessionm</groupId>
+            <artifactId>ios-sdk</artifactId>
+            <version>1.9.3</version>
+            <type>a</type>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>

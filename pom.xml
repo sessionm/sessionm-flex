@@ -23,12 +23,24 @@
         <android.version>4.1.1.4</android.version>
         <android.sdk>/opt/android-sdk/</android.sdk>
         <extension.versionNumber>0.0.1</extension.versionNumber>
-        <air.version>4.0</air.version>
+        <air.version>3.8</air.version>
         <flex.sdk.version>4.6.b.23201</flex.sdk.version>
+        <adtMavenPlugin.version>1.0.8</adtMavenPlugin.version>
+        <ios.activeConfiguration>Debug</ios.activeConfiguration>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>release</id>
+            <properties>
+                <ios.activeConfiguration>Release</ios.activeConfiguration>
+            </properties>
+        </profile>
+    </profiles>
 
     <modules>
         <module>sessionm-android</module>
+        <module>sessionm-ios</module>
         <module>sessionm-actionscript</module>
         <module>sessionm</module>
         <module>sessionm-example</module>
@@ -39,7 +51,7 @@
             <plugin>
                 <groupId>com.yelbota.plugins</groupId>
                 <artifactId>adt-maven-plugin</artifactId>
-                <version>1.0.7</version>
+                <version>${adtMavenPlugin.version}</version>
                 <executions>
                     <execution>
                         <id>unpack-air-sdk</id>
