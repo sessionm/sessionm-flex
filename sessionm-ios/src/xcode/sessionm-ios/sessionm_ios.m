@@ -35,11 +35,12 @@
  * sessionm-ios
  *
  * Created by Antoine Lassauzay on 1/30/2014.
- * Copyright (c) 2014 __MyCompanyName__. All rights reserved.
+ * Copyright (c) 2014 Ludia. All rights reserved.
  */
 
 #import "sessionm_ios.h"
 #import "SessionM.h"
+#import "FlashRuntimeExtensions.h"
 
 /* sessionm-iosExtInitializer()
  * The extension initializer is called the first time the ActionScript side of the extension
@@ -84,6 +85,10 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
     static FRENamedFunction func[] = 
     {
         MAP_FUNCTION(startSession, NULL),
+        MAP_FUNCTION(isSupportedPlatform, NULL),
+        MAP_FUNCTION(logAction, NULL),
+        MAP_FUNCTION(presentActivity, NULL),
+        MAP_FUNCTION(dismissActivity, NULL),
     };
     
     *numFunctionsToTest = sizeof(func) / sizeof(FRENamedFunction);
@@ -101,40 +106,160 @@ void ContextFinalizer(FREContext ctx)
 {
     NSLog(@"Entering ContextFinalizer()");
 
-    // Nothing to clean up.
     NSLog(@"Exiting ContextFinalizer()");
     return;
 }
 
-
-/* This is a TEST function that is being included as part of this template. 
- *
- * Users of this template are expected to change this and add similar functions 
- * to be able to call the native functions in the ANE from their ActionScript code
- */
 ANE_FUNCTION(startSession)
 {
     NSLog(@"Entering startSession()");
+    SessionM *instance = [SessionM sharedInstance];
     
-    if(argc > 0)
+    if(instance)
     {
-        uint32_t len;
-        const uint8_t* token = 0;
-        if(FRE_OK == FREGetObjectAsUTF8(argv[0], &len, &token))
+        if(argc > 0)
         {
-            NSLog(@"Received appID %s", token);
-            SMStart([NSString stringWithUTF8String:(char *)token]);
+            uint32_t len;
+            const uint8_t* token = 0;
+            if(FRE_OK == FREGetObjectAsUTF8(argv[0], &len, &token))
+            {
+                NSLog(@"Received appID %s", token);
+                SMStart([NSString stringWithUTF8String:(char *)token]);
+            }
+            else
+            {
+                NSLog(@"Error when reading appID");
+            }
         }
         else
         {
-            NSLog(@"Error when reading appID");
+            NSLog(@"Missing appID argument");
         }
     }
     else
     {
-        NSLog(@"Missing appID argument");
+        NSLog(@"SessionM is not supported on this platform");
     }
     
 	return NULL;
+}
+
+ANE_FUNCTION(logAction)
+{
+    NSLog(@"Entering logAction()");
+    
+    SessionM *instance = [SessionM sharedInstance];
+    
+    if(instance)
+    {
+        if(argc > 0)
+        {
+            uint32_t len;
+            const uint8_t* token = 0;
+            if(FRE_OK == FREGetObjectAsUTF8(argv[0], &len, &token))
+            {
+                NSLog(@"Received action name %s", token);
+                SMAction([NSString stringWithUTF8String:(char *)token]);
+            }
+            else
+            {
+                NSLog(@"Error when reading action name");
+            }
+        }
+        else
+        {
+            NSLog(@"Missing action name argument");
+        }
+    }
+    else
+    {
+        NSLog(@"SessionM is not supported on this platform");
+    }
+    
+	return NULL;
+}
+
+
+ANE_FUNCTION(presentActivity)
+{
+    NSLog(@"Entering presentActivity()");
+    SessionM *instance = [SessionM sharedInstance];
+
+    if(instance)
+    {
+        if(argc > 0)
+        {
+            uint32_t len;
+            const uint8_t* token = 0;
+            if(FRE_OK == FREGetObjectAsUTF8(argv[0], &len, &token))
+            {
+                NSLog(@"Received activity type %s", token);
+                NSString *type = [NSString stringWithUTF8String:(char *)token];
+                
+                // replace this switch/case or a dictionary
+                if([type isEqualToString:@"ACHIEVEMENT"])
+                {
+                    [instance presentActivity:SMActivityTypeAchievement];
+                }
+                else if([type isEqualToString:@"PORTAL"])
+                {
+                    [instance presentActivity:SMActivityTypePortal];
+                }
+                else if([type isEqualToString:@"INTRODUCTION"])
+                {
+                    [instance presentActivity:SMActivityTypeIntroduction];
+                }
+                else
+                {
+                    NSLog(@"Invalid activity type %s", token);
+                }
+            }
+            else
+            {
+                NSLog(@"Error when reading action name");
+            }
+        }
+        else
+        {
+            NSLog(@"Missing action name argument");
+        }
+    }
+    else
+    {
+        NSLog(@"SessionM is not supported on this platform");
+    }
+    
+	return NULL;
+}
+
+ANE_FUNCTION(dismissActivity)
+{
+    SessionM *instance = [SessionM sharedInstance];
+    if(instance)
+    {
+        [instance dismissActivity];
+    }
+    else
+    {
+        NSLog(@"SessionM is not supported on this platform");
+    }
+
+    return NULL;
+}
+
+ANE_FUNCTION(isSupportedPlatform)
+{
+    BOOL isSupported = [SessionM isSupportedPlatform];
+    
+    FREObject* returnVal = malloc(sizeof(FREObject));
+    
+    if(FRE_OK == FRENewObjectFromBool(isSupported,returnVal))
+    {
+        return returnVal;
+    }
+    else
+    {
+        return NULL;
+    }
 }
 

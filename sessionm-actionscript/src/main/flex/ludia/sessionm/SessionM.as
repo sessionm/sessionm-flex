@@ -110,6 +110,19 @@ public class SessionM extends EventDispatcher implements ISessionM {
         return typeString;
     }
 
+
+    public function isSupportedPlatform():Boolean {
+        var supported:Boolean = false;
+        try {
+            supported = Boolean(context.call("isSupportedPlatform"));
+        }
+        catch (error:Error) {
+            logger.error("Unknown error: {0}", error);
+            supported = false;
+        }
+        return supported;
+    }
+
     /**
      * @private
      * @param event
@@ -196,7 +209,7 @@ public class SessionM extends EventDispatcher implements ISessionM {
     }
 
     public static function get isSupported():Boolean {
-        return Capabilities.manufacturer.indexOf("Android") > -1;
+        return Capabilities.manufacturer.indexOf("Android") > -1 || Capabilities.manufacturer.indexOf("iOS") > -1;
     }
 
     public function dispose():void {

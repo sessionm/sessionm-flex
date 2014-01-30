@@ -59,8 +59,8 @@ public class Main extends Sprite {
         sessionM.logAction("example");
     }
 
-    public function getSessionState():void {
-        txtStatus.appendText("\nSession state: " + sessionM.getSessionState());
+    public function isSupportedPlatform():void {
+        txtStatus.appendText("\nIs supported platform: " + sessionM.isSupportedPlatform());
     }
 
     private function presentPortal():void {
@@ -117,8 +117,7 @@ public class Main extends Sprite {
         layout.addButton(new SimpleButton(new Command("Log Action",logAction)));
         layout.addButton(new SimpleButton(new Command("Present portal", presentPortal)));
         layout.addButton(new SimpleButton(new Command("Present achievement", presentAchievement)));
-        layout.addButton(new SimpleButton(new Command("Get session state", getSessionState)));
-        layout.addButton(new SimpleButton(new Command("Get activity type", getActivityType)));
+        layout.addButton(new SimpleButton(new Command("Is supported platform", isSupportedPlatform)));
 
         layout.attach(buttonContainer);
         layout.layout();

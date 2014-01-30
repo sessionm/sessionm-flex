@@ -70,9 +70,8 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
 */
 void ContextFinalizer(FREContext ctx);
 
-/* This is a sample function that is being included as part of this template. 
- *
- * Users of this template are expected to change this and add similar functions 
- * to be able to call the native functions in the ANE from their ActionScript code
-*/
 ANE_FUNCTION(startSession);
+ANE_FUNCTION(logAction);
+ANE_FUNCTION(presentActivity);
+ANE_FUNCTION(dismissActivity);
+ANE_FUNCTION(isSupportedPlatform);
