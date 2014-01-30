@@ -33,13 +33,13 @@ public class SessionM extends EventDispatcher implements ISessionM {
     public function SessionM() {
         this.context = ExtensionContext.createExtensionContext(ID, null);
         try {
-            logger = Log.getLogger("ludia.sessionm.SessionM");
+            logger = Log.getLogger(ID);
         }
         catch (error:Error) {
             logger = new FallbackLogger();
         }
         if(!context) {
-            logger.debug("Context could not be created");
+            throw new Error("Un-supported platform, use isSupported property before creating a SessionM object");
         }
         else {
             this.context.addEventListener(StatusEvent.STATUS, statusHandler);
@@ -75,31 +75,65 @@ public class SessionM extends EventDispatcher implements ISessionM {
         callExtension("startSession", appID);
     }
 
+
+    public function getUser():User {
+        var user:User;
+        var userString:String;
+        try {
+            userString = String(context.call("getSessionState"));
+            if(userString) {
+                user = new User(JSON.parse(userString));
+            }
+        }
+        catch (error:Error) {
+            logger.error("Unknown error: {0}", error);
+            user = null;
+        }
+        return user;
+    }
+
+    public function getAchievement():Achievement {
+        return null;
+    }
+
+    public function getCurrentActivityType():String {
+        var typeString:String;
+        try {
+            typeString = String(context.call("getCurrentActivityType"));
+        }
+        catch (error:Error) {
+            logger.error("Unknown error: {0}", error);
+        }
+        if(!typeString) {
+            return null;
+        }
+        return typeString;
+    }
+
     /**
      * @private
      * @param event
      */
     protected function statusHandler(event:StatusEvent):void {
 
-        var type:String = event.code;
+        var code:String = event.code;
 
-        if(hasConstant(SessionEvent, type)) {
+        logger.debug("StatusEvent code={0} level={1}", code, event.level);
+
+        if(hasConstant(SessionEvent, code)) {
             manageStateChange(event);
         }
-        else if(hasConstant(UserEvent, type)) {
+        else if(hasConstant(UserEvent, code)) {
             manageUser(event);
         }
-        else if(hasConstant(AchievementEvent, type)) {
+        else if(hasConstant(AchievementEvent, code)) {
             manageAchievement(event);
         }
-        else if(hasConstant(ActivityEvent, type)) {
+        else if(hasConstant(ActivityEvent, code)) {
             manageActivity(event);
         }
-        else if(event.type == "LOG") {
+        else if(code == "LOG") {
             logger.debug(event.level);
-        }
-        else {
-            logger.debug("Un-managed event code={0} level={1}", event.code, event.level);
         }
     }
 
