@@ -7,6 +7,7 @@ import com.sessionm.api.SessionListener;
 import com.sessionm.api.SessionM;
 import com.sessionm.api.User;
 import ludia.sessionm.functions.*;
+import ludia.sessionm.util.SessionMDataUtil;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,6 +21,7 @@ public class SessionMExtensionContext extends FREContext implements SessionListe
     public static String SESSION_FAILED = "SESSION_FAILED";
     public static String USER_UPDATED = "USER_UPDATED";
     public static String UNCLAIMED_ACHIEVEMENT = "UNCLAIMED_ACHIEVEMENT";
+
 
     public SessionMExtensionContext()
     {
@@ -36,6 +38,9 @@ public class SessionMExtensionContext extends FREContext implements SessionListe
         map.put("logAction", new LogActionFunction());
         map.put("presentActivity", new PresentActivityFunction());
         map.put("getSessionState", new GetSessionStateFunction());
+        map.put("getUser", new GetUserFunction());
+        map.put("getCurrentActivityType", new GetCurrentActivityTypeFunction());
+
         return map;
     }
 
@@ -60,11 +65,7 @@ public class SessionMExtensionContext extends FREContext implements SessionListe
     public void onUserUpdated(SessionM sessionM, User user) {
         JSONObject json = null;
         try {
-            json = new JSONObject();
-            json.put("pointBalance", user.getPointBalance());
-            json.put("unclaimedAchievementCount", user.getUnclaimedAchievementCount());
-            json.put("unclaimedAchievementValue", user.getUnclaimedAchievementValue());
-            json.put("optedOut", user.isOptedOut());
+            json = SessionMDataUtil.userToJSON(user);
         }
         catch (JSONException e) {
             json = null;
@@ -80,14 +81,7 @@ public class SessionMExtensionContext extends FREContext implements SessionListe
     public void onUnclaimedAchievement(SessionM sessionM, AchievementData achievementData) {
         JSONObject json = null;
         try {
-            json = new JSONObject();
-            json.put("name", achievementData.getName());
-            json.put("message", achievementData.getMessage());
-            json.put("action", achievementData.getAction());
-            json.put("achievementIconURL", achievementData.getAchievementIconURL());
-            json.put("isCustom", achievementData.isCustom());
-            Date lastEarnedDate = achievementData.lastEarnedDate();
-            json.put("lastEarnedDate", (lastEarnedDate == null) ? 0 : lastEarnedDate.getTime());
+            json = SessionMDataUtil.achievementToJSON(achievementData);
         }
         catch (JSONException e) {
             json = null;

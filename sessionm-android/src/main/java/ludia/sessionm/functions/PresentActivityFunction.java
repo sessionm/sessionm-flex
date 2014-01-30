@@ -22,8 +22,6 @@ public class PresentActivityFunction implements FREFunction {
         Intent intent = new Intent(activity.getApplicationContext(), PresentActivityActivity.class);
         intent.putExtra("ACT_TYPE", type);
 
-        SessionMExtension.log("Activity type: " + type);
-
         try {
             activity.startActivity(intent);
         }
