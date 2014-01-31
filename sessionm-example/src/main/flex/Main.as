@@ -89,10 +89,6 @@ public class Main extends Sprite {
         txtStatus.appendText("\nUser action: " + event.userAction);
     }
 
-    private function getActivityType():void {
-        txtStatus.appendText("\nActivity type: " + sessionM.getCurrentActivityType());
-    }
-
     /** Create UI */
     public function createUI():void
     {
