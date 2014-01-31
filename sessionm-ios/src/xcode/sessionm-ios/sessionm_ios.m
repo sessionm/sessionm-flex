@@ -251,9 +251,9 @@ ANE_FUNCTION(isSupportedPlatform)
 {
     BOOL isSupported = [SessionM isSupportedPlatform];
     
-    FREObject* returnVal = malloc(sizeof(FREObject));
+    FREObject returnVal;
     
-    if(FRE_OK == FRENewObjectFromBool(isSupported,returnVal))
+    if(FRE_OK == FRENewObjectFromBool(isSupported, &returnVal))
     {
         return returnVal;
     }
