@@ -42,6 +42,8 @@
 #import "SessionM.h"
 #import "FlashRuntimeExtensions.h"
 
+FREContext context = nil;
+
 /* sessionm-iosExtInitializer()
  * The extension initializer is called the first time the ActionScript side of the extension
  * calls ExtensionContext.createExtensionContext() for any context.
@@ -94,6 +96,8 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
     *numFunctionsToTest = sizeof(func) / sizeof(FRENamedFunction);
     *functionsToSet = func;
     
+    context = ctx;
+    
     NSLog(@"Exiting ContextInitializer()");
 }
 
@@ -110,6 +114,171 @@ void ContextFinalizer(FREContext ctx)
     return;
 }
 
+@implementation SessionMHandler
+
+/*!
+ @abstract Notifies about @link SessionM @/link state transition.
+ @param sessionM SessionM service object.
+ @param state SessionM state.
+ */
+- (void)sessionM:(SessionM *)sessionM didTransitionToState:(SessionMState)state
+{
+    NSLog(@"didTransitionToState %i", state);
+    
+    NSString *stateName;
+    
+    if(state == SessionMStateStopped) {
+        stateName = @"STOPPED";
+    }
+    else if(state == SessionMStateStartedOnline) {
+        stateName = @"STARTED_ONLINE";
+    }
+    else if(state == SessionMStateStartedOffline) {
+        stateName = @"STARTED_OFFLINE";
+    }
+    
+    NSString *eventName = @"SESSION_STATE_CHANGED";
+    
+    NSLog(@"Will dispatch %@:%@", eventName, stateName);
+    
+    int code = FREDispatchStatusEventAsync(context, (const uint8_t *)[eventName UTF8String], (const uint8_t *)[stateName UTF8String]);
+    if(FRE_OK != code)
+    {
+        NSLog(@"Could not dispatch async event, code %i", code);
+    }
+}
+/*!
+ @abstract Notifies that @link SessionM @/link service is permanently unavailable.
+ @discussion This method indicates permanent failure to start SessionM service. This can be the case when invalid application ID is supplied by the application or when SessionM service is not available in current device locale or
+ session has been refused for security or other reasons. Application should use this method to remove or disable SessionM related UI elements.
+ @param sessionM SessionM service object.
+ @param error Error object.
+ */
+//- (void)sessionM:(SessionM *)sessionM didFailWithError:(NSError *)error;
+/*!
+ @abstract Indicates if newly earned achievement UI activity should be presented.
+ @discussion This method is called when achievement is earned and will occur when application calls @link logAction: @/link or starts a session.
+ By default, SessionM displays the achievement UI immediately after it is earned. Application can customize this behavior to defer the display until appropriate application state is reached.
+ @param sessionM SessionM service object.
+ @param achievement Achievement data object.
+ @result Boolean indicating if achievement activity should be presented.
+ */
+//- (BOOL)sessionM:(SessionM *)sessionM shouldAutopresentAchievement:(SMAchievementData *)achievement;
+/*!
+ @abstract Returns UIView to use as a superview for SessionM view objects.
+ @param sessionM SessionM service object.
+ @param type Activity type.
+ @result UIView object.
+ */
+//- (UIView *)sessionM:(SessionM *)session viewForActivity:(SMActivityType)type;
+/*!
+ @abstract Returns UIViewController to use as a presenting controller for SessionM view controller.
+ @discussion This method is only called when application's root view controller is nil. In this case SessionM tries to determine appropriate view controller in the view hierarchy to use as a 'presenting controller'.
+ This method provides a mechanism for the application to explicitely specify which view controller should be used in this case. It is recommended that application implement this method when root view controller is not set.
+ Note, that UIViewController based presentation is only applicable for full screen activities, e.g. user portal.
+ @param sessionM SessionM service object.
+ @param type Activity type.
+ @result UIViewController object.
+ */
+//- (UIViewController *)sessionM:(SessionM *)session viewControllerForActivity:(SMActivityType)type;
+/*!
+ @abstract Notifies that UI activity will be presented.
+ @param sessionM SessionM service object.
+ @param activity Activity object.
+ */
+//- (void)sessionM:(SessionM *)sessionM willPresentActivity:(SMActivity *)activity;
+/*!
+ @abstract Notifies that UI activity was presented.
+ @param sessionM SessionM service object.
+ @param activity Activity object.
+ */
+//- (void)sessionM:(SessionM *)sessionM didPresentActivity:(SMActivity *)activity;
+/*!
+ @abstract Notifies that UI activity will be dismissed.
+ @param sessionM SessionM service object.
+ @param activity Activity object.
+ */
+//- (void)sessionM:(SessionM *)sessionM willDismissActivity:(SMActivity *)activity;
+/*!
+ @abstract Notifies that UI activity was dismissed.
+ @param sessionM SessionM service object.
+ @param activity Activity object.
+ */
+//- (void)sessionM:(SessionM *)sessionM didDismissActivity:(SMActivity *)activity;
+/*!
+ @abstract Notifies that user info was updated.
+ @discussion User info is updated when earned achievement count, opt out status or other user relevant state changes.
+ @param sessionM SessionM service object.
+ @param user User object.
+ */
+//- (void)sessionM:(SessionM *)sessionM didUpdateUser:(SMUser *)user;
+/*!
+ @abstract Notifies that media (typically video) will start playing.
+ @discussion Application should use this method to suspend its own media playback if any.
+ @param sessionM SessionM service object.
+ @param activity Activity object.
+ */
+//- (void)sessionM:(SessionM *)sessionM willStartPlayingMediaForActivity:(SMActivity *)activity;
+/*!
+ @abstract Notifies that media (typically video) finished playing
+ @discussion Application should use this method to resume its own media playback if any.
+ @param sessionM SessionM service object.
+ @param activity Activity object.
+ */
+//- (void)sessionM:(SessionM *)sessionM didFinishPlayingMediaForActivity:(SMActivity *)activity;
+/*!
+ @abstract Notifies that user performed an action in currently presented UI activity.
+ @param sessionM SessionM service object.
+ @param user User object.
+ @param action User action type.
+ @param activity Activity object.
+ @param data NSDictionary object with action specific data.
+ */
+//- (void)sessionM:(SessionM *)sessionM user:(SMUser *)user didPerformAction:(SMActivityUserAction)action forActivity:(SMActivity *)activity withData:(NSDictionary *)data;
+/*!
+ * @abstract Returns center point to use when presenting built-in achievement alert UIView.
+ * @discussion Application can use this method to refine the positioning of achievement alert UIView. The default layout is specified in the developer portal as part of achievement configuration.
+ * However, this method provides additional flexibility if application interface is dynamic and requires adjustments to alert positioning in order to ensure it does not cover important UI elements.
+ * @param sessionM SessionM service object.
+ * @param activity Activity object.
+ * @param size Activity UIView size.
+ * @result CGPoint UIView center.
+ */
+//- (CGPoint)sessionM:(SessionM *)sessionM centerForActivity:(SMActivity *)activity withSize:(CGSize)size;
+
+
+
+/*!
+ @abstract Deprecated. Notifies that UI activity is not available for presentation.
+ @discussion This method is called in response to @link presentActivity: @/link call when activity of specified type cannot be presented.
+ @param sessionM SessionM service object.
+ @param type Activity type.
+ @deprecated This method is deprecated. Use boolean value returned from @link presentActivity: @/link as an indicator if activity will be presented or not.
+ */
+//- (void)sessionM:(SessionM *)sessionM activityUnavailable:(SMActivityType)type __attribute__((deprecated));
+/*!
+ @abstract Deprecated. Notifies that unclaimed achievement is available or not, if nil, for presentation.
+ @discussion This method should be used by application to customize an achievement presentation. SessionM service invokes this method when new achievement is earned or to notify about one of the previously earned
+ unclaimed achievements. Achievement object supplied by this method is also available via SessionM @link unclaimedAchievement @/link property.
+ This notification, in conjunction with @link unclaimedAchievement @/link property, allows application to present user achievements at convenient time during application lifecycle.
+ @param sessionM SessionM service object.
+ @param achievement Achievement data object or nil if no unclaimed achievement is available.
+ @deprecated This method is deprecated. Use @link sessionM:shouldAutopresentAchievement: @/link to get notified about new achievements.
+ */
+//- (void)sessionM:(SessionM *)sessionM didUpdateUnclaimedAchievement:(SMAchievementData *)achievement __attribute__((deprecated));
+/*!
+ @abstract Deprecated. Indicates if newly earned achievement UI activity should be presented.
+ @param sessionM SessionM service object.
+ @param type Activity type.
+ @result Boolean indicating if achievement activity should be presented.
+ @deprecated This method is deprecated - use @link sessionM:shouldAutopresentAchievement: @/link instead.
+ */
+//- (BOOL)sessionM:(SessionM *)sessionM shouldAutopresentActivity:(SMActivityType)type __attribute__((deprecated));
+
+@end
+
+SessionMHandler *handler = NULL;
+
 ANE_FUNCTION(startSession)
 {
     NSLog(@"Entering startSession()");
@@ -124,7 +293,12 @@ ANE_FUNCTION(startSession)
             if(FRE_OK == FREGetObjectAsUTF8(argv[0], &len, &token))
             {
                 NSLog(@"Received appID %s", token);
+                handler = [[SessionMHandler alloc] init];
+                instance.logLevel = SMLogLevelInfo;
+                instance.logCategories = SMLogCategorySession;
+                instance.delegate = handler;
                 SMStart([NSString stringWithUTF8String:(char *)token]);
+                NSLog(@"SMStart called");
             }
             else
             {

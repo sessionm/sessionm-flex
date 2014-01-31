@@ -39,6 +39,7 @@
 
 #import <Foundation/Foundation.h>
 #import "FlashRuntimeExtensions.h"
+#import "SessionM.h"
 
 #define ANE_FUNCTION(f) FREObject (f)(FREContext ctx, void *data, uint32_t argc, FREObject argv[])
 #define MAP_FUNCTION(f, data) { (const uint8_t*)(#f), (data), &(f) }
@@ -70,6 +71,9 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
 */
 void ContextFinalizer(FREContext ctx);
 
+@interface SessionMHandler : NSObject <SessionMDelegate>
+
+@end
 
 ANE_FUNCTION(startSession);
 ANE_FUNCTION(logAction);

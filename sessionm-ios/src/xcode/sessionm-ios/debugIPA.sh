@@ -1,7 +1,7 @@
 #!/bin/sh
 
 echo "Please provide the complete path of the IPA before building this target"
-PATH_TO_IPA="To BE FILLED BEFORE RUNNING THIS TARGET"
+PATH_TO_IPA="/Users/alassauzay/Documents/workspace/air-sessionm/sessionm-example/target/sessionm-example.ipa"
 
 IPA_DIR=`/usr/bin/dirname "$PATH_TO_IPA"`
 IPA_NAME=`/usr/bin/basename "$PATH_TO_IPA"`
