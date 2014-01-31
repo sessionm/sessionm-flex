@@ -41,6 +41,7 @@
 #import "sessionm_ios.h"
 #import "SessionM.h"
 #import "FlashRuntimeExtensions.h"
+#import <Foundation/Foundation.h>
 
 FREContext context = nil;
 
@@ -132,6 +133,12 @@ void ContextFinalizer(FREContext ctx)
     }
     else if(state == SessionMStateStartedOnline) {
         stateName = @"STARTED_ONLINE";
+        SessionM *instance = [SessionM sharedInstance];
+        
+        if(instance && instance.user)
+        {
+            dispatchUser(instance.user);
+        }
     }
     else if(state == SessionMStateStartedOffline) {
         stateName = @"STARTED_OFFLINE";
@@ -186,13 +193,25 @@ void ContextFinalizer(FREContext ctx)
  @param sessionM SessionM service object.
  @param activity Activity object.
  */
-//- (void)sessionM:(SessionM *)sessionM willPresentActivity:(SMActivity *)activity;
+//- (void)sessionM:(SessionM *)sessionM willPresentActivity:(SMActivity *)activity
 /*!
  @abstract Notifies that UI activity was presented.
  @param sessionM SessionM service object.
  @param activity Activity object.
  */
-//- (void)sessionM:(SessionM *)sessionM didPresentActivity:(SMActivity *)activity;
+- (void)sessionM:(SessionM *)sessionM didPresentActivity:(SMActivity *)activity
+{
+    NSString *eventName = @"ACTIVITY_PRESENTED";
+    NSString *level = @"";
+    
+    NSLog(@"Will dispatch %@:%@", eventName, level);
+    
+    int code = FREDispatchStatusEventAsync(context, (const uint8_t *)[eventName UTF8String], (const uint8_t *)[level UTF8String]);
+    if(FRE_OK != code)
+    {
+        NSLog(@"Could not dispatch async event, code %i", code);
+    }
+}
 /*!
  @abstract Notifies that UI activity will be dismissed.
  @param sessionM SessionM service object.
@@ -204,14 +223,30 @@ void ContextFinalizer(FREContext ctx)
  @param sessionM SessionM service object.
  @param activity Activity object.
  */
-//- (void)sessionM:(SessionM *)sessionM didDismissActivity:(SMActivity *)activity;
+- (void)sessionM:(SessionM *)sessionM didDismissActivity:(SMActivity *)activity
+{
+    NSString *eventName = @"ACTIVITY_DISMISSED";
+    NSString *level = @"";
+    
+    NSLog(@"Will dispatch %@:%@", eventName, level);
+    
+    int code = FREDispatchStatusEventAsync(context, (const uint8_t *)[eventName UTF8String], (const uint8_t *)[level UTF8String]);
+    if(FRE_OK != code)
+    {
+        NSLog(@"Could not dispatch async event, code %i", code);
+    }
+}
 /*!
  @abstract Notifies that user info was updated.
  @discussion User info is updated when earned achievement count, opt out status or other user relevant state changes.
  @param sessionM SessionM service object.
  @param user User object.
  */
-//- (void)sessionM:(SessionM *)sessionM didUpdateUser:(SMUser *)user;
+- (void)sessionM:(SessionM *)sessionM didUpdateUser:(SMUser *)user
+{
+    dispatchUser(user);
+}
+
 /*!
  @abstract Notifies that media (typically video) will start playing.
  @discussion Application should use this method to suspend its own media playback if any.
@@ -234,7 +269,21 @@ void ContextFinalizer(FREContext ctx)
  @param activity Activity object.
  @param data NSDictionary object with action specific data.
  */
-//- (void)sessionM:(SessionM *)sessionM user:(SMUser *)user didPerformAction:(SMActivityUserAction)action forActivity:(SMActivity *)activity withData:(NSDictionary *)data;
+- (void)sessionM:(SessionM *)sessionM user:(SMUser *)user didPerformAction:(SMActivityUserAction)action forActivity:(SMActivity *)activity withData:(NSDictionary *)data
+{
+    {
+        NSString *eventName = @"USER_ACTION";
+        NSString *level = @"";//TODO
+        
+        NSLog(@"Will dispatch %@:%@", eventName, level);
+        
+        int code = FREDispatchStatusEventAsync(context, (const uint8_t *)[eventName UTF8String], (const uint8_t *)[level UTF8String]);
+        if(FRE_OK != code)
+        {
+            NSLog(@"Could not dispatch async event, code %i", code);
+        }
+    }
+}
 /*!
  * @abstract Returns center point to use when presenting built-in achievement alert UIView.
  * @discussion Application can use this method to refine the positioning of achievement alert UIView. The default layout is specified in the developer portal as part of achievement configuration.
@@ -255,7 +304,19 @@ void ContextFinalizer(FREContext ctx)
  @param type Activity type.
  @deprecated This method is deprecated. Use boolean value returned from @link presentActivity: @/link as an indicator if activity will be presented or not.
  */
-//- (void)sessionM:(SessionM *)sessionM activityUnavailable:(SMActivityType)type __attribute__((deprecated));
+- (void)sessionM:(SessionM *)sessionM activityUnavailable:(SMActivityType)type __attribute__((deprecated))
+{
+    NSString *eventName = @"ACTIVITY_UNAVAILABLE";
+    NSString *level = @"";
+    
+    NSLog(@"Will dispatch %@:%@", eventName, level);
+    
+    int code = FREDispatchStatusEventAsync(context, (const uint8_t *)[eventName UTF8String], (const uint8_t *)[level UTF8String]);
+    if(FRE_OK != code)
+    {
+        NSLog(@"Could not dispatch async event, code %i", code);
+    }
+}
 /*!
  @abstract Deprecated. Notifies that unclaimed achievement is available or not, if nil, for presentation.
  @discussion This method should be used by application to customize an achievement presentation. SessionM service invokes this method when new achievement is earned or to notify about one of the previously earned
@@ -278,6 +339,29 @@ void ContextFinalizer(FREContext ctx)
 @end
 
 SessionMHandler *handler = NULL;
+
+void dispatchUser(SMUser *user)
+{
+    NSError *jsonError = nil;
+    NSDictionary *dict = @{
+                           @"pointBalance": [[NSNumber alloc] initWithInteger:user.pointBalance],
+                           @"optedOut": user.isOptedOut ? @"true" : @"false",
+                           @"unclaimedAchievementValue": [[NSNumber alloc] initWithInteger:user.unclaimedAchievementValue],
+                           @"unclaimedAchievementCount": [[NSNumber alloc] initWithInteger:user.unclaimedAchievementCount]
+                           };
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:(id)dict options:0 error:&jsonError];
+    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSString *eventName = @"USER_UPDATED";
+    NSLog(@"Will dispatch %@:%@", eventName, jsonStr);
+    
+    int code = FREDispatchStatusEventAsync(context, (const uint8_t *)[eventName UTF8String], (const uint8_t *)[jsonStr UTF8String]);
+    if(FRE_OK != code)
+    {
+        NSLog(@"Could not dispatch async event, code %i", code);
+    }
+}
 
 ANE_FUNCTION(startSession)
 {
