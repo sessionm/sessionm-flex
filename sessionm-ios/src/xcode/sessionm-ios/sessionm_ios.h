@@ -72,6 +72,7 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
 void ContextFinalizer(FREContext ctx);
 
 void dispatchUser(SMUser *user);
+void dispatchAchievement(SMAchievementData *achievementData);
 
 @interface SessionMHandler : NSObject <SessionMDelegate>
 

@@ -139,6 +139,11 @@ void ContextFinalizer(FREContext ctx)
         {
             dispatchUser(instance.user);
         }
+        
+        if(instance && instance.unclaimedAchievement)
+        {
+            dispatchAchievement(instance.unclaimedAchievement);
+        }
     }
     else if(state == SessionMStateStartedOffline) {
         stateName = @"STARTED_OFFLINE";
@@ -326,7 +331,10 @@ void ContextFinalizer(FREContext ctx)
  @param achievement Achievement data object or nil if no unclaimed achievement is available.
  @deprecated This method is deprecated. Use @link sessionM:shouldAutopresentAchievement: @/link to get notified about new achievements.
  */
-//- (void)sessionM:(SessionM *)sessionM didUpdateUnclaimedAchievement:(SMAchievementData *)achievement __attribute__((deprecated));
+- (void)sessionM:(SessionM *)sessionM didUpdateUnclaimedAchievement:(SMAchievementData *)achievement __attribute__((deprecated))
+{
+    dispatchAchievement(achievement);
+}
 /*!
  @abstract Deprecated. Indicates if newly earned achievement UI activity should be presented.
  @param sessionM SessionM service object.
@@ -354,6 +362,34 @@ void dispatchUser(SMUser *user)
     NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     
     NSString *eventName = @"USER_UPDATED";
+    NSLog(@"Will dispatch %@:%@", eventName, jsonStr);
+    
+    int code = FREDispatchStatusEventAsync(context, (const uint8_t *)[eventName UTF8String], (const uint8_t *)[jsonStr UTF8String]);
+    if(FRE_OK != code)
+    {
+        NSLog(@"Could not dispatch async event, code %i", code);
+    }
+}
+
+void dispatchAchievement(SMAchievementData *achievementData)
+{
+    NSError *jsonError = nil;
+    NSDate *date = achievementData.lastEarnedDate;
+    double time = date ? date.timeIntervalSince1970 : 0;
+    
+    NSDictionary *dict = @{
+                           @"achievementIconURL": achievementData.achievementIconURL,
+                           @"action": achievementData.action,
+                           @"name": achievementData.name,
+                           @"message": achievementData.message,
+                           @"isCustom": achievementData.isCustom ? @"true" : @"false",
+                           @"lastEarnedDate": [[NSNumber alloc] initWithDouble:time]
+    };
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:(id)dict options:0 error:&jsonError];
+    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSString *eventName = @"UNCLAIMED_ACHIEVEMENT";
     NSLog(@"Will dispatch %@:%@", eventName, jsonStr);
     
     int code = FREDispatchStatusEventAsync(context, (const uint8_t *)[eventName UTF8String], (const uint8_t *)[jsonStr UTF8String]);
