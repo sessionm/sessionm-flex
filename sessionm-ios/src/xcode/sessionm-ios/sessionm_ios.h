@@ -70,6 +70,7 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
 */
 void ContextFinalizer(FREContext ctx);
 
+
 ANE_FUNCTION(startSession);
 ANE_FUNCTION(logAction);
 ANE_FUNCTION(presentActivity);

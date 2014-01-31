@@ -83,7 +83,9 @@ public class SessionM extends EventDispatcher implements ISessionM {
     public function isSupportedPlatform():Boolean {
         var supported:Boolean = false;
         try {
-            supported = Boolean(context.call("isSupportedPlatform"));
+            var returnVal:* = context.call("isSupportedPlatform");
+            logger.debug("iSupported return value: {0}", returnVal);
+            supported = Boolean(returnVal);
         }
         catch (error:Error) {
             logger.error("Unknown error: {0}", error);
