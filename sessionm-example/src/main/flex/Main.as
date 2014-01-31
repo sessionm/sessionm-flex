@@ -66,6 +66,7 @@ public class Main extends Sprite {
     private function presentPortal():void {
         sessionM.addEventListener(ActivityEvent.ACTIVITY_DISMISSED, sessionM_activityDismissedHandler);
         sessionM.addEventListener(ActivityEvent.ACTIVITY_PRESENTED, sessionM_activityPresentedHandler);
+        sessionM.addEventListener(ActivityEvent.ACTIVITY_UNAVAILABLE, sessionM_activityUnavailableHandler);
         sessionM.addEventListener(ActivityEvent.USER_ACTION, sessionM_userActionHandler);
         sessionM.presentActivity(ActivityType.PORTAL);
     }
@@ -73,6 +74,7 @@ public class Main extends Sprite {
     private function presentAchievement():void {
         sessionM.addEventListener(ActivityEvent.ACTIVITY_DISMISSED, sessionM_activityDismissedHandler);
         sessionM.addEventListener(ActivityEvent.ACTIVITY_PRESENTED, sessionM_activityPresentedHandler);
+        sessionM.addEventListener(ActivityEvent.ACTIVITY_UNAVAILABLE, sessionM_activityUnavailableHandler);
         sessionM.addEventListener(ActivityEvent.USER_ACTION, sessionM_userActionHandler);
         sessionM.presentActivity(ActivityType.ACHIEVEMENT);
     }
@@ -83,6 +85,10 @@ public class Main extends Sprite {
 
     protected function sessionM_activityPresentedHandler(event:ActivityEvent):void {
         txtStatus.appendText("\nActivity presented");
+    }
+
+    protected function sessionM_activityUnavailableHandler(event:ActivityEvent):void {
+        txtStatus.appendText("\nActivity unavailable");
     }
 
     protected function sessionM_userActionHandler(event:ActivityEvent):void {

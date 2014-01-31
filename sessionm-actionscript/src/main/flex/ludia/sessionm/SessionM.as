@@ -139,7 +139,8 @@ public class SessionM extends EventDispatcher implements ISessionM {
         if(event.level) {
             userAction = new UserAction(JSON.parse(event.level));
         }
-        dispatchEvent(new ActivityEvent(event.type, userAction));
+        var eventType:String = ActivityEvent[event.code];
+        dispatchEvent(new ActivityEvent(eventType, userAction));
     }
 
     private function manageUser(event:StatusEvent):void {
