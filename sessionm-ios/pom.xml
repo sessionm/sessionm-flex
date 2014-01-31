@@ -33,30 +33,6 @@
                     <doxygenDefaultConfig>${ios.activeConfiguration}</doxygenDefaultConfig>
                 </configuration>
             </plugin>
-            <!--<plugin>-->
-                <!--<groupId>org.codehaus.mojo</groupId>-->
-                <!--<artifactId>build-helper-maven-plugin</artifactId>-->
-                <!--<version>1.8</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>attach-ane-artifact</id>-->
-                        <!--<goals>-->
-                            <!--<goal>attach-artifact</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<artifacts>-->
-                                <!--<artifact>-->
-                                    <!--<file>${project.build.sourceDirectory}/sessionm-ios/libSessionM.1.9.3.a</file>-->
-                                    <!--<groupId>com.sessionm</groupId>-->
-                                    <!--<id>ios-sdk</id>-->
-                                    <!--<version>1.9.3</version>-->
-                                    <!--<type>a</type>-->
-                                <!--</artifact>-->
-                            <!--</artifacts>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
         </plugins>
     </build>
 </project>
