@@ -8,11 +8,9 @@ import ludia.sessionm.data.User;
 public interface ISessionM extends IEventDispatcher {
     function logAction(action:String):void;
     function presentActivity(type:String):void;
-    function getSessionState():String;
     function startSession(appID:String):void;
     function getUser():User;
     function getAchievement():Achievement;
     function isSupportedPlatform():Boolean;
-    function getCurrentActivityType():String;
 }
 }

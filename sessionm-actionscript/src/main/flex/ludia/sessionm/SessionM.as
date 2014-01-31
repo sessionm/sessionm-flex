@@ -55,22 +55,6 @@ public class SessionM extends EventDispatcher implements ISessionM {
         callExtension("presentActivity", activity);
     }
 
-
-    public function getSessionState():String {
-        var stateString:String;
-        try {
-            stateString = String(context.call("getSessionState"));
-        }
-        catch (error:Error) {
-            logger.error("Unknown error: {0}", error);
-        }
-        if(!stateString) {
-            throw new Error("Missing state string");
-        }
-        return stateString;
-    }
-
-
     public function startSession(appID:String):void {
         callExtension("startSession", appID);
     }
@@ -95,21 +79,6 @@ public class SessionM extends EventDispatcher implements ISessionM {
     public function getAchievement():Achievement {
         return null;
     }
-
-    public function getCurrentActivityType():String {
-        var typeString:String;
-        try {
-            typeString = String(context.call("getCurrentActivityType"));
-        }
-        catch (error:Error) {
-            logger.error("Unknown error: {0}", error);
-        }
-        if(!typeString) {
-            return null;
-        }
-        return typeString;
-    }
-
 
     public function isSupportedPlatform():Boolean {
         var supported:Boolean = false;

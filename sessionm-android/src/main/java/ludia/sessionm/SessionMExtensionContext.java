@@ -37,9 +37,7 @@ public class SessionMExtensionContext extends FREContext implements SessionListe
         map.put("startSession", new StartSessionFunction());
         map.put("logAction", new LogActionFunction());
         map.put("presentActivity", new PresentActivityFunction());
-        map.put("getSessionState", new GetSessionStateFunction());
         map.put("getUser", new GetUserFunction());
-        map.put("getCurrentActivityType", new GetCurrentActivityTypeFunction());
 
         return map;
     }
