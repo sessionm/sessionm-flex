@@ -280,7 +280,7 @@ void ContextFinalizer(FREContext ctx)
 
 - (void)sessionM:(SessionM *)sessionM user:(SMUser *)user didPerformAction:(SMActivityUserAction)action forActivity:(SMActivity *)activity withData:(NSDictionary *)data
 {
-    NSString *userAction = nil;
+    NSString *userAction = @"OTHER";
     
     if(action == SMAchievementViewAction) userAction = @"ACHIEVEMENT_VIEWED";
     else if(action == SMAchievementEngagedAction) userAction = @"ACHIEVEMENT_DISMISSED";
@@ -294,12 +294,24 @@ void ContextFinalizer(FREContext ctx)
     else if(action == SMSignOutAction) userAction = @"SIGN_OUT";
     else if(action == SMRegisteredAction) userAction = @"REGISTERED";
     else if(action == SMRedeemedRewardAction) userAction = @"REDEEMED_REWARD";
-    else userAction = @"OTHER";
     
     NSString *eventName = @"USER_ACTION";
     
     NSError *jsonError = nil;
-    NSDictionary *dict = @{@"userAction": userAction};
+    
+    NSLog(@"User action data : %@", [data allKeys]);
+        
+    NSString *achievementName = [data objectForKey:SMUserActionAchievementNameKey];
+    NSString *pageName = [data objectForKey:SMUserActionPageNameKey];
+    NSString *sponsorContentName = [data objectForKey:SMUserActionSponsorContentNameKey];
+    NSString *rewardName = [data objectForKey:SMUserActionRewardNameKey];
+    
+    NSDictionary *dict = @{@"userAction": userAction,
+                           @"achievementName": achievementName ? achievementName : @"null",
+                           @"pageName": pageName ? pageName : @"null",
+                           @"sponsorContentName": sponsorContentName ? sponsorContentName : @"null",
+                           @"rewardName": rewardName ? rewardName : @"null",
+                          };
     
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:(id)dict options:0 error:&jsonError];
     NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
