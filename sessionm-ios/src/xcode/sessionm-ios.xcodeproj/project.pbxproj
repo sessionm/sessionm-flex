@@ -58,6 +58,8 @@
 		87920FD1189B040200D5985E /* EventKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKit.framework; path = System/Library/Frameworks/EventKit.framework; sourceTree = SDKROOT; };
 		87920FD3189B054700D5985E /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		87920FD5189B05E900D5985E /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
+		87CEF92018A00BA1002D5AEC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		87CEF93218A01B4E002D5AEC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		87920F7A189AF29100D5985E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				87CEF93218A01B4E002D5AEC /* XCTest.framework */,
 				87920FD5189B05E900D5985E /* EventKitUI.framework */,
 				87920FD3189B054700D5985E /* AdSupport.framework */,
 				87920FD1189B040200D5985E /* EventKit.framework */,
@@ -128,6 +131,7 @@
 				87920F93189AF29100D5985E /* CoreVideo.framework */,
 				87920F95189AF29100D5985E /* AVFoundation.framework */,
 				87920F97189AF29100D5985E /* Security.framework */,
+				87CEF92018A00BA1002D5AEC /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -347,8 +351,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				AIR_SDK_PATH = "/Users/alassauzay/air-sdk-4.0/";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Antoine Lassauzay (K7F4JZH682)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Antoine Lassauzay (K7F4JZH682)";
 				NATIVEEXTENSION_SWC = /;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "Debugsessionm-iosAIRApp";
+				PROVISIONING_PROFILE = "7E8CDB9C-FFE7-4679-A112-8A6B7E3388B1";
 			};
 			name = Debug;
 		};
@@ -356,8 +366,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				AIR_SDK_PATH = "/Users/alassauzay/air-sdk-4.0/";
+				ARCHS = "$(ARCHS_STANDARD)";
+				CODE_SIGN_ENTITLEMENTS = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Antoine Lassauzay (K7F4JZH682)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Antoine Lassauzay (K7F4JZH682)";
 				NATIVEEXTENSION_SWC = /;
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "Debugsessionm-iosAIRApp";
+				PROVISIONING_PROFILE = "7E8CDB9C-FFE7-4679-A112-8A6B7E3388B1";
 			};
 			name = Release;
 		};

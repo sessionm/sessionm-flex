@@ -175,7 +175,10 @@ void ContextFinalizer(FREContext ctx)
  @param achievement Achievement data object.
  @result Boolean indicating if achievement activity should be presented.
  */
-//- (BOOL)sessionM:(SessionM *)sessionM shouldAutopresentAchievement:(SMAchievementData *)achievement;
+- (BOOL)sessionM:(SessionM *)sessionM shouldAutopresentAchievement:(SMAchievementData *)achievement
+{
+    return NO;
+}
 /*!
  @abstract Returns UIView to use as a superview for SessionM view objects.
  @param sessionM SessionM service object.
@@ -274,19 +277,39 @@ void ContextFinalizer(FREContext ctx)
  @param activity Activity object.
  @param data NSDictionary object with action specific data.
  */
+
 - (void)sessionM:(SessionM *)sessionM user:(SMUser *)user didPerformAction:(SMActivityUserAction)action forActivity:(SMActivity *)activity withData:(NSDictionary *)data
 {
+    NSString *userAction = nil;
+    
+    if(action == SMAchievementViewAction) userAction = @"ACHIEVEMENT_VIEWED";
+    else if(action == SMAchievementEngagedAction) userAction = @"ACHIEVEMENT_DISMISSED";
+    else if(action == SMAchievementDismissedAction) userAction = @"ACHIEVEMENT_ENGAGED";
+    else if(action == SMSponsorContentViewedAction) userAction = @"SPONSOR_CONTENT_VIEWED";
+    else if(action == SMSponsorContentEngagedAction) userAction = @"SPONSOR_CONTENT_ENGAGED";
+    else if(action == SMSponsorContentDismissedAction) userAction = @"SPONSOR_CONTENT_DISMISSED";
+    else if(action == SMPortalViewedAction) userAction = @"PORTAL_VIEWED";
+    else if(action == SMPortalDismissedAction) userAction = @"PORTAL_DISMISSED";
+    else if(action == SMSignInAction) userAction = @"SIGN_IN";
+    else if(action == SMSignOutAction) userAction = @"SIGN_OUT";
+    else if(action == SMRegisteredAction) userAction = @"REGISTERED";
+    else if(action == SMRedeemedRewardAction) userAction = @"REDEEMED_REWARD";
+    else userAction = @"OTHER";
+    
+    NSString *eventName = @"USER_ACTION";
+    
+    NSError *jsonError = nil;
+    NSDictionary *dict = @{@"userAction": userAction};
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:(id)dict options:0 error:&jsonError];
+    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    NSLog(@"Will dispatch %@:%@", eventName, jsonStr);
+    
+    int code = FREDispatchStatusEventAsync(context, (const uint8_t *)[eventName UTF8String], (const uint8_t *)[jsonStr UTF8String]);
+    if(FRE_OK != code)
     {
-        NSString *eventName = @"USER_ACTION";
-        NSString *level = @"";//TODO
-        
-        NSLog(@"Will dispatch %@:%@", eventName, level);
-        
-        int code = FREDispatchStatusEventAsync(context, (const uint8_t *)[eventName UTF8String], (const uint8_t *)[level UTF8String]);
-        if(FRE_OK != code)
-        {
-            NSLog(@"Could not dispatch async event, code %i", code);
-        }
+        NSLog(@"Could not dispatch async event, code %i", code);
     }
 }
 /*!
