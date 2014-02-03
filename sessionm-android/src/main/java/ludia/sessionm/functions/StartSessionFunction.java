@@ -20,6 +20,7 @@ public class StartSessionFunction implements FREFunction{
         SessionMExtension.log("Using appID: " + appID);
 
         SessionM sessionM = SessionM.getInstance();
+        sessionM.setAutopresentMode(false);
         sessionM.startSession(freContext.getActivity().getApplicationContext(), appID);
 
         return null;

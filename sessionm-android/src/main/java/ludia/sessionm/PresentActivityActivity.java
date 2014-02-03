@@ -20,15 +20,14 @@ public class PresentActivityActivity extends BaseActivity{
     public static String ACTIVITY_UNAVAILABLE = "ACTIVITY_UNAVAILABLE";
     public static String USER_ACTION = "USER_ACTION";
 
+    private SessionM.ActivityType type;
+    private boolean presented;
+
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         Log.d(TAG, "PresentActivityActivity.onCreate()");
-        SessionM.ActivityType type = SessionM.ActivityType.valueOf(getIntent().getStringExtra("ACT_TYPE"));
-        SessionM sessionM = SessionM.getInstance();
-        if (sessionM.getSessionState() == SessionM.State.STARTED_ONLINE) {
-            sessionM.presentActivity(type);
-        }
+        this.type = SessionM.ActivityType.valueOf(getIntent().getStringExtra("ACT_TYPE"));
     }
 
     @Override
@@ -52,7 +51,15 @@ public class PresentActivityActivity extends BaseActivity{
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG, "PresentActivityActivity.onResume()");
+        Log.d(TAG, "PresentActivityActivity.onResume() presented=" + presented);
+        if(!this.presented) {
+            SessionM.getInstance().presentActivity(type);
+            this.presented = true;
+        }
+        else {
+//            SessionM.getInstance().dismissActivity();
+            this.presented = false;
+        }
     }
 
     @Override
@@ -83,13 +90,14 @@ public class PresentActivityActivity extends BaseActivity{
     public void onDismissed(SessionM sessionM) {
         Log.d(TAG, "PresentActivityActivity.onDismissed()");
         SessionMExtension.context.dispatchStatusEventAsync(ACTIVITY_DISMISSED, "");
-//        finish();
+        finish();
     }
 
     @Override
     public void onUnavailable(SessionM sessionM) {
         Log.d(TAG, "PresentActivityActivity.onUnavailable()");
         SessionMExtension.context.dispatchStatusEventAsync(ACTIVITY_UNAVAILABLE, "");
+        finish();
     }
 
     @Override
