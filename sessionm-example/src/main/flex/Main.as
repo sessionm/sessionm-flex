@@ -44,15 +44,15 @@ public class Main extends Sprite {
     }
 
     protected function sessionM_sessionStateChangedHandler(event:SessionEvent):void {
-        txtStatus.appendText("\nSession state updated: " + event.state);
+        prependText("Session state updated: " + event.state);
     }
 
     protected function sessionM_userUpdatedHandler(event:UserEvent):void {
-        txtStatus.appendText("\nUser updated: " + event.user.pointBalance + " mPOINTS, " + event.user.unclaimedAchievementCount + " unclaimed achievement(s)");
+        prependText("User updated: " + event.user.pointBalance + " mPOINTS, " + event.user.unclaimedAchievementCount + " unclaimed achievement(s)");
     }
 
     private function sessionM_unclaimedAchievementHandler(event:AchievementEvent):void {
-        txtStatus.appendText("\nUnclaimed achievement: " + event.achievement.name);
+        prependText("Unclaimed achievement: " + event.achievement.name);
     }
 
     public function logAction():void {
@@ -60,9 +60,8 @@ public class Main extends Sprite {
     }
 
     public function isSupportedPlatform():void {
-        txtStatus.appendText("\nIs supported platform: " + sessionM.isSupportedPlatform());
+        prependText("Is supported platform: " + sessionM.isSupportedPlatform());
     }
-
     private function presentPortal():void {
         sessionM.addEventListener(ActivityEvent.ACTIVITY_DISMISSED, sessionM_activityDismissedHandler);
         sessionM.addEventListener(ActivityEvent.ACTIVITY_PRESENTED, sessionM_activityPresentedHandler);
@@ -80,21 +79,28 @@ public class Main extends Sprite {
     }
 
     protected function sessionM_activityDismissedHandler(event:ActivityEvent):void {
-        txtStatus.appendText("\nActivity dismissed");
+        prependText("Activity dismissed");
     }
 
     protected function sessionM_activityPresentedHandler(event:ActivityEvent):void {
-        txtStatus.appendText("\nActivity presented");
+        prependText("Activity presented");
     }
 
     protected function sessionM_activityUnavailableHandler(event:ActivityEvent):void {
-        txtStatus.appendText("\nActivity unavailable");
+        prependText("Activity unavailable");
     }
 
     protected function sessionM_userActionHandler(event:ActivityEvent):void {
-        txtStatus.appendText("\nUser action: " + event.userAction);
+        prependText("User action: " + event.userAction);
     }
 
+    private function clearLog():void {
+        txtStatus.text = "";
+    }
+
+    private function prependText(text:String):void {
+        txtStatus.text = text + "\n" + txtStatus.text;
+    }
     /** Create UI */
     public function createUI():void
     {
@@ -120,6 +126,7 @@ public class Main extends Sprite {
         layout.addButton(new SimpleButton(new Command("Present portal", presentPortal)));
         layout.addButton(new SimpleButton(new Command("Present achievement", presentAchievement)));
         layout.addButton(new SimpleButton(new Command("Is supported platform", isSupportedPlatform)));
+        layout.addButton(new SimpleButton(new Command("Clear log", clearLog)));
 
         layout.attach(buttonContainer);
         layout.layout();
