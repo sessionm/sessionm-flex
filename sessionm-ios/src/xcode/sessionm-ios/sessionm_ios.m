@@ -280,27 +280,33 @@ void ContextFinalizer(FREContext ctx)
 
 - (void)sessionM:(SessionM *)sessionM user:(SMUser *)user didPerformAction:(SMActivityUserAction)action forActivity:(SMActivity *)activity withData:(NSDictionary *)data
 {
-    NSString *userAction = @"OTHER";
+    NSMutableDictionary *actionToStr = [[NSMutableDictionary alloc] init];
+    [actionToStr setObject:@"ACHIEVEMENT_VIEWED" forKey:[[NSNumber alloc] initWithInt:SMAchievementViewAction]];
+    [actionToStr setObject:@"ACHIEVEMENT_DISMISSED" forKey:[[NSNumber alloc] initWithInt:SMAchievementDismissedAction]];
+    [actionToStr setObject:@"ACHIEVEMENT_ENGAGED" forKey:[[NSNumber alloc] initWithInt:SMAchievementEngagedAction]];
+    [actionToStr setObject:@"SPONSOR_CONTENT_VIEWED" forKey:[[NSNumber alloc] initWithInt:SMSponsorContentViewedAction]];
+    [actionToStr setObject:@"SPONSOR_CONTENT_ENGAGED" forKey:[[NSNumber alloc] initWithInt:SMSponsorContentEngagedAction]];
+    [actionToStr setObject:@"SPONSOR_CONTENT_DISMISSED" forKey:[[NSNumber alloc] initWithInt:SMSponsorContentDismissedAction]];
+    [actionToStr setObject:@"PORTAL_VIEWED" forKey:[[NSNumber alloc] initWithInt:SMPortalViewedAction]];
+    [actionToStr setObject:@"PORTAL_DISMISSED" forKey:[[NSNumber alloc] initWithInt:SMPortalDismissedAction]];
+    [actionToStr setObject:@"SIGN_IN" forKey:[[NSNumber alloc] initWithInt:SMSignInAction]];
+    [actionToStr setObject:@"SIGN_OUT" forKey:[[NSNumber alloc] initWithInt:SMSignOutAction]];
+    [actionToStr setObject:@"REGISTERED" forKey:[[NSNumber alloc] initWithInt:SMRegisteredAction]];
+    [actionToStr setObject:@"REDEEMED_REWARD" forKey:[[NSNumber alloc] initWithInt:SMRedeemedRewardAction]];
     
-    if(action == SMAchievementViewAction) userAction = @"ACHIEVEMENT_VIEWED";
-    else if(action == SMAchievementEngagedAction) userAction = @"ACHIEVEMENT_DISMISSED";
-    else if(action == SMAchievementDismissedAction) userAction = @"ACHIEVEMENT_ENGAGED";
-    else if(action == SMSponsorContentViewedAction) userAction = @"SPONSOR_CONTENT_VIEWED";
-    else if(action == SMSponsorContentEngagedAction) userAction = @"SPONSOR_CONTENT_ENGAGED";
-    else if(action == SMSponsorContentDismissedAction) userAction = @"SPONSOR_CONTENT_DISMISSED";
-    else if(action == SMPortalViewedAction) userAction = @"PORTAL_VIEWED";
-    else if(action == SMPortalDismissedAction) userAction = @"PORTAL_DISMISSED";
-    else if(action == SMSignInAction) userAction = @"SIGN_IN";
-    else if(action == SMSignOutAction) userAction = @"SIGN_OUT";
-    else if(action == SMRegisteredAction) userAction = @"REGISTERED";
-    else if(action == SMRedeemedRewardAction) userAction = @"REDEEMED_REWARD";
+    NSString *userAction = [actionToStr objectForKey:[[NSNumber alloc] initWithInt:action]];
+    
+    if(!userAction)
+    {
+        userAction = @"OTHER";
+    }
     
     NSString *eventName = @"USER_ACTION";
     
     NSError *jsonError = nil;
     
     NSLog(@"User action data : %@", [data allKeys]);
-        
+    
     NSString *achievementName = [data objectForKey:SMUserActionAchievementNameKey];
     NSString *pageName = [data objectForKey:SMUserActionPageNameKey];
     NSString *sponsorContentName = [data objectForKey:SMUserActionSponsorContentNameKey];
