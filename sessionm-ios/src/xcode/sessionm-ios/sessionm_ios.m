@@ -117,6 +117,32 @@ void ContextFinalizer(FREContext ctx)
 
 @implementation SessionMHandler
 
+{
+    NSMutableDictionary *actionToStr;
+}
+- (id)init
+{
+    self = [super init];
+    
+    if(self) {
+        actionToStr = [[NSMutableDictionary alloc] init];
+        [actionToStr setObject:@"ACHIEVEMENT_VIEWED" forKey:[[NSNumber alloc] initWithInt:SMAchievementViewAction]];
+        [actionToStr setObject:@"ACHIEVEMENT_DISMISSED" forKey:[[NSNumber alloc] initWithInt:SMAchievementDismissedAction]];
+        [actionToStr setObject:@"ACHIEVEMENT_ENGAGED" forKey:[[NSNumber alloc] initWithInt:SMAchievementEngagedAction]];
+        [actionToStr setObject:@"SPONSOR_CONTENT_VIEWED" forKey:[[NSNumber alloc] initWithInt:SMSponsorContentViewedAction]];
+        [actionToStr setObject:@"SPONSOR_CONTENT_ENGAGED" forKey:[[NSNumber alloc] initWithInt:SMSponsorContentEngagedAction]];
+        [actionToStr setObject:@"SPONSOR_CONTENT_DISMISSED" forKey:[[NSNumber alloc] initWithInt:SMSponsorContentDismissedAction]];
+        [actionToStr setObject:@"PORTAL_VIEWED" forKey:[[NSNumber alloc] initWithInt:SMPortalViewedAction]];
+        [actionToStr setObject:@"PORTAL_DISMISSED" forKey:[[NSNumber alloc] initWithInt:SMPortalDismissedAction]];
+        [actionToStr setObject:@"SIGN_IN" forKey:[[NSNumber alloc] initWithInt:SMSignInAction]];
+        [actionToStr setObject:@"SIGN_OUT" forKey:[[NSNumber alloc] initWithInt:SMSignOutAction]];
+        [actionToStr setObject:@"REGISTERED" forKey:[[NSNumber alloc] initWithInt:SMRegisteredAction]];
+        [actionToStr setObject:@"REDEEMED_REWARD" forKey:[[NSNumber alloc] initWithInt:SMRedeemedRewardAction]];
+    }
+    
+    return self;
+}
+
 /*!
  @abstract Notifies about @link SessionM @/link state transition.
  @param sessionM SessionM service object.
@@ -280,20 +306,6 @@ void ContextFinalizer(FREContext ctx)
 
 - (void)sessionM:(SessionM *)sessionM user:(SMUser *)user didPerformAction:(SMActivityUserAction)action forActivity:(SMActivity *)activity withData:(NSDictionary *)data
 {
-    NSMutableDictionary *actionToStr = [[NSMutableDictionary alloc] init];
-    [actionToStr setObject:@"ACHIEVEMENT_VIEWED" forKey:[[NSNumber alloc] initWithInt:SMAchievementViewAction]];
-    [actionToStr setObject:@"ACHIEVEMENT_DISMISSED" forKey:[[NSNumber alloc] initWithInt:SMAchievementDismissedAction]];
-    [actionToStr setObject:@"ACHIEVEMENT_ENGAGED" forKey:[[NSNumber alloc] initWithInt:SMAchievementEngagedAction]];
-    [actionToStr setObject:@"SPONSOR_CONTENT_VIEWED" forKey:[[NSNumber alloc] initWithInt:SMSponsorContentViewedAction]];
-    [actionToStr setObject:@"SPONSOR_CONTENT_ENGAGED" forKey:[[NSNumber alloc] initWithInt:SMSponsorContentEngagedAction]];
-    [actionToStr setObject:@"SPONSOR_CONTENT_DISMISSED" forKey:[[NSNumber alloc] initWithInt:SMSponsorContentDismissedAction]];
-    [actionToStr setObject:@"PORTAL_VIEWED" forKey:[[NSNumber alloc] initWithInt:SMPortalViewedAction]];
-    [actionToStr setObject:@"PORTAL_DISMISSED" forKey:[[NSNumber alloc] initWithInt:SMPortalDismissedAction]];
-    [actionToStr setObject:@"SIGN_IN" forKey:[[NSNumber alloc] initWithInt:SMSignInAction]];
-    [actionToStr setObject:@"SIGN_OUT" forKey:[[NSNumber alloc] initWithInt:SMSignOutAction]];
-    [actionToStr setObject:@"REGISTERED" forKey:[[NSNumber alloc] initWithInt:SMRegisteredAction]];
-    [actionToStr setObject:@"REDEEMED_REWARD" forKey:[[NSNumber alloc] initWithInt:SMRedeemedRewardAction]];
-    
     NSString *userAction = [actionToStr objectForKey:[[NSNumber alloc] initWithInt:action]];
     
     if(!userAction)
