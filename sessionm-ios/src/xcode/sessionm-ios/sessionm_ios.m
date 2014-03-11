@@ -42,6 +42,7 @@
 #import "SessionM.h"
 #import "FlashRuntimeExtensions.h"
 #import <Foundation/Foundation.h>
+#import <string.h>
 
 FREContext context = nil;
 
@@ -92,6 +93,7 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
         MAP_FUNCTION(logAction, NULL),
         MAP_FUNCTION(presentActivity, NULL),
         MAP_FUNCTION(dismissActivity, NULL),
+        MAP_FUNCTION(getSDKVersion, NULL),
     };
     
     *numFunctionsToTest = sizeof(func) / sizeof(FRENamedFunction);
@@ -608,5 +610,21 @@ ANE_FUNCTION(isSupportedPlatform)
     {
         return NULL;
     }
+}
+
+ANE_FUNCTION(getSDKVersion)
+{
+    const char* version = [__SESSIONM_SDK_VERSION__ UTF8String];
+    FREObject returnVal;
+    
+    if(FRE_OK == FRENewObjectFromUTF8(strlen(version), (const uint8_t*)version, &returnVal))
+    {
+        return returnVal;
+    }
+    else
+    {
+        return NULL;
+    }
+
 }
 

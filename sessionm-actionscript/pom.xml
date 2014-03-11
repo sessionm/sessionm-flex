@@ -12,6 +12,25 @@
     <packaging>swc</packaging>
     <description>ActionScript wrapper</description>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>net.flexmojos.oss</groupId>
+                <artifactId>flexmojos-maven-plugin</artifactId>
+                <version>${flexmojos.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <defines combine.children="append">
+                        <property>
+                            <name>CONFIG::extensionVersion</name>
+                            <value>"${project.version}"</value>
+                        </property>
+                    </defines>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <dependencies>
         <dependency>
             <groupId>com.adobe.flex.framework</groupId>

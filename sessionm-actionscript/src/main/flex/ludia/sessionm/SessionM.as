@@ -94,6 +94,24 @@ public class SessionM extends EventDispatcher implements ISessionM {
         return supported;
     }
 
+
+    public function getSDKVersion():String {
+        var version:String = "unknown";
+        try {
+            var returnVal:* = context.call("getSDKVersion");
+            logger.debug("getSDKVersion return value: {0}", returnVal);
+            version = String(returnVal);
+        }
+        catch (error:Error) {
+            logger.error("Unknown error: {0}", error);
+        }
+        return version;
+    }
+
+    public function getExtensionVersion():String {
+        return CONFIG::extensionVersion;
+    }
+
     /**
      * @private
      * @param event

@@ -62,6 +62,11 @@ public class Main extends Sprite {
     public function isSupportedPlatform():void {
         prependText("Is supported platform: " + sessionM.isSupportedPlatform());
     }
+
+    public function getVersions():void {
+        prependText("SDK: " + sessionM.getSDKVersion() + ", extension: " + sessionM.getExtensionVersion());
+    }
+
     private function presentPortal():void {
         sessionM.addEventListener(ActivityEvent.ACTIVITY_DISMISSED, sessionM_activityDismissedHandler);
         sessionM.addEventListener(ActivityEvent.ACTIVITY_PRESENTED, sessionM_activityPresentedHandler);
@@ -108,7 +113,7 @@ public class Main extends Sprite {
         txtStatus=new TextField();
         txtStatus.defaultTextFormat=new TextFormat("Arial",20);
         txtStatus.width=stage.stageWidth;
-        txtStatus.height=400;
+        txtStatus.height=300;
         txtStatus.multiline=true;
         txtStatus.wordWrap=true;
         txtStatus.text="Press \"Start session\"";
@@ -126,6 +131,7 @@ public class Main extends Sprite {
         layout.addButton(new SimpleButton(new Command("Present portal", presentPortal)));
         layout.addButton(new SimpleButton(new Command("Present achievement", presentAchievement)));
         layout.addButton(new SimpleButton(new Command("Is supported platform", isSupportedPlatform)));
+        layout.addButton(new SimpleButton(new Command("Get versions", getVersions)));
         layout.addButton(new SimpleButton(new Command("Clear log", clearLog)));
 
         layout.attach(buttonContainer);
