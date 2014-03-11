@@ -80,6 +80,20 @@ public class SessionM extends EventDispatcher implements ISessionM {
         return null;
     }
 
+    public function isSupportedPlatform():Boolean {
+        var supported:Boolean = false;
+        try {
+            var returnVal:* = context.call("isSupportedPlatform");
+            logger.debug("iSupported return value: {0}", returnVal);
+            supported = Boolean(returnVal);
+        }
+        catch (error:Error) {
+            logger.error("Unknown error: {0}", error);
+            supported = false;
+        }
+        return supported;
+    }
+
     /**
      * @private
      * @param event
@@ -125,7 +139,8 @@ public class SessionM extends EventDispatcher implements ISessionM {
         if(event.level) {
             userAction = new UserAction(JSON.parse(event.level));
         }
-        dispatchEvent(new ActivityEvent(event.type, userAction));
+        var eventType:String = ActivityEvent[event.code];
+        dispatchEvent(new ActivityEvent(eventType, userAction));
     }
 
     private function manageUser(event:StatusEvent):void {
@@ -166,7 +181,7 @@ public class SessionM extends EventDispatcher implements ISessionM {
     }
 
     public static function get isSupported():Boolean {
-        return Capabilities.manufacturer.indexOf("Android") > -1;
+        return Capabilities.manufacturer.indexOf("Android") > -1 || Capabilities.manufacturer.indexOf("iOS") > -1;
     }
 
     public function dispose():void {

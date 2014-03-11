@@ -11,5 +11,6 @@ public interface ISessionM extends IEventDispatcher {
     function startSession(appID:String):void;
     function getUser():User;
     function getAchievement():Achievement;
+    function isSupportedPlatform():Boolean;
 }
 }

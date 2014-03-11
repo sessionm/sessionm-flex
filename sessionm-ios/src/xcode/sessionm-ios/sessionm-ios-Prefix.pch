@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'sessionm-ios' target in the 'sessionm-ios' project
+//
+
+#ifdef __OBJC__
+    #import <Foundation/Foundation.h>
+#endif

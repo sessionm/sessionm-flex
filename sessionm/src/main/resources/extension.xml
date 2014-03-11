@@ -1,4 +1,4 @@
-<extension xmlns="http://ns.adobe.com/air/extension/3.5">
+<extension xmlns="http://ns.adobe.com/air/extension/${air.version}">
     <id>${project.groupId}.${project.artifactId}</id>
     <versionNumber>${extension.versionNumber}</versionNumber>
     <platforms>
@@ -7,6 +7,12 @@
                 <nativeLibrary>sessionm-android.jar</nativeLibrary>
                 <initializer>ludia.sessionm.SessionMExtension</initializer>
                 <finalizer>ludia.sessionm.SessionMExtension</finalizer>
+            </applicationDeployment>
+        </platform>
+        <platform name="iPhone-ARM">
+            <applicationDeployment>
+                <nativeLibrary>sessionm-ios.a</nativeLibrary>
+                <initializer>SessionMExtInitializer</initializer>
             </applicationDeployment>
         </platform>
         <platform name="default">

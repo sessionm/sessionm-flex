@@ -8,8 +8,12 @@ public class UserAction {
     public static const SPONSOR_CONTENT_ENGAGED:String = "SPONSOR_CONTENT_ENGAGED";
     public static const SPONSOR_CONTENT_DISMISSED:String = "SPONSOR_CONTENT_DISMISSED";
     public static const PORTAL_VIEWED:String = "PORTAL_VIEWED";
+    public static const PORTAL_DISMISSED:String = "PORTAL_DISMISSED";
     public static const SIGN_IN:String = "SIGN_IN";
     public static const SIGN_OUT:String = "SIGN_OUT";
+    public static const REGISTERED:String = "REGISTERED";
+    public static const REDEEMED_REWARD:String = "REDEEMED_REWARD";
+    public static const OTHER:String = "OTHER";
 
     private var _achievementName:String;
     private var _pageName:String;

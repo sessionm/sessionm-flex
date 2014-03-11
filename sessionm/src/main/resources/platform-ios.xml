@@ -1,0 +1,18 @@
+<platform xmlns="http://ns.adobe.com/air/extension/${air.version}">
+    <description>iOS linking options</description>
+    <copyright>Ludia Inc.</copyright>
+    <sdkVersion>7.0</sdkVersion>
+    <packagedDependencies>
+        <packagedDependency>ios-sdk.a</packagedDependency>
+    </packagedDependencies>
+    <linkerOptions>
+        <option>-framework AdSupport</option>
+        <option>-framework CoreData</option>
+        <option>-framework MediaPlayer</option>
+        <option>-framework CoreTelephony</option>
+        <option>-framework EventKit</option>
+        <option>-framework EventKitUI</option>
+        <option>-lxml2.2</option>
+        <option>-lz.1.1.3</option>
+    </linkerOptions>
+</platform>

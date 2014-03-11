@@ -29,39 +29,21 @@
             </includes>
             <outputFileNameMapping>${artifact.artifactId}.jar</outputFileNameMapping>
         </dependencySet>
-        <!-- Android: Unzips the SWC file into /sessionm/android for AS wrapper -->
+        <!-- iOS: Copies the native archive files in session/ios/ -->
         <dependencySet>
-            <outputDirectory>android</outputDirectory>
+            <outputDirectory>ios</outputDirectory>
             <includes>
-                <include>*:sessionm-actionscript</include>
+                <include>*:sessionm-ios</include>
+                <include>com.sessionm:ios-sdk</include>
             </includes>
-            <unpack>true</unpack>
-            <unpackOptions>
-                <includes>
-                    <include>*.swf</include>
-                </includes>
-            </unpackOptions>
+            <outputFileNameMapping>${artifact.artifactId}.a</outputFileNameMapping>
         </dependencySet>
-        <!-- Default: Unzips the SWC file into /sessionm/default (the AS code handles unavailable context) -->
+        <!-- AS3: Copies the native archive files in session/ios/ -->
         <dependencySet>
             <outputDirectory>default</outputDirectory>
             <includes>
                 <include>*:sessionm-actionscript</include>
             </includes>
-            <unpack>true</unpack>
-            <unpackOptions>
-                <includes>
-                    <include>*.swf</include>
-                </includes>
-            </unpackOptions>
-        </dependencySet>
-        <!-- Copies the AS wrapper SWC file (also required by ADT to package the ANE) -->
-        <dependencySet>
-            <outputDirectory>/</outputDirectory>
-            <includes>
-                <include>*:sessionm-actionscript</include>
-            </includes>
-            <outputFileNameMapping>${artifact.artifactId}.swc</outputFileNameMapping>
         </dependencySet>
     </dependencySets>
 </assembly>

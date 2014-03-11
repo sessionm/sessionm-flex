@@ -2,6 +2,7 @@ target
 build
 gen
 dependency-reduced-pom.xml
+xcuserdata
 
 syntax: glob
 *-local.xml

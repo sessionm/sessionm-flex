@@ -59,6 +59,9 @@ public class Main extends Sprite {
         sessionM.logAction("example");
     }
 
+    public function isSupportedPlatform():void {
+        prependText("Is supported platform: " + sessionM.isSupportedPlatform());
+    }
     private function presentPortal():void {
         sessionM.addEventListener(ActivityEvent.ACTIVITY_DISMISSED, sessionM_activityDismissedHandler);
         sessionM.addEventListener(ActivityEvent.ACTIVITY_PRESENTED, sessionM_activityPresentedHandler);
@@ -98,7 +101,6 @@ public class Main extends Sprite {
     private function prependText(text:String):void {
         txtStatus.text = text + "\n" + txtStatus.text;
     }
-
     /** Create UI */
     public function createUI():void
     {
@@ -123,6 +125,7 @@ public class Main extends Sprite {
         layout.addButton(new SimpleButton(new Command("Log Action",logAction)));
         layout.addButton(new SimpleButton(new Command("Present portal", presentPortal)));
         layout.addButton(new SimpleButton(new Command("Present achievement", presentAchievement)));
+        layout.addButton(new SimpleButton(new Command("Is supported platform", isSupportedPlatform)));
         layout.addButton(new SimpleButton(new Command("Clear log", clearLog)));
 
         layout.attach(buttonContainer);
