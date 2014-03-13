@@ -71,6 +71,9 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
 */
 void ContextFinalizer(FREContext ctx);
 
+NSString* userToJSON(SMUser *user);
+NSString* achievementToJSON(SMAchievementData *achievementData);
+
 void dispatchUser(SMUser *user);
 void dispatchAchievement(SMAchievementData *achievementData);
 

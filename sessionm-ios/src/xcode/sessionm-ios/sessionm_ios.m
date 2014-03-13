@@ -405,18 +405,43 @@ void ContextFinalizer(FREContext ctx)
 
 SessionMHandler *handler = NULL;
 
-void dispatchUser(SMUser *user)
+NSString* userToJSON(SMUser *user)
 {
-    NSError *jsonError = nil;
     NSDictionary *dict = @{
                            @"pointBalance": [[NSNumber alloc] initWithInteger:user.pointBalance],
                            @"optedOut": user.isOptedOut ? @"true" : @"false",
                            @"unclaimedAchievementValue": [[NSNumber alloc] initWithInteger:user.unclaimedAchievementValue],
                            @"unclaimedAchievementCount": [[NSNumber alloc] initWithInteger:user.unclaimedAchievementCount]
                            };
-    
+    NSError *jsonError = nil;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:(id)dict options:0 error:&jsonError];
     NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return jsonStr;
+}
+
+NSString* achievementToJSON(SMAchievementData *achievementData)
+{
+    NSDate *date = achievementData.lastEarnedDate;
+    double time = date ? date.timeIntervalSince1970 : 0;
+    
+    NSDictionary *dict = @{
+                           @"achievementIconURL": achievementData.achievementIconURL,
+                           @"action": achievementData.action,
+                           @"name": achievementData.name,
+                           @"message": achievementData.message,
+                           @"isCustom": achievementData.isCustom ? @"true" : @"false",
+                           @"lastEarnedDate": [[NSNumber alloc] initWithDouble:time]
+                           };
+    
+    NSError *jsonError = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:(id)dict options:0 error:&jsonError];
+    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return jsonStr;
+}
+
+void dispatchUser(SMUser *user)
+{
+    NSString *jsonStr = userToJSON(user);
     
     NSString *eventName = @"USER_UPDATED";
     NSLog(@"Will dispatch %@:%@", eventName, jsonStr);
@@ -430,21 +455,7 @@ void dispatchUser(SMUser *user)
 
 void dispatchAchievement(SMAchievementData *achievementData)
 {
-    NSError *jsonError = nil;
-    NSDate *date = achievementData.lastEarnedDate;
-    double time = date ? date.timeIntervalSince1970 : 0;
-    
-    NSDictionary *dict = @{
-                           @"achievementIconURL": achievementData.achievementIconURL,
-                           @"action": achievementData.action,
-                           @"name": achievementData.name,
-                           @"message": achievementData.message,
-                           @"isCustom": achievementData.isCustom ? @"true" : @"false",
-                           @"lastEarnedDate": [[NSNumber alloc] initWithDouble:time]
-    };
-    
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:(id)dict options:0 error:&jsonError];
-    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSString *jsonStr = achievementToJSON(achievementData);
     
     NSString *eventName = @"UNCLAIMED_ACHIEVEMENT";
     NSLog(@"Will dispatch %@:%@", eventName, jsonStr);
@@ -646,17 +657,8 @@ ANE_FUNCTION(getUser)
         return NULL;
     }
     
-    SMUser *user = instance.user;
-    NSDictionary *dict = @{
-                           @"pointBalance": [[NSNumber alloc] initWithInteger:user.pointBalance],
-                           @"optedOut": user.isOptedOut ? @"true" : @"false",
-                           @"unclaimedAchievementValue": [[NSNumber alloc] initWithInteger:user.unclaimedAchievementValue],
-                           @"unclaimedAchievementCount": [[NSNumber alloc] initWithInteger:user.unclaimedAchievementCount]
-                           };
     
-    NSError *jsonError = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:(id)dict options:0 error:&jsonError];
-    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSString *jsonStr = userToJSON(instance.user);
     
     const char* version = [jsonStr UTF8String];
     FREObject returnVal;
@@ -689,24 +691,8 @@ ANE_FUNCTION(getUnclaimedAchievement)
         return NULL;
     }
     
-    SMAchievementData *achievementData = instance.unclaimedAchievement;
-    
-    NSDate *date = achievementData.lastEarnedDate;
-    double time = date ? date.timeIntervalSince1970 : 0;
-    
-    NSDictionary *dict = @{
-                           @"achievementIconURL": achievementData.achievementIconURL,
-                           @"action": achievementData.action,
-                           @"name": achievementData.name,
-                           @"message": achievementData.message,
-                           @"isCustom": achievementData.isCustom ? @"true" : @"false",
-                           @"lastEarnedDate": [[NSNumber alloc] initWithDouble:time]
-                           };
-    
-    NSError *jsonError = nil;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:(id)dict options:0 error:&jsonError];
-    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    
+    NSString *jsonStr = achievementToJSON(instance.unclaimedAchievement);
+   
     const char* version = [jsonStr UTF8String];
     FREObject returnVal;
     FREResult result = FRENewObjectFromUTF8(strlen(version), (const uint8_t*)version, &returnVal);
