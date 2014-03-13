@@ -94,6 +94,7 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
         MAP_FUNCTION(presentActivity, NULL),
         MAP_FUNCTION(dismissActivity, NULL),
         MAP_FUNCTION(getSDKVersion, NULL),
+        MAP_FUNCTION(getUser, NULL),
     };
     
     *numFunctionsToTest = sizeof(func) / sizeof(FRENamedFunction);
@@ -626,5 +627,48 @@ ANE_FUNCTION(getSDKVersion)
         return NULL;
     }
 
+}
+
+ANE_FUNCTION(getUser)
+{
+    SessionM *instance = [SessionM sharedInstance];
+    
+    if(!instance)
+    {
+        NSLog(@"SessionM is not supported on this platform");
+        return NULL;
+    }
+    
+    if(!instance.user)
+    {
+        NSLog(@"SessionM instance has no user");
+        return NULL;
+    }
+    
+    SMUser *user = instance.user;
+    NSDictionary *dict = @{
+                           @"pointBalance": [[NSNumber alloc] initWithInteger:user.pointBalance],
+                           @"optedOut": user.isOptedOut ? @"true" : @"false",
+                           @"unclaimedAchievementValue": [[NSNumber alloc] initWithInteger:user.unclaimedAchievementValue],
+                           @"unclaimedAchievementCount": [[NSNumber alloc] initWithInteger:user.unclaimedAchievementCount]
+                           };
+    
+    NSError *jsonError = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:(id)dict options:0 error:&jsonError];
+    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    const char* version = [jsonStr UTF8String];
+    FREObject returnVal;
+    FREResult result = FRENewObjectFromUTF8(strlen(version), (const uint8_t*)version, &returnVal);
+    
+    if(FRE_OK == result)
+    {
+        return returnVal;
+    }
+    else
+    {
+        NSLog(@"Invalid FRE result code %i", result);
+        return NULL;
+    }
 }
 

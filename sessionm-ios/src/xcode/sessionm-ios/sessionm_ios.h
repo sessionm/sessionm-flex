@@ -84,3 +84,4 @@ ANE_FUNCTION(presentActivity);
 ANE_FUNCTION(dismissActivity);
 ANE_FUNCTION(isSupportedPlatform);
 ANE_FUNCTION(getSDKVersion);
+ANE_FUNCTION(getUser);

@@ -50,7 +50,6 @@ public class SessionM extends EventDispatcher implements ISessionM {
         callExtension("logAction", action);
     }
 
-
     public function presentActivity(activity:String):void {
         callExtension("presentActivity", activity);
     }
@@ -59,12 +58,11 @@ public class SessionM extends EventDispatcher implements ISessionM {
         callExtension("startSession", appID);
     }
 
-
     public function getUser():User {
         var user:User;
         var userString:String;
         try {
-            userString = String(context.call("getSessionState"));
+            userString = String(context.call("getUser"));
             if(userString) {
                 user = new User(JSON.parse(userString));
             }

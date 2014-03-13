@@ -67,6 +67,10 @@ public class Main extends Sprite {
         prependText("SDK: " + sessionM.getSDKVersion() + ", extension: " + sessionM.getExtensionVersion());
     }
 
+    public function getUserInfo():void {
+        prependText("User: " + sessionM.getUser());
+    }
+
     private function presentPortal():void {
         sessionM.addEventListener(ActivityEvent.ACTIVITY_DISMISSED, sessionM_activityDismissedHandler);
         sessionM.addEventListener(ActivityEvent.ACTIVITY_PRESENTED, sessionM_activityPresentedHandler);
@@ -130,6 +134,7 @@ public class Main extends Sprite {
         layout.addButton(new SimpleButton(new Command("Log Action",logAction)));
         layout.addButton(new SimpleButton(new Command("Present portal", presentPortal)));
         layout.addButton(new SimpleButton(new Command("Present achievement", presentAchievement)));
+        layout.addButton(new SimpleButton(new Command("Get user info", getUserInfo)));
         layout.addButton(new SimpleButton(new Command("Is supported platform", isSupportedPlatform)));
         layout.addButton(new SimpleButton(new Command("Get versions", getVersions)));
         layout.addButton(new SimpleButton(new Command("Clear log", clearLog)));
