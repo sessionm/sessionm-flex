@@ -38,6 +38,7 @@ public class SessionMExtensionContext extends FREContext implements SessionListe
         map.put("logAction", new LogActionFunction());
         map.put("presentActivity", new PresentActivityFunction());
         map.put("getUser", new GetUserFunction());
+        map.put("getUnclaimedAchievement", new GetUnclaimedAchievementFunction());
         map.put("isSupportedPlatform", new IsSupportedPlatformFunction());
         map.put("getSDKVersion", new GetSDKVersionFunction());
 

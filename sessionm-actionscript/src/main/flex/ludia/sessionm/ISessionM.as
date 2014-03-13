@@ -10,7 +10,7 @@ public interface ISessionM extends IEventDispatcher {
     function presentActivity(type:String):void;
     function startSession(appID:String):void;
     function getUser():User;
-    function getAchievement():Achievement;
+    function getUnclaimedAchievement():Achievement;
     function isSupportedPlatform():Boolean;
     function getSDKVersion():String;
     function getExtensionVersion():String;

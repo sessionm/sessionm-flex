@@ -62,8 +62,9 @@ public class SessionM extends EventDispatcher implements ISessionM {
         var user:User;
         var userString:String;
         try {
-            userString = String(context.call("getUser"));
-            if(userString) {
+            var returnVal:* = context.call("getUser");
+            if(returnVal) {
+                userString = String(returnVal);
                 user = new User(JSON.parse(userString));
             }
         }
@@ -74,15 +75,27 @@ public class SessionM extends EventDispatcher implements ISessionM {
         return user;
     }
 
-    public function getAchievement():Achievement {
-        return null;
+    public function getUnclaimedAchievement():Achievement {
+        var achievement:Achievement;
+        var achievementStr:String;
+        try {
+            var returnVal:* = context.call("getUnclaimedAchievement");
+            if(returnVal) {
+                achievementStr = String(returnVal);
+                achievement = new Achievement(JSON.parse(achievementStr));
+            }
+        }
+        catch (error:Error) {
+            logger.error("Unknown error: {0}", error);
+            achievement = null;
+        }
+        return achievement;
     }
 
     public function isSupportedPlatform():Boolean {
         var supported:Boolean = false;
         try {
             var returnVal:* = context.call("isSupportedPlatform");
-            logger.debug("iSupported return value: {0}", returnVal);
             supported = Boolean(returnVal);
         }
         catch (error:Error) {
@@ -187,7 +200,6 @@ public class SessionM extends EventDispatcher implements ISessionM {
             else {
                 logger.debug("Call " + method + " returned nothing");
             }
-
         }
         catch (error:Error) {
             logger.error("Unknown error: {0}", error);

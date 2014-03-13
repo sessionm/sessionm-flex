@@ -12,7 +12,10 @@ public class Achievement {
         this._achievementIconURL = String(source.achievementIconURL);
         this._action = String(source.action);
         this._message = String(source.message);
-        this._lastEarnedDate = new Date(int(source.lastEarnedDate));
+        var timestamp:int = int(source.lastEarnedDate);
+        if(timestamp > 0) {
+            this._lastEarnedDate = new Date(timestamp);
+        }
         this._isCustom = Boolean(source.isCustom);
         this._name = String(source.name);
     }

@@ -85,3 +85,4 @@ ANE_FUNCTION(dismissActivity);
 ANE_FUNCTION(isSupportedPlatform);
 ANE_FUNCTION(getSDKVersion);
 ANE_FUNCTION(getUser);
+ANE_FUNCTION(getUnclaimedAchievement);

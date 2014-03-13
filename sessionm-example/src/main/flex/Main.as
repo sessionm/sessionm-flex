@@ -69,6 +69,7 @@ public class Main extends Sprite {
 
     public function getUserInfo():void {
         prependText("User: " + sessionM.getUser());
+        prependText("Unclaimed achievement: " + sessionM.getUnclaimedAchievement());
     }
 
     private function presentPortal():void {

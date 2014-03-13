@@ -95,6 +95,7 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
         MAP_FUNCTION(dismissActivity, NULL),
         MAP_FUNCTION(getSDKVersion, NULL),
         MAP_FUNCTION(getUser, NULL),
+        MAP_FUNCTION(getUnclaimedAchievement, NULL),
     };
     
     *numFunctionsToTest = sizeof(func) / sizeof(FRENamedFunction);
@@ -672,3 +673,51 @@ ANE_FUNCTION(getUser)
     }
 }
 
+ANE_FUNCTION(getUnclaimedAchievement)
+{
+    SessionM *instance = [SessionM sharedInstance];
+    
+    if(!instance)
+    {
+        NSLog(@"SessionM is not supported on this platform");
+        return NULL;
+    }
+    
+    if(!instance.unclaimedAchievement)
+    {
+        NSLog(@"SessionM instance has no unclaimed achievement");
+        return NULL;
+    }
+    
+    SMAchievementData *achievementData = instance.unclaimedAchievement;
+    
+    NSDate *date = achievementData.lastEarnedDate;
+    double time = date ? date.timeIntervalSince1970 : 0;
+    
+    NSDictionary *dict = @{
+                           @"achievementIconURL": achievementData.achievementIconURL,
+                           @"action": achievementData.action,
+                           @"name": achievementData.name,
+                           @"message": achievementData.message,
+                           @"isCustom": achievementData.isCustom ? @"true" : @"false",
+                           @"lastEarnedDate": [[NSNumber alloc] initWithDouble:time]
+                           };
+    
+    NSError *jsonError = nil;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:(id)dict options:0 error:&jsonError];
+    NSString *jsonStr = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    
+    const char* version = [jsonStr UTF8String];
+    FREObject returnVal;
+    FREResult result = FRENewObjectFromUTF8(strlen(version), (const uint8_t*)version, &returnVal);
+    
+    if(FRE_OK == result)
+    {
+        return returnVal;
+    }
+    else
+    {
+        NSLog(@"Invalid FRE result code %i", result);
+        return NULL;
+    }
+}
