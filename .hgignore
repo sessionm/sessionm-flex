@@ -9,4 +9,5 @@ syntax: glob
 *.iml
 .DS_Store
 .idea
+*.xcuserstate
 
