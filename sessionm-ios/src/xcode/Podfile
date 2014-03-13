@@ -1,0 +1,4 @@
+platform :ios
+pod 'SessionM', '~> 1.10'
+xcodeproj 'sessionm-ios'
+workspace 'sessionm-ios'

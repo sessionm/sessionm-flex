@@ -3,10 +3,13 @@ build
 gen
 dependency-reduced-pom.xml
 xcuserdata
+xcworkspacedata
 
 syntax: glob
 *-local.xml
 *.iml
 .DS_Store
 .idea
+Podfile.lock
+Pods
 

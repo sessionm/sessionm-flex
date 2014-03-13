@@ -132,9 +132,10 @@
             <type>a</type>
         </dependency>
         <dependency>
-            <groupId>com.sessionm</groupId>
-            <artifactId>ios-sdk</artifactId>
-            <version>1.9.3</version>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>sessionm-ios</artifactId>
+            <version>${project.version}</version>
+            <classifier>packaged-dep</classifier>
             <type>a</type>
         </dependency>
         <dependency>

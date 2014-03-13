@@ -11,7 +11,7 @@
         </platform>
         <platform name="iPhone-ARM">
             <applicationDeployment>
-                <nativeLibrary>sessionm-ios.a</nativeLibrary>
+                <nativeLibrary>sessionm-ios-${ios.activeConfiguration}-iphoneos.a</nativeLibrary>
                 <initializer>SessionMExtInitializer</initializer>
             </applicationDeployment>
         </platform>
