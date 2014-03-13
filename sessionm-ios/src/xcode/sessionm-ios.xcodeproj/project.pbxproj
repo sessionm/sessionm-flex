@@ -21,10 +21,11 @@
 		87920FD2189B040200D5985E /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87920FD1189B040200D5985E /* EventKit.framework */; };
 		87920FD4189B054700D5985E /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87920FD3189B054700D5985E /* AdSupport.framework */; };
 		87920FD6189B05E900D5985E /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87920FD5189B05E900D5985E /* EventKitUI.framework */; };
-		98FCFD316F0240EFADD82F19 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ACAD2EA41B524744BB07AD20 /* libPods.a */; };
+		87DD9B4818D248900005AA0A /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87DD9B4718D248900005AA0A /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		36801BD61E6A4E55AE1D45A2 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		87920F78189AF29100D5985E /* libsessionm-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libsessionm-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		87920F7B189AF29100D5985E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		87920F7D189AF29100D5985E /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -46,10 +47,6 @@
 		87920FA6189AF29100D5985E /* sessionm_ios.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sessionm_ios.h; sourceTree = "<group>"; };
 		87920FA7189AF29100D5985E /* sessionm_ios.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sessionm_ios.m; sourceTree = "<group>"; };
 		87920FAC189AF29100D5985E /* debugIPA.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = debugIPA.sh; sourceTree = "<group>"; };
-		87920FB8189AF34F00D5985E /* libSessionM.1.9.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSessionM.1.9.3.a; sourceTree = "<group>"; };
-		87920FB9189AF34F00D5985E /* SessionM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionM.h; sourceTree = "<group>"; };
-		87920FBA189AF34F00D5985E /* SMAchievementData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAchievementData.h; sourceTree = "<group>"; };
-		87920FBB189AF34F00D5985E /* SMPortalButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPortalButton.h; sourceTree = "<group>"; };
 		87920FBC189AF34F00D5985E /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashRuntimeExtensions.h; sourceTree = "<group>"; };
 		87920FC2189AFF9800D5985E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		87920FC3189AFF9800D5985E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -61,7 +58,8 @@
 		87920FD5189B05E900D5985E /* EventKitUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = EventKitUI.framework; path = System/Library/Frameworks/EventKitUI.framework; sourceTree = SDKROOT; };
 		87CEF92018A00BA1002D5AEC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		87CEF93218A01B4E002D5AEC /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		ACAD2EA41B524744BB07AD20 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		87DD9B4718D248900005AA0A /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		BC3C6CB0BC6144269388EDEC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87DD9B4818D248900005AA0A /* StoreKit.framework in Frameworks */,
 				87920FD6189B05E900D5985E /* EventKitUI.framework in Frameworks */,
 				87920FD4189B054700D5985E /* AdSupport.framework in Frameworks */,
 				87920FD2189B040200D5985E /* EventKit.framework in Frameworks */,
@@ -82,7 +81,6 @@
 				87920FC8189AFFAF00D5985E /* MediaPlayer.framework in Frameworks */,
 				87920FC6189AFFA800D5985E /* SystemConfiguration.framework in Frameworks */,
 				87920FC5189AFF9800D5985E /* CoreTelephony.framework in Frameworks */,
-				98FCFD316F0240EFADD82F19 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,6 +93,7 @@
 				87920FA3189AF29100D5985E /* sessionm-ios */,
 				87920F7A189AF29100D5985E /* Frameworks */,
 				87920F79189AF29100D5985E /* Products */,
+				36801BD61E6A4E55AE1D45A2 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -110,6 +109,7 @@
 		87920F7A189AF29100D5985E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				87DD9B4718D248900005AA0A /* StoreKit.framework */,
 				87CEF93218A01B4E002D5AEC /* XCTest.framework */,
 				87920FD5189B05E900D5985E /* EventKitUI.framework */,
 				87920FD3189B054700D5985E /* AdSupport.framework */,
@@ -135,7 +135,7 @@
 				87920F95189AF29100D5985E /* AVFoundation.framework */,
 				87920F97189AF29100D5985E /* Security.framework */,
 				87CEF92018A00BA1002D5AEC /* XCTest.framework */,
-				ACAD2EA41B524744BB07AD20 /* libPods.a */,
+				BC3C6CB0BC6144269388EDEC /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -143,10 +143,6 @@
 		87920FA3189AF29100D5985E /* sessionm-ios */ = {
 			isa = PBXGroup;
 			children = (
-				87920FB8189AF34F00D5985E /* libSessionM.1.9.3.a */,
-				87920FB9189AF34F00D5985E /* SessionM.h */,
-				87920FBA189AF34F00D5985E /* SMAchievementData.h */,
-				87920FBB189AF34F00D5985E /* SMPortalButton.h */,
 				87920FBC189AF34F00D5985E /* FlashRuntimeExtensions.h */,
 				87920FA6189AF29100D5985E /* sessionm_ios.h */,
 				87920FA7189AF29100D5985E /* sessionm_ios.m */,
@@ -347,6 +343,7 @@
 		};
 		87920FB0189AF29100D5985E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36801BD61E6A4E55AE1D45A2 /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -354,18 +351,23 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "sessionm-ios/sessionm-ios-Prefix.pch";
 				GCC_VERSION = "";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/alassauzay/Documents/workspace/air-sessionm/sessionm-ios/src/xcode/sessionm-ios",
+				HEADER_SEARCH_PATHS = (
+					"${inherited}",
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/SessionM\"",
+					"\"${SOURCE_ROOT}/PROJECT_NAME\"",
 				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
 		87920FB1189AF29100D5985E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 36801BD61E6A4E55AE1D45A2 /* Pods.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_OBJC_ARC = YES;
@@ -373,13 +375,17 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "sessionm-ios/sessionm-ios-Prefix.pch";
 				GCC_VERSION = "";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"/Users/alassauzay/Documents/workspace/air-sessionm/sessionm-ios/src/xcode/sessionm-ios",
+				HEADER_SEARCH_PATHS = (
+					"${inherited}",
+					"\"${PODS_ROOT}/Headers\"",
+					"\"${PODS_ROOT}/Headers/SessionM\"",
+					"\"${SOURCE_ROOT}/PROJECT_NAME\"",
 				);
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};

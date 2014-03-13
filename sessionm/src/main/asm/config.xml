@@ -34,9 +34,8 @@
             <outputDirectory>ios</outputDirectory>
             <includes>
                 <include>*:sessionm-ios</include>
-                <include>com.sessionm:ios-sdk</include>
             </includes>
-            <outputFileNameMapping>${artifact.artifactId}.a</outputFileNameMapping>
+            <outputFileNameMapping>${artifact.artifactId}${dashClassifier?}.a</outputFileNameMapping>
         </dependencySet>
         <!-- AS3: Copies the native archive files in session/ios/ -->
         <dependencySet>

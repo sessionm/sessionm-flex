@@ -33,6 +33,28 @@
                     <doxygenDefaultConfig>${ios.activeConfiguration}</doxygenDefaultConfig>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-ane-artifact</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attach-artifact</goal>
+                        </goals>
+                        <configuration>
+                            <artifacts>
+                                <artifact>
+                                    <classifier>packaged-dep</classifier>
+                                    <file>${project.build.sourceDirectory}/Pods/SessionM/SessionM_iOS_v1.10.0_Release/libSessionM.1.10.0.a</file>
+                                    <type>a</type>
+                                </artifact>
+                            </artifacts>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
