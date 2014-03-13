@@ -8,17 +8,17 @@
 
      minimumPatchLevel - The minimum patch level of the AIR runtime required to run the application. Optional. -->
 
-<application xmlns="http://ns.adobe.com/air/application/3.6">
+<application xmlns="http://ns.adobe.com/air/application/${air.version}">
 
     <!-- A universally unique application identifier. Must be unique across all AIR applications.
          Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
     <id>com.ludia.gamesample2</id>
 
     <!-- Used as the filename for the application. Required. -->
-    <filename>LudiaShowcase</filename>
+    <filename>SessionMExample</filename>
 
     <!-- The name that is displayed in the AIR application installer. May have multiple values for each language. See samples or xsd schema file. Optional. -->
-    <name>Ludia Showcase</name>
+    <name>SessionM Example</name>
 
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade.
          Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
@@ -128,16 +128,16 @@
     <!-- The icon the system uses for the application. For at least one resolution, specify the path to a PNG file included in the AIR package. Optional. -->
     <icon>
         <!--<image16x16></image16x16>-->
-        <image29x29>icons/Icon-Small.png</image29x29>
+        <!--<image29x29>icons/Icon-Small.png</image29x29>-->
         <!--<image32x32></image32x32>-->
         <!--<image36x36></image36x36>-->
         <!--<image48x48></image48x48>-->
-        <image50x50>icons/Icon-Small-50.png</image50x50>
-        <image57x57>icons/Icon.png</image57x57>
-        <image58x58>icons/Icon-Small@2x.png</image58x58>
-        <image72x72>icons/Icon-72.png</image72x72>
+        <!--<image50x50>icons/Icon-Small-50.png</image50x50>-->
+        <!--<image57x57>icons/Icon.png</image57x57>-->
+        <!--<image58x58>icons/Icon-Small@2x.png</image58x58>-->
+        <!--<image72x72>icons/Icon-72.png</image72x72>-->
         <!--<image100x100></image100x100>-->
-        <image114x114>icons/Icon@2x.png</image114x114>
+        <!--<image114x114>icons/Icon@2x.png</image114x114>-->
         <!--<image128x128></image128x128>-->
         <!--<image144x144></image144x144>-->
         <!--<image512x512></image512x512>-->

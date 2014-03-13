@@ -13,7 +13,6 @@
     <artifactId>sessionm-ios</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>xcode-lib</packaging>
-    <name>iOS Library</name>
 
     <build>
         <sourceDirectory>${project.basedir}/src/xcode</sourceDirectory>
