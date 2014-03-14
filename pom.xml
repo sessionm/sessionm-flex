@@ -15,8 +15,8 @@
     <description>AIR SessionM SDK</description>
 
     <scm>
-        <connection>scm:hg:ssh://hg@bitbucket.org/Ludia/air-ship</connection>
-        <url>https://bitbucket.org/Ludia/air-ship</url>
+        <connection>scm:hg:ssh://hg@bitbucket.org/Ludia/air-sessionm</connection>
+        <url>https://bitbucket.org/Ludia/air-sessionm</url>
     </scm>
 
     <properties>
