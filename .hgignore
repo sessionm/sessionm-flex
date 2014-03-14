@@ -12,4 +12,5 @@ syntax: glob
 .idea
 Podfile.lock
 Pods
+*.xcuserstate
 
