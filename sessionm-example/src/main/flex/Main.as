@@ -88,20 +88,6 @@ public class Main extends Sprite {
     }
 
     /**
-     * Returns the value for isSupportedPlatform() in the native SDK
-     */
-    public function isSupportedPlatform():void {
-        prependText("Is supported platform: " + sessionM.isSupportedPlatform());
-    }
-
-    /**
-     * Read both extension version and SDK version, for instance to construct a User-Agent string
-     */
-    public function getVersions():void {
-        prependText("SDK: " + sessionM.getSDKVersion() + ", extension: " + sessionM.getExtensionVersion());
-    }
-
-    /**
      * You can retrieve user data at anytime
      */
     public function getUserInfo():void {
