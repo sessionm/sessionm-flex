@@ -13,4 +13,6 @@ syntax: glob
 Podfile.lock
 Pods
 *.xcuserstate
+*.p12
+*.mobileprovision
 

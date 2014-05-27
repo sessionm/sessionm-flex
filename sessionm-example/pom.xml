@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>sessionm-parent</artifactId>
+        <groupId>com.ludia.client</groupId>
+        <version>1.0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>sessionm-example</artifactId>
+    <packaging>swf</packaging>
+    <description>Example application</description>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.yelbota.plugins</groupId>
+                <artifactId>adt-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>package-android-app</id>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <sdkVersion>${air.version}</sdkVersion>
+                            <target>apk-captive-runtime</target>
+                            <keystore>${project.build.sourceDirectory}/app-android.p12</keystore>
+                            <storepass>${env.ADT_STOREPASS}</storepass>
+                            <descriptor>${project.build.outputDirectory}/app-descriptor.xml</descriptor>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>package-ios-app</id>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                        <phase>package</phase>
+                        <configuration>
+                            <sdkVersion>${air.version}</sdkVersion>
+                            <target>ipa-debug</target>
+                            <keystore>${project.build.sourceDirectory}/app-ios.p12</keystore>
+                            <storepass>${env.ADT_STOREPASS}</storepass>
+                            <provisioningProfile>${project.build.outputDirectory}/mobile.mobileprovision</provisioningProfile>
+                            <descriptor>${project.build.outputDirectory}/app-descriptor.xml</descriptor>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>sessionm</artifactId>
+            <version>${project.version}</version>
+            <type>ane</type>
+        </dependency>
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>airglobal</artifactId>
+            <version>${flex.sdk.version}</version>
+            <classifier>${air.version}</classifier>
+            <type>swc</type>
+        </dependency>
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>air-framework</artifactId>
+            <version>${flex.sdk.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>org.hamcrest</groupId>
+            <artifactId>hamcrest</artifactId>
+            <version>1.1.3</version>
+            <type>swc</type>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+
+</project>
