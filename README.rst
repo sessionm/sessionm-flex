@@ -5,6 +5,12 @@ SessionM for Adobe AIR
 Unofficial Adobe AIR Native Extension for the SessionM SDKs (iOS & Android).
 License : MIT
 
+#####
+Usage
+#####
+
+Please see http://air-sessionm.readthedocs.org/en/latest/#api-usage
+
 ##################
 Build dependencies
 ##################
