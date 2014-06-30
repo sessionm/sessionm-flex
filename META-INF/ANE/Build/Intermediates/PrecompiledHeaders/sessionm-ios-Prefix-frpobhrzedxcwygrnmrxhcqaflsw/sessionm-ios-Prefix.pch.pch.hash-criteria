@@ -1,0 +1,25 @@
+Contents of /Users/tdaniels/sdk/Ludia-4/sessionm-ios/src/xcode/sessionm-ios/sessionm-ios-Prefix.pch
+-x
+objective-c
+-arch
+arm64
+-std=gnu99
+-fobjc-arc
+-fpascal-strings
+-Os
+-isysroot
+/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS7.1.sdk
+-fno-objc-exceptions
+-g
+-miphoneos-version-min=7.0
+-iquote
+-iquote
+-I/Users/tdaniels/sdk/Ludia-4/META-INF/ANE/Build/Products/Release-iphoneos/include
+-I/Headers
+-I/Headers/SessionM
+-I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include
+-F/Users/tdaniels/sdk/Ludia-4/META-INF/ANE/Build/Products/Release-iphoneos
+arm64-apple-darwin13.2.0
+"4.2.1 Compatible Apple LLVM 5.1 (clang-503.0.40)"
+SDK_PRODUCT_BUILD_VERSION=11D167
+11D167

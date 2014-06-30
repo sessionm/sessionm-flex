@@ -81,6 +81,7 @@ void dispatchAchievement(SMAchievementData *achievementData);
 
 @end
 
+ANE_FUNCTION(shouldDisplayUI);
 ANE_FUNCTION(startSession);
 ANE_FUNCTION(logAction);
 ANE_FUNCTION(presentActivity);

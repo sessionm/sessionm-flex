@@ -1,0 +1,23 @@
+<extension xmlns="http://ns.adobe.com/air/extension/14.0">
+    <id>com.ludia.client.sessionm</id>
+    <versionNumber>0.0.1</versionNumber>
+    <platforms>
+        <platform name="Android-ARM">
+            <applicationDeployment>
+                <nativeLibrary>sessionm-android.jar</nativeLibrary>
+                <initializer>ludia.sessionm.SessionMExtension</initializer>
+                <finalizer>ludia.sessionm.SessionMExtension</finalizer>
+            </applicationDeployment>
+        </platform>
+        <platform name="iPhone-ARM">
+            <applicationDeployment>
+                <nativeLibrary>libsessionm-ios.a</nativeLibrary>
+                <initializer>SessionMExtInitializer</initializer>
+                <finalizer>SessionMExtFinalizer</finalizer>
+            </applicationDeployment>
+        </platform>
+        <platform name="default">
+            <applicationDeployment/>
+        </platform>
+    </platforms>
+</extension>

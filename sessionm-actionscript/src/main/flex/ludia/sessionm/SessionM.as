@@ -8,13 +8,13 @@ import flash.system.Capabilities;
 import ludia.sessionm.data.Achievement;
 import ludia.sessionm.data.User;
 import ludia.sessionm.data.UserAction;
+
 import ludia.sessionm.event.AchievementEvent;
 import ludia.sessionm.event.ActivityEvent;
 import ludia.sessionm.event.SessionEvent;
-
 import ludia.sessionm.event.UserEvent;
 
-import mx.logging.Log;
+// import mx.logging.Log;
 
 [Event(type="ludia.sessionm.event.AchievementEvent", name="unclaimedAchievement")]
 [Event(type="ludia.sessionm.event.ActivityEvent", name="activityPresented")]
@@ -25,6 +25,8 @@ import mx.logging.Log;
 public class SessionM extends EventDispatcher implements ISessionM {
 
     public static const ID:String = "com.ludia.client.sessionm";
+    public var shouldDisplayUI:Boolean = false;
+    public var globalState:String = "STARTED_OFFLINE";
 
     public var logger:* = null;
 
@@ -32,12 +34,14 @@ public class SessionM extends EventDispatcher implements ISessionM {
 
     public function SessionM() {
         this.context = ExtensionContext.createExtensionContext(ID, null);
-        try {
+        logger = new FallbackLogger();
+
+        /* try {
             logger = Log.getLogger(ID);
         }
         catch (error:Error) {
             logger = new FallbackLogger();
-        }
+        } */
         if(!context) {
             throw new Error("Un-supported platform, use isSupported property before creating a SessionM object");
         }
@@ -120,7 +124,20 @@ public class SessionM extends EventDispatcher implements ISessionM {
     }
 
     public function getExtensionVersion():String {
-        return CONFIG::extensionVersion;
+        return "unknown";
+    }
+
+    public function shouldDisplayButton():Boolean {
+        var display:Boolean = false;
+ 
+        if (globalState == "STARTED_ONLINE") {
+            display = true;
+        }
+        else {
+            display = false;
+        }
+
+        return display;
     }
 
     /**
@@ -155,7 +172,10 @@ public class SessionM extends EventDispatcher implements ISessionM {
     }
 
     private function manageStateChange(event:StatusEvent):void {
-        dispatchEvent(new SessionEvent(SessionEvent.SESSION_STATE_CHANGED, event.level));
+        var sessionEvent:SessionEvent = new SessionEvent(SessionEvent.SESSION_STATE_CHANGED, event.level);
+
+        globalState = event.level;
+        dispatchEvent(sessionEvent);
     }
 
     private function manageAchievement(event:StatusEvent):void {

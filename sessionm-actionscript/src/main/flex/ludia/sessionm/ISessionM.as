@@ -6,6 +6,7 @@ import ludia.sessionm.data.Achievement;
 import ludia.sessionm.data.User;
 
 public interface ISessionM extends IEventDispatcher {
+    function shouldDisplayButton():Boolean;
     function logAction(action:String):void;
     function presentActivity(type:String):void;
     function startSession(appID:String):void;

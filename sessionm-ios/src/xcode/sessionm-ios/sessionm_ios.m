@@ -46,6 +46,7 @@
 
 FREContext context = nil;
 
+
 /* sessionm-iosExtInitializer()
  * The extension initializer is called the first time the ActionScript side of the extension
  * calls ExtensionContext.createExtensionContext() for any context.
@@ -88,6 +89,7 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
      */
     static FRENamedFunction func[] = 
     {
+        MAP_FUNCTION(shouldDisplayUI, NULL),
         MAP_FUNCTION(startSession, NULL),
         MAP_FUNCTION(isSupportedPlatform, NULL),
         MAP_FUNCTION(logAction, NULL),
@@ -467,9 +469,38 @@ void dispatchAchievement(SMAchievementData *achievementData)
     }
 }
 
+ANE_FUNCTION(shouldDisplayUI)
+{
+    NSLog(@"Entering shouldDisplayUI()");
+    
+    SessionM *instance = [SessionM sharedInstance];
+    BOOL shouldDisplay = NO;
+    
+    if (instance)
+    {
+        SessionMState *smSessionState = (SessionMState *) instance.sessionState;
+        if (smSessionState != (SessionMState *)SessionMServiceUnavailable && instance.user.isOptedOut == NO)
+        {
+            shouldDisplay = YES;
+        }
+    }
+
+    FREObject returnVal;
+    
+    if(FRE_OK == FRENewObjectFromBool(shouldDisplay, &returnVal))
+    {
+        return returnVal;
+    }
+    else
+    {
+        return NULL;
+    }
+}
+
 ANE_FUNCTION(startSession)
 {
     NSLog(@"Entering startSession()");
+
     SessionM *instance = [SessionM sharedInstance];
     
     if(instance)
@@ -505,6 +536,7 @@ ANE_FUNCTION(startSession)
     
 	return NULL;
 }
+
 
 ANE_FUNCTION(logAction)
 {
@@ -627,7 +659,9 @@ ANE_FUNCTION(isSupportedPlatform)
 
 ANE_FUNCTION(getSDKVersion)
 {
-    const char* version = [__SESSIONM_SDK_VERSION__ UTF8String];
+    // const char* version = [__SESSIONM_SDK_VERSION__ UTF8String];
+    const char* version = "Success!!!\0";
+
     FREObject returnVal;
     
     if(FRE_OK == FRENewObjectFromUTF8(strlen(version), (const uint8_t*)version, &returnVal))
