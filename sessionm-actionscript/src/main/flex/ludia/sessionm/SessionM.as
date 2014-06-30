@@ -132,10 +132,11 @@ public class SessionM extends EventDispatcher implements ISessionM {
      * Returns true if the rewards icon should be displayed, i.e. when the session state
      * is "STARTED_ONLINE" and the user has not opted out of rewards
      */
-    public function shouldDisplayButton():Boolean {
+    public function shouldDisplayRewardsBadge():Boolean {
         var display:Boolean = false;
  
-        if (globalState == "STARTED_ONLINE" && getUser.optedOut == false) {
+        //if (globalState == "STARTED_ONLINE" && getUser.optedOut == false) {
+        if (globalState == "STARTED_ONLINE") {
             display = true;
         }
         else {

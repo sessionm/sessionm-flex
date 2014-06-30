@@ -199,7 +199,7 @@ public class Main extends Sprite {
     public function updateUI():void
     {
 	// Should the rewards icon be displayed?
-        if (sessionM.shouldDisplayButton()) {
+        if (sessionM.shouldDisplayRewardsBadge()) {
             prependText("Displaying rewards icon");
 
             // Show the icon if it is not already being shown
@@ -209,7 +209,7 @@ public class Main extends Sprite {
             }
         } 
         else {
-            prependText("Could not display rewards icon");
+            prependText(“Do not display rewards icon");
 
             // Hide the icon if it is being shown
             if (buttonContainer.contains(rewardsIcon)) {
