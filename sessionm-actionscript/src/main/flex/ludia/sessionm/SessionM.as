@@ -25,12 +25,10 @@ import ludia.sessionm.event.UserEvent;
 public class SessionM extends EventDispatcher implements ISessionM {
 
     public static const ID:String = "com.ludia.client.sessionm";
-    public var shouldDisplayUI:Boolean = false;
-    public var globalState:String = "STARTED_OFFLINE";
-
     public var logger:* = null;
 
     private var context:ExtensionContext;
+    private var globalState:String = "STARTED_OFFLINE";
 
     public function SessionM() {
         this.context = ExtensionContext.createExtensionContext(ID, null);
@@ -127,10 +125,17 @@ public class SessionM extends EventDispatcher implements ISessionM {
         return "unknown";
     }
 
+    /** 
+     * @public
+     * @returns Boolean
+     *
+     * Returns true if the rewards icon should be displayed, i.e. when the session state
+     * is "STARTED_ONLINE" and the user has not opted out of rewards
+     */
     public function shouldDisplayButton():Boolean {
         var display:Boolean = false;
  
-        if (globalState == "STARTED_ONLINE") {
+        if (globalState == "STARTED_ONLINE" && getUser.optedOut == false) {
             display = true;
         }
         else {

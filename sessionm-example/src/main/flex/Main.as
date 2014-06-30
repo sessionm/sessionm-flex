@@ -60,27 +60,11 @@ public class Main extends Sprite {
 
     /**
     * When a session is started, you will receive SessionEvent.SESSION_STATE_CHANGED
+    * and the UI is updated accordingly
     */
     protected function sessionM_sessionStateChangedHandler(event:SessionEvent):void {
-        prependText("Session state updated: Z" + event.state + "Z");
-        prependText("globalState should be same: " + sessionM.globalState);
-        prependText("show: " + sessionM.shouldDisplayUI.toString());
-
-        if (event.state == "STARTED_ONLINE") {
-            prependText("true");
-            updateUI(true);
-        }
-        else {
-            prependText("false");
-            updateUI(false);
-        }
-
-        prependText("before");
-        var show:Boolean = false;
-        prependText("afterInit");
-        show = new Boolean(sessionM.shouldDisplayButton());
-        prependText("afterFunctionReturn");
-        prependText("show2: " + show.toString());
+        prependText("Session state updated: " + event.state);
+	updateUI();
     }
 
     /**
@@ -211,22 +195,23 @@ public class Main extends Sprite {
         layout.update(buttonContainer);
     }
 
-   /** Update UI */
-    public function updateUI(display:Boolean):void
+    /** Update UI */
+    public function updateUI():void
     {
-        prependText("show: " + sessionM.shouldDisplayUI.toString());
-
-        if (display) {
+	// Should the rewards icon be displayed?
+        if (sessionM.shouldDisplayButton()) {
             prependText("Displaying rewards icon");
 
+            // Show the icon if it is not already being shown
             if (!buttonContainer.contains(rewardsIcon)) {
                 layout.addButton(rewardsIcon);
                 layout.update(buttonContainer);
             }
-        }
+        } 
         else {
             prependText("Could not display rewards icon");
 
+            // Hide the icon if it is being shown
             if (buttonContainer.contains(rewardsIcon)) {
                 layout.removeButton(rewardsIcon);
                 layout.update(buttonContainer);

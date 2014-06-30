@@ -27,5 +27,6 @@ clean :
 	rm -f Main.swf
 	rm -f META-INF/ANE/library.swf
 	rm -f META-INF/ANE/catalog.xml
+	rm -f META-INF/ANE/ludiaTest.ane
 	rm -f META-INF/ANE/default/*.swc
 
