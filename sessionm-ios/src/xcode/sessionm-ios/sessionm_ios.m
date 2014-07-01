@@ -46,6 +46,7 @@
 
 FREContext context = nil;
 
+
 /* sessionm-iosExtInitializer()
  * The extension initializer is called the first time the ActionScript side of the extension
  * calls ExtensionContext.createExtensionContext() for any context.
@@ -470,6 +471,7 @@ void dispatchAchievement(SMAchievementData *achievementData)
 ANE_FUNCTION(startSession)
 {
     NSLog(@"Entering startSession()");
+
     SessionM *instance = [SessionM sharedInstance];
     
     if(instance)
@@ -505,6 +507,7 @@ ANE_FUNCTION(startSession)
     
 	return NULL;
 }
+
 
 ANE_FUNCTION(logAction)
 {
@@ -628,6 +631,7 @@ ANE_FUNCTION(isSupportedPlatform)
 ANE_FUNCTION(getSDKVersion)
 {
     const char* version = [__SESSIONM_SDK_VERSION__ UTF8String];
+
     FREObject returnVal;
     
     if(FRE_OK == FRENewObjectFromUTF8(strlen(version), (const uint8_t*)version, &returnVal))

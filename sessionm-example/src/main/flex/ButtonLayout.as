@@ -30,7 +30,18 @@ class ButtonLayout
         return buttons.push(btn);
     }
 
-    public function attach(parent:DisplayObjectContainer):void
+    private function isSameButton(b1:*, index:int, arr:Array, b2:SimpleButton):Boolean
+    {
+        return b1 === b2;
+    }
+
+    public function removeButton(btn:SimpleButton):void
+    {
+        buttons = buttons.filter(isSameButton)(btn);
+        parent.removeChild(btn);
+    }
+
+    private function attach(parent:DisplayObjectContainer):void
     {
         this.parent=parent;
         for each(var btn:SimpleButton in this.buttons)
@@ -39,7 +50,7 @@ class ButtonLayout
         }
     }
 
-    public function layout():void
+    private function layout():void
     {
         var btnX:Number=rect.x+padding;
         var btnY:Number=rect.y;
@@ -52,5 +63,11 @@ class ButtonLayout
             btnY+=btn.height;
         }
     }
+
+   public function update(parent:DisplayObjectContainer):void
+   {
+        attach(parent);
+        layout();
+   }
 }
 }

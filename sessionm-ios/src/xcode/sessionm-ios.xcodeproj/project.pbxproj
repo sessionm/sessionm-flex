@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F76A3D1195B6D0E00439FB7 /* libSessionM.1.11.4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F76A3D0195B6D0E00439FB7 /* libSessionM.1.11.4.a */; };
+		2F76A3D5195B6D7200439FB7 /* SessionM.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F76A3D2195B6D7200439FB7 /* SessionM.h */; };
+		2F76A3D6195B6D7200439FB7 /* SMAchievementData.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F76A3D3195B6D7200439FB7 /* SMAchievementData.h */; };
+		2F76A3D7195B6D7200439FB7 /* SMPortalButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F76A3D4195B6D7200439FB7 /* SMPortalButton.h */; };
+		2F76A3D8195B6D8700439FB7 /* FlashRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 87920FBC189AF34F00D5985E /* FlashRuntimeExtensions.h */; };
+		2F76A3D9195B6D8B00439FB7 /* sessionm_ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 87920FA6189AF29100D5985E /* sessionm_ios.h */; };
+		2F76A3DA195B6D9500439FB7 /* sessionm-ios-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 87920FA5189AF29100D5985E /* sessionm-ios-Prefix.pch */; };
+		2F76A3DC195B712200439FB7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87920F7B189AF29100D5985E /* Foundation.framework */; };
 		87920FA8189AF29100D5985E /* sessionm_ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 87920FA7189AF29100D5985E /* sessionm_ios.m */; };
 		87920FC4189AFF9800D5985E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87920FC2189AFF9800D5985E /* CoreData.framework */; };
 		87920FC5189AFF9800D5985E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87920FC3189AFF9800D5985E /* CoreTelephony.framework */; };
@@ -24,6 +32,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2F76A3D0195B6D0E00439FB7 /* libSessionM.1.11.4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSessionM.1.11.4.a; sourceTree = "<group>"; };
+		2F76A3D2195B6D7200439FB7 /* SessionM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionM.h; sourceTree = "<group>"; };
+		2F76A3D3195B6D7200439FB7 /* SMAchievementData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAchievementData.h; sourceTree = "<group>"; };
+		2F76A3D4195B6D7200439FB7 /* SMPortalButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPortalButton.h; sourceTree = "<group>"; };
 		87920F78189AF29100D5985E /* libsessionm-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libsessionm-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		87920F7B189AF29100D5985E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		87920F7D189AF29100D5985E /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -45,10 +57,6 @@
 		87920FA6189AF29100D5985E /* sessionm_ios.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = sessionm_ios.h; sourceTree = "<group>"; };
 		87920FA7189AF29100D5985E /* sessionm_ios.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sessionm_ios.m; sourceTree = "<group>"; };
 		87920FAC189AF29100D5985E /* debugIPA.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = debugIPA.sh; sourceTree = "<group>"; };
-		87920FB8189AF34F00D5985E /* libSessionM.1.9.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSessionM.1.9.3.a; sourceTree = "<group>"; };
-		87920FB9189AF34F00D5985E /* SessionM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionM.h; sourceTree = "<group>"; };
-		87920FBA189AF34F00D5985E /* SMAchievementData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAchievementData.h; sourceTree = "<group>"; };
-		87920FBB189AF34F00D5985E /* SMPortalButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPortalButton.h; sourceTree = "<group>"; };
 		87920FBC189AF34F00D5985E /* FlashRuntimeExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlashRuntimeExtensions.h; sourceTree = "<group>"; };
 		87920FC2189AFF9800D5985E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		87920FC3189AFF9800D5985E /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
@@ -69,6 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F76A3DC195B712200439FB7 /* Foundation.framework in Frameworks */,
 				87920FD6189B05E900D5985E /* EventKitUI.framework in Frameworks */,
 				87920FD4189B054700D5985E /* AdSupport.framework in Frameworks */,
 				87920FD2189B040200D5985E /* EventKit.framework in Frameworks */,
@@ -81,6 +90,7 @@
 				87920FCC189AFFD500D5985E /* QuartzCore.framework in Frameworks */,
 				87920FC8189AFFAF00D5985E /* MediaPlayer.framework in Frameworks */,
 				87920FC6189AFFA800D5985E /* SystemConfiguration.framework in Frameworks */,
+				2F76A3D1195B6D0E00439FB7 /* libSessionM.1.11.4.a in Frameworks */,
 				87920FC5189AFF9800D5985E /* CoreTelephony.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -110,6 +120,7 @@
 		87920F7A189AF29100D5985E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2F76A3D0195B6D0E00439FB7 /* libSessionM.1.11.4.a */,
 				87CEF93218A01B4E002D5AEC /* XCTest.framework */,
 				87920FD5189B05E900D5985E /* EventKitUI.framework */,
 				87920FD3189B054700D5985E /* AdSupport.framework */,
@@ -143,10 +154,9 @@
 		87920FA3189AF29100D5985E /* sessionm-ios */ = {
 			isa = PBXGroup;
 			children = (
-				87920FB8189AF34F00D5985E /* libSessionM.1.9.3.a */,
-				87920FB9189AF34F00D5985E /* SessionM.h */,
-				87920FBA189AF34F00D5985E /* SMAchievementData.h */,
-				87920FBB189AF34F00D5985E /* SMPortalButton.h */,
+				2F76A3D2195B6D7200439FB7 /* SessionM.h */,
+				2F76A3D3195B6D7200439FB7 /* SMAchievementData.h */,
+				2F76A3D4195B6D7200439FB7 /* SMPortalButton.h */,
 				87920FBC189AF34F00D5985E /* FlashRuntimeExtensions.h */,
 				87920FA6189AF29100D5985E /* sessionm_ios.h */,
 				87920FA7189AF29100D5985E /* sessionm_ios.m */,
@@ -171,6 +181,12 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F76A3DA195B6D9500439FB7 /* sessionm-ios-Prefix.pch in Headers */,
+				2F76A3D8195B6D8700439FB7 /* FlashRuntimeExtensions.h in Headers */,
+				2F76A3D7195B6D7200439FB7 /* SMPortalButton.h in Headers */,
+				2F76A3D9195B6D8B00439FB7 /* sessionm_ios.h in Headers */,
+				2F76A3D6195B6D7200439FB7 /* SMAchievementData.h in Headers */,
+				2F76A3D5195B6D7200439FB7 /* SessionM.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -181,11 +197,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 87920FAF189AF29100D5985E /* Build configuration list for PBXNativeTarget "sessionm-ios" */;
 			buildPhases = (
-				BF9FC7B7A8954271ADE77EFA /* Check Pods Manifest.lock */,
 				87920F74189AF29100D5985E /* Sources */,
 				87920F75189AF29100D5985E /* Frameworks */,
 				87920F76189AF29100D5985E /* Headers */,
-				D6CBE607C03E4C34BCB4C8EC /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -251,36 +265,6 @@
 			shellPath = /bin/bash;
 			shellScript = "\n\t\t\t\t\t\t\t\tchmod 755 \"$PROJECT_DIR/$PROJECT_NAME/debugIPA.sh\"\n\t\t\t\t\t\t\t\t\"$PROJECT_DIR/$PROJECT_NAME/debugIPA.sh\"\n";
 		};
-		BF9FC7B7A8954271ADE77EFA /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		D6CBE607C03E4C34BCB4C8EC /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -313,7 +297,7 @@
 					"$(inherited)",
 				);
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -334,7 +318,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_CPP_EXCEPTIONS = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = "";
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -360,7 +344,10 @@
 					"\"${PODS_ROOT}/Headers/SessionM\"",
 					"${inherited}",
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -382,7 +369,10 @@
 					"\"${PODS_ROOT}/Headers/SessionM\"",
 					"${inherited}",
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

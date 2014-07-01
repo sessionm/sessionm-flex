@@ -60,9 +60,11 @@ public class Main extends Sprite {
 
     /**
     * When a session is started, you will receive SessionEvent.SESSION_STATE_CHANGED
+    * and the UI is updated accordingly
     */
     protected function sessionM_sessionStateChangedHandler(event:SessionEvent):void {
         prependText("Session state updated: " + event.state);
+	updateUI();
     }
 
     /**
@@ -154,6 +156,12 @@ public class Main extends Sprite {
     /** Buttons */
     private var buttonContainer:Sprite;
 
+    /** Button layout */
+    private var layout:ButtonLayout;
+ 
+    /** Rewards icon */
+    private var rewardsIcon:SimpleButton = new SimpleButton(new Command("REWARDS", presentPortal));
+
     /** Create UI */
     public function createUI():void
     {
@@ -161,7 +169,7 @@ public class Main extends Sprite {
         txtStatus=new TextField();
         txtStatus.defaultTextFormat=new TextFormat("Arial",20);
         txtStatus.width=stage.stageWidth;
-        txtStatus.height=300;
+        txtStatus.height=150;
         txtStatus.multiline=true;
         txtStatus.wordWrap=true;
         txtStatus.text="Press \"Start session\"";
@@ -173,9 +181,10 @@ public class Main extends Sprite {
         addChild(buttonContainer);
 
         var uiRect:Rectangle=new Rectangle(0,0,stage.stageWidth,stage.stageHeight);
-        var layout:ButtonLayout=new ButtonLayout(uiRect,14);
-        layout.addButton(new SimpleButton(new Command("Start session",startSession)));
-        layout.addButton(new SimpleButton(new Command("Log Action",logAction)));
+        layout=new ButtonLayout(uiRect,14);
+
+        layout.addButton(new SimpleButton(new Command("Start session", startSession)));
+        layout.addButton(new SimpleButton(new Command("Log Action", logAction)));
         layout.addButton(new SimpleButton(new Command("Present portal", presentPortal)));
         layout.addButton(new SimpleButton(new Command("Present achievement", presentAchievement)));
         layout.addButton(new SimpleButton(new Command("Get user info", getUserInfo)));
@@ -183,8 +192,31 @@ public class Main extends Sprite {
         layout.addButton(new SimpleButton(new Command("Get versions", getVersions)));
         layout.addButton(new SimpleButton(new Command("Clear log", clearLog)));
 
-        layout.attach(buttonContainer);
-        layout.layout();
+        layout.update(buttonContainer);
+    }
+
+    /** Update UI */
+    public function updateUI():void
+    {
+	// Should the rewards icon be displayed?
+        if (sessionM.shouldDisplayRewardsBadge()) {
+            prependText("Displaying rewards icon");
+
+            // Show the icon if it is not already being shown
+            if (!buttonContainer.contains(rewardsIcon)) {
+                layout.addButton(rewardsIcon);
+                layout.update(buttonContainer);
+            }
+        } 
+        else {
+            prependText("Do not display rewards icon");
+
+            // Hide the icon if it is being shown
+            if (buttonContainer.contains(rewardsIcon)) {
+                layout.removeButton(rewardsIcon);
+                layout.update(buttonContainer);
+            }
+        }
     }
 }
 }
