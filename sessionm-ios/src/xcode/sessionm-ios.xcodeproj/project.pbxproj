@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2F76A3D1195B6D0E00439FB7 /* libSessionM.1.11.4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F76A3D0195B6D0E00439FB7 /* libSessionM.1.11.4.a */; };
-		2F76A3D5195B6D7200439FB7 /* SessionM.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F76A3D2195B6D7200439FB7 /* SessionM.h */; };
-		2F76A3D6195B6D7200439FB7 /* SMAchievementData.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F76A3D3195B6D7200439FB7 /* SMAchievementData.h */; };
-		2F76A3D7195B6D7200439FB7 /* SMPortalButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 2F76A3D4195B6D7200439FB7 /* SMPortalButton.h */; };
 		2F76A3D8195B6D8700439FB7 /* FlashRuntimeExtensions.h in Headers */ = {isa = PBXBuildFile; fileRef = 87920FBC189AF34F00D5985E /* FlashRuntimeExtensions.h */; };
 		2F76A3D9195B6D8B00439FB7 /* sessionm_ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 87920FA6189AF29100D5985E /* sessionm_ios.h */; };
 		2F76A3DA195B6D9500439FB7 /* sessionm-ios-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 87920FA5189AF29100D5985E /* sessionm-ios-Prefix.pch */; };
@@ -32,10 +28,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		2F76A3D0195B6D0E00439FB7 /* libSessionM.1.11.4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libSessionM.1.11.4.a; sourceTree = "<group>"; };
-		2F76A3D2195B6D7200439FB7 /* SessionM.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionM.h; sourceTree = "<group>"; };
-		2F76A3D3195B6D7200439FB7 /* SMAchievementData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMAchievementData.h; sourceTree = "<group>"; };
-		2F76A3D4195B6D7200439FB7 /* SMPortalButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SMPortalButton.h; sourceTree = "<group>"; };
 		87920F78189AF29100D5985E /* libsessionm-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libsessionm-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		87920F7B189AF29100D5985E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		87920F7D189AF29100D5985E /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -90,7 +82,6 @@
 				87920FCC189AFFD500D5985E /* QuartzCore.framework in Frameworks */,
 				87920FC8189AFFAF00D5985E /* MediaPlayer.framework in Frameworks */,
 				87920FC6189AFFA800D5985E /* SystemConfiguration.framework in Frameworks */,
-				2F76A3D1195B6D0E00439FB7 /* libSessionM.1.11.4.a in Frameworks */,
 				87920FC5189AFF9800D5985E /* CoreTelephony.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -120,7 +111,6 @@
 		87920F7A189AF29100D5985E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				2F76A3D0195B6D0E00439FB7 /* libSessionM.1.11.4.a */,
 				87CEF93218A01B4E002D5AEC /* XCTest.framework */,
 				87920FD5189B05E900D5985E /* EventKitUI.framework */,
 				87920FD3189B054700D5985E /* AdSupport.framework */,
@@ -154,9 +144,6 @@
 		87920FA3189AF29100D5985E /* sessionm-ios */ = {
 			isa = PBXGroup;
 			children = (
-				2F76A3D2195B6D7200439FB7 /* SessionM.h */,
-				2F76A3D3195B6D7200439FB7 /* SMAchievementData.h */,
-				2F76A3D4195B6D7200439FB7 /* SMPortalButton.h */,
 				87920FBC189AF34F00D5985E /* FlashRuntimeExtensions.h */,
 				87920FA6189AF29100D5985E /* sessionm_ios.h */,
 				87920FA7189AF29100D5985E /* sessionm_ios.m */,
@@ -183,10 +170,7 @@
 			files = (
 				2F76A3DA195B6D9500439FB7 /* sessionm-ios-Prefix.pch in Headers */,
 				2F76A3D8195B6D8700439FB7 /* FlashRuntimeExtensions.h in Headers */,
-				2F76A3D7195B6D7200439FB7 /* SMPortalButton.h in Headers */,
 				2F76A3D9195B6D8B00439FB7 /* sessionm_ios.h in Headers */,
-				2F76A3D6195B6D7200439FB7 /* SMAchievementData.h in Headers */,
-				2F76A3D5195B6D7200439FB7 /* SessionM.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,6 +2,7 @@
 <!DOCTYPE application [
 <!ENTITY airVersion "14.0">
 <!ENTITY appVersion "0.0.2">
+<!ENTITY appID "com.sessionm.ludiaTest">
 ]>
 
 <!-- Adobe AIR Application Descriptor File Template.
@@ -16,7 +17,7 @@
     
     <!-- A universally unique application identifier. Must be unique across all AIR applications.
      Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-    <id>com.sessionm.ludiaTest</id>
+    <id>&appID;</id>
     
     <!-- Used as the filename for the application. Required. -->
     <filename>SessionM AIR Example</filename>

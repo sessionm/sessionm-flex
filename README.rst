@@ -17,17 +17,25 @@ Build dependencies
 
 In order to build this extension, the following programs must be available :
 
-* XCode 5.0.2 (requires MacOSX 10.8+)
-* CocoaPods (gem install cocoapods)
+* A copy of the Adobe AIR SDK (Tested with Adobe Air 14)
+* XCode (Tested on XCode 5.1.1)
 * Android SDK (can be specified with ``android.sdk`` Java options)
-* Maven 3.0.5
+* SessionM iOS and Android SDK. Available for download from: http://www.sessionm.com/documentation/downloads.php
+ 
+Edit the provided Makefile.config, including setting your iOS certificate and mobile provision profile. In addition, the following files must be edited to reflect changes to settings such as the Adobe AIR SDK version and the application ID:
+ 
+* sessionm-ane/extension.xml 
+* sessionm-ane/iPhone-ARM/platform.xml 
+* sessionm-example/src/main/resources/app-descriptor.xml
+ 
+Otherwise it's a regular build process : ::
+    make
 
-With the current configuration, the project can only be built from inside
-Ludia, as it depends on various artifacts only deployed inside our internal
-Nexus repository. You will need to deploy these artifacts before being able
-to build the project. The downloads section contains the final ANE file that
-you can use freely.
+When done: ::
+    make clean
 
-Otherwise it's just a regular Maven build : ::
+Note: The XCode build in sessionm-ios may fail the first time around after retriving the repository with the following error:
 
-    mvn install
+xcodebuild: error: The workspace 'sessionm-ios' does not contain a scheme named 'sessionm-ios'.
+
+A workaround is simply to load the  sessionm-ios/src/xcode/sessionm-ios.xcodeproj project in XCode and save it.

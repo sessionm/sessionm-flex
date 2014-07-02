@@ -5,10 +5,10 @@ CONFIG_FILE = ../Makefile.config
 include $(CONFIG_FILE)
 
 ## Build rules and recipes
-$(SWC) :
+$(SWC):
 	rm -f ../sessionm-ane/library.swf
 	rm -f ../sessionm-ane/catalog.xml
-	$(air-bin)/acompc -source-path src/main/flex/ \
+	$(AIR-SDK)/bin/acompc -source-path src/main/flex/ \
 	-include-classes ludia.sessionm.ISessionM ludia.sessionm.SessionM \
 	ludia.sessionm.ActivityType ludia.sessionm.FallbackLogger \
 	ludia.sessionm.data.Achievement ludia.sessionm.data.State \
