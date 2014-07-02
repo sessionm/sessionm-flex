@@ -34,7 +34,7 @@ Otherwise it's a regular build process : ::
 When done: ::
     make clean
 
-Note: The XCode build in sessionm-ios may fail the first time around after retriving the repository with the following error:
+Note: The XCode build in sessionm-ios may fail the first time around after retrieving the repository with the following error:
 
 xcodebuild: error: The workspace 'sessionm-ios' does not contain a scheme named 'sessionm-ios'.
 
