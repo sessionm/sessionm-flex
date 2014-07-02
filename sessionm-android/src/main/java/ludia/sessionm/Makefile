@@ -10,4 +10,4 @@ build:
 	jar cvf ../../../../../../sessionm-ane/Android-ARM/sessionm-android.jar *.java functions/ util/ $(ANDROID-SDK)
 
 clean:	
-	rm *.class functions/*.class util/*.class
+	rm -f *.class functions/*.class util/*.class
