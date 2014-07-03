@@ -30,14 +30,9 @@ class ButtonLayout
         return buttons.push(btn);
     }
 
-    private function isSameButton(b1:*, index:int, arr:Array, b2:SimpleButton):Boolean
-    {
-        return b1 === b2;
-    }
-
     public function removeButton(btn:SimpleButton):void
     {
-        buttons = buttons.filter(isSameButton)(btn);
+        buttons.splice(buttons.indexOf(btn), 1);
         parent.removeChild(btn);
     }
 
@@ -66,6 +61,7 @@ class ButtonLayout
 
    public function update(parent:DisplayObjectContainer):void
    {
+        this.parent = parent;
         attach(parent);
         layout();
    }

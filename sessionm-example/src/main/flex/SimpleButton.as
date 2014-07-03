@@ -62,6 +62,13 @@ class SimpleButton extends Sprite
         redraw();
     }
 
+    /** Set Label */
+    public function set label(val:String):void
+    {
+        txtLabel.text=val;
+        redraw();
+    }
+
 
     /** Dispose */
     public function dispose():void
@@ -86,7 +93,7 @@ class SimpleButton extends Sprite
     /** Redraw */
     private function redraw():void
     {
-        txtLabel.text=cmd.getLabel();
+        //txtLabel.text=this._txtLabel.text;
         _width=_width||txtLabel.width*1.1;
 
         graphics.clear();

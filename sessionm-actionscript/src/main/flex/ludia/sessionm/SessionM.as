@@ -135,8 +135,7 @@ public class SessionM extends EventDispatcher implements ISessionM {
     public function shouldDisplayRewardsBadge():Boolean {
         var display:Boolean = false;
  
-        //if (globalState == "STARTED_ONLINE" && getUser.optedOut == false) {
-        if (globalState == "STARTED_ONLINE") {
+        if (globalState == "STARTED_ONLINE" && getUser().optedOut == false) {
             display = true;
         }
         else {

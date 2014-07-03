@@ -8,7 +8,14 @@ public class User {
 
     public function User(source:Object) {
         this._pointBalance = Number(source.pointBalance);
-        this._optedOut = Boolean(source.optedOut);
+
+        if (source.optedOut == "true") {
+          this._optedOut = true;
+        }
+        else {
+          this._optedOut = false;
+        }
+
         this._unclaimedAchievementValue = Number(source.unclaimedAchievementValue);
         this._unclaimedAchievementCount = Number(source.unclaimedAchievementCount);
     }

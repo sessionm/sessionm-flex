@@ -72,6 +72,7 @@ public class Main extends Sprite {
      */
     protected function sessionM_userUpdatedHandler(event:UserEvent):void {
         prependText("User updated: " + event.user.pointBalance + " mPOINTS, " + event.user.unclaimedAchievementCount + " unclaimed achievement(s)");
+        updateUI();
     }
 
     /**
@@ -79,6 +80,7 @@ public class Main extends Sprite {
      */
     private function sessionM_unclaimedAchievementHandler(event:AchievementEvent):void {
         prependText("Unclaimed achievement: " + event.achievement.name);
+        updateUI();
     }
 
     /**
@@ -159,8 +161,8 @@ public class Main extends Sprite {
     /** Button layout */
     private var layout:ButtonLayout;
  
-    /** Rewards icon */
-    private var rewardsIcon:SimpleButton = new SimpleButton(new Command("REWARDS", presentPortal));
+    /** Rewards badge */
+    private var rewardsBadge:SimpleButton = new SimpleButton(new Command("REWARDS", presentPortal));
 
     /** Create UI */
     public function createUI():void
@@ -198,22 +200,28 @@ public class Main extends Sprite {
     /** Update UI */
     public function updateUI():void
     {
-	// Should the rewards icon be displayed?
+	// Should the rewards badge be displayed?
         if (sessionM.shouldDisplayRewardsBadge()) {
-            prependText("Displaying rewards icon");
+            prependText("Displaying rewards badge");
 
-            // Show the icon if it is not already being shown
-            if (!buttonContainer.contains(rewardsIcon)) {
-                layout.addButton(rewardsIcon);
+            // Show the badge if it is not already being shown
+            var ach:String = sessionM.getUser().unclaimedAchievementCount.toString();
+            rewardsBadge.label = "REWARDS " + ach;
+
+            if (!buttonContainer.contains(rewardsBadge)) {
+                prependText("Unclaimed achievements: " + ach);
+                rewardsBadge.visible = true;
+                layout.addButton(rewardsBadge);
                 layout.update(buttonContainer);
             }
         } 
         else {
-            prependText("Do not display rewards icon");
+            prependText("Do not display rewards badge");
 
-            // Hide the icon if it is being shown
-            if (buttonContainer.contains(rewardsIcon)) {
-                layout.removeButton(rewardsIcon);
+            // Hide the badge if it is being shown
+            if (buttonContainer.contains(rewardsBadge)) {
+		rewardsBadge.visible = false;
+                layout.removeButton(rewardsBadge);
                 layout.update(buttonContainer);
             }
         }
