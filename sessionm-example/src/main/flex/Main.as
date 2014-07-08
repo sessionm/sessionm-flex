@@ -19,7 +19,7 @@ public class Main extends Sprite {
     private var sessionM:SessionM;
 
     // Replace this by your SessionM App ID
-    private var appID:String = "3f07ab1fa36c7232fd7f8d9c39abd4ba77336fe3";
+    private var appID:String = "7dbc26b02482e29f1798ff448af2c04388ae8e44";
 
     public function Main()
     {
@@ -88,7 +88,8 @@ public class Main extends Sprite {
      * eventually reward him with an achievement
      */
     public function logAction():void {
-        sessionM.logAction("example");
+        sessionM.logAction("custom");
+        presentAchievement();
     }
 
     /**

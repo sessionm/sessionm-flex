@@ -41,10 +41,12 @@
 #import "sessionm_ios.h"
 #import "SessionM.h"
 #import "FlashRuntimeExtensions.h"
+#import "CustomAchievementActivity.h"
 #import <Foundation/Foundation.h>
 #import <string.h>
 
 FREContext context = nil;
+CustomAchievementActivity *customActivity = nil;
 
 
 /* sessionm-iosExtInitializer()
@@ -208,7 +210,7 @@ void ContextFinalizer(FREContext ctx)
  */
 - (BOOL)sessionM:(SessionM *)sessionM shouldAutopresentAchievement:(SMAchievementData *)achievement
 {
-    return NO;
+    return YES;
 }
 /*!
  @abstract Returns UIView to use as a superview for SessionM view objects.
@@ -564,7 +566,15 @@ ANE_FUNCTION(presentActivity)
                 // replace this switch/case or a dictionary
                 if([type isEqualToString:@"ACHIEVEMENT"])
                 {
-                    [instance presentActivity:SMActivityTypeAchievement];
+                    if (instance.unclaimedAchievement.isCustom) {
+                        NSLog(@"Presenting custom achievement");
+                        customActivity = [[CustomAchievementActivity alloc] initWithAchievmentData:instance.unclaimedAchievement];
+                        [customActivity performSelector:@selector(present)];
+                    }
+                    else {
+                        [instance presentActivity:SMActivityTypeAchievement];
+                    }
+
                 }
                 else if([type isEqualToString:@"PORTAL"])
                 {
@@ -602,7 +612,14 @@ ANE_FUNCTION(dismissActivity)
     SessionM *instance = [SessionM sharedInstance];
     if(instance)
     {
-        [instance dismissActivity];
+        if (instance.unclaimedAchievement.isCustom) {
+            NSLog(@"Dismissing custom achievement");
+            customActivity = [[CustomAchievementActivity alloc] initWithAchievmentData:instance.unclaimedAchievement];
+            [customActivity performSelector:@selector(dismiss)];
+        }
+        else {
+            [instance dismissActivity];
+        }
     }
     else
     {
