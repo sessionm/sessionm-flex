@@ -11,6 +11,8 @@
 		2F76A3D9195B6D8B00439FB7 /* sessionm_ios.h in Headers */ = {isa = PBXBuildFile; fileRef = 87920FA6189AF29100D5985E /* sessionm_ios.h */; };
 		2F76A3DA195B6D9500439FB7 /* sessionm-ios-Prefix.pch in Headers */ = {isa = PBXBuildFile; fileRef = 87920FA5189AF29100D5985E /* sessionm-ios-Prefix.pch */; };
 		2F76A3DC195B712200439FB7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87920F7B189AF29100D5985E /* Foundation.framework */; };
+		2FCC415F196B11C500B03A0F /* CustomAchievementActivity.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FCC415E196B11C500B03A0F /* CustomAchievementActivity.m */; };
+		2FCC4161196B11EE00B03A0F /* CustomAchievementActivity.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FCC4160196B11EE00B03A0F /* CustomAchievementActivity.h */; };
 		87920FA8189AF29100D5985E /* sessionm_ios.m in Sources */ = {isa = PBXBuildFile; fileRef = 87920FA7189AF29100D5985E /* sessionm_ios.m */; };
 		87920FC4189AFF9800D5985E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87920FC2189AFF9800D5985E /* CoreData.framework */; };
 		87920FC5189AFF9800D5985E /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 87920FC3189AFF9800D5985E /* CoreTelephony.framework */; };
@@ -28,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2FCC415E196B11C500B03A0F /* CustomAchievementActivity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAchievementActivity.m; sourceTree = "<group>"; };
+		2FCC4160196B11EE00B03A0F /* CustomAchievementActivity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAchievementActivity.h; sourceTree = "<group>"; };
 		87920F78189AF29100D5985E /* libsessionm-ios.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libsessionm-ios.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		87920F7B189AF29100D5985E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		87920F7D189AF29100D5985E /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
@@ -144,6 +148,8 @@
 		87920FA3189AF29100D5985E /* sessionm-ios */ = {
 			isa = PBXGroup;
 			children = (
+				2FCC415E196B11C500B03A0F /* CustomAchievementActivity.m */,
+				2FCC4160196B11EE00B03A0F /* CustomAchievementActivity.h */,
 				87920FBC189AF34F00D5985E /* FlashRuntimeExtensions.h */,
 				87920FA6189AF29100D5985E /* sessionm_ios.h */,
 				87920FA7189AF29100D5985E /* sessionm_ios.m */,
@@ -169,6 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F76A3DA195B6D9500439FB7 /* sessionm-ios-Prefix.pch in Headers */,
+				2FCC4161196B11EE00B03A0F /* CustomAchievementActivity.h in Headers */,
 				2F76A3D8195B6D8700439FB7 /* FlashRuntimeExtensions.h in Headers */,
 				2F76A3D9195B6D8B00439FB7 /* sessionm_ios.h in Headers */,
 			);
@@ -256,6 +263,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FCC415F196B11C500B03A0F /* CustomAchievementActivity.m in Sources */,
 				87920FA8189AF29100D5985E /* sessionm_ios.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
