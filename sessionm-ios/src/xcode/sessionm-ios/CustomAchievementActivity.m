@@ -17,25 +17,26 @@
 }
 
 - (void)present {
-    NSAssert(self.data, @"Achievement data must be set before presenting");
-    
-    if(!self.alertView) {
-        NSString *message = [NSString stringWithFormat:@"%@\n+%lu", self.data.message, (unsigned long)self.data.mpointValue];
-        
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:self.data.name message:message delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:@"Claim", nil];
-        self.alertView = alertView;
-        
-        UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
-        UIImage *image = [UIImage imageNamed:@"Reward.png"];
-        imageView.backgroundColor = [UIColor blueColor];
-        
-        [imageView setImage:image];
-        [alertView setValue:imageView forKey:@"accessoryView"];
-        [alertView show];
+    if(!self.data) {
+        NSLog(@"Achievement data must be set before presenting");
     }
     else {
-        // This is here for testing purposes only to check negative case of extraneous present notification
-        self.isLastCallSuccessful = [super notifyPresented];
+        // Example of custom alert-style achievement with only one button for dismissing the achievement
+        if(!self.alertView) {
+            NSString *message = [NSString stringWithFormat:@"%@\n+%lu", self.data.message, (unsigned long)self.data.mpointValue];
+        
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:self.data.name message:message delegate:self cancelButtonTitle:@"Dismiss" otherButtonTitles:nil, nil];
+        
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 64, 64)];
+            imageView.backgroundColor = [UIColor blueColor];
+        
+            [alertView setValue:imageView forKey:@"accessoryView"];
+            [alertView show];
+        }
+        else {
+            // This is here for testing purposes only to check negative case of extraneous present notification
+            self.isLastCallSuccessful = [super notifyPresented];
+        }
     }
 }
 
@@ -54,7 +55,12 @@
 }
 
 - (void)claim {
-    [self dismiss];
+    if(self.alertView) {
+        [self.alertView dismissWithClickedButtonIndex:1 animated:NO];
+    } else {
+        // This is here for testing purposes only to check negative case of extraneous claim notification
+        self.isLastCallSuccessful = [super notifyDismissed:SMAchievementDismissTypeClaimed];
+    }
 }
 
 #pragma mark -
@@ -71,7 +77,7 @@
         [super notifyDismissed:SMAchievementDismissTypeCanceled];
     }
     else if(buttonIndex == 1) {
-        [super notifyDismissed:SMAchievementDismissTypeCanceled];
+        [super notifyDismissed:SMAchievementDismissTypeClaimed];
     }
 }
 

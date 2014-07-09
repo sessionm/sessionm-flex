@@ -89,7 +89,6 @@ public class Main extends Sprite {
      */
     public function logAction():void {
         sessionM.logAction("custom");
-        presentAchievement();
     }
 
     /**
@@ -101,7 +100,7 @@ public class Main extends Sprite {
     }
 
     /**
-     * Calling presentActivity() with ActivityType.PORTAL opens the main SessionM overlay,
+     * Calling initActivity() with ActivityType.PORTAL opens the main SessionM overlay,
      * where the user can engage with various offers.
      * You can subscribe to events of the ActivityEvent class to perform some custom logic.
      */
@@ -110,11 +109,11 @@ public class Main extends Sprite {
         sessionM.addEventListener(ActivityEvent.ACTIVITY_PRESENTED, sessionM_activityPresentedHandler);
         sessionM.addEventListener(ActivityEvent.ACTIVITY_UNAVAILABLE, sessionM_activityUnavailableHandler);
         sessionM.addEventListener(ActivityEvent.USER_ACTION, sessionM_userActionHandler);
-        sessionM.presentActivity(ActivityType.PORTAL);
+        sessionM.initActivity(ActivityType.PORTAL);
     }
 
     /**
-     * Calling presentActivity() with ActivityType.ACHIEVEMENT opens an achievement popup,
+     * Calling initActivity() with ActivityType.ACHIEVEMENT opens an achievement popup,
      * if the user has unclaimed achievements.
      * You can subscribe to events of the ActivityEvent class to perform some custom logic.
      */
@@ -123,7 +122,13 @@ public class Main extends Sprite {
         sessionM.addEventListener(ActivityEvent.ACTIVITY_PRESENTED, sessionM_activityPresentedHandler);
         sessionM.addEventListener(ActivityEvent.ACTIVITY_UNAVAILABLE, sessionM_activityUnavailableHandler);
         sessionM.addEventListener(ActivityEvent.USER_ACTION, sessionM_userActionHandler);
-        sessionM.presentActivity(ActivityType.ACHIEVEMENT);
+
+        if (sessionM.getUnclaimedAchievement().isCustom) {
+           sessionM.initCustomActivity();
+        }
+        else {
+           sessionM.initActivity(ActivityType.ACHIEVEMENT);
+       }
     }
 
     protected function sessionM_activityDismissedHandler(event:ActivityEvent):void {

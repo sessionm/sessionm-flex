@@ -52,8 +52,12 @@ public class SessionM extends EventDispatcher implements ISessionM {
         callExtension("logAction", action);
     }
 
-    public function presentActivity(activity:String):void {
-        callExtension("presentActivity", activity);
+    public function initActivity(activity:String):void {
+    	callExtension("initActivity", activity);
+    }
+
+    public function initCustomActivity():void {
+    	context.call("initCustomActivity");
     }
 
     public function startSession(appID:String):void {

@@ -94,7 +94,8 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
         MAP_FUNCTION(startSession, NULL),
         MAP_FUNCTION(isSupportedPlatform, NULL),
         MAP_FUNCTION(logAction, NULL),
-        MAP_FUNCTION(presentActivity, NULL),
+        MAP_FUNCTION(initActivity, NULL),
+        MAP_FUNCTION(initCustomActivity, NULL),
         MAP_FUNCTION(dismissActivity, NULL),
         MAP_FUNCTION(getSDKVersion, NULL),
         MAP_FUNCTION(getUser, NULL),
@@ -547,9 +548,9 @@ ANE_FUNCTION(logAction)
 }
 
 
-ANE_FUNCTION(presentActivity)
+ANE_FUNCTION(initActivity)
 {
-    NSLog(@"Entering presentActivity()");
+    NSLog(@"Entering initActivity()");
     SessionM *instance = [SessionM sharedInstance];
 
     if(instance)
@@ -566,15 +567,7 @@ ANE_FUNCTION(presentActivity)
                 // replace this switch/case or a dictionary
                 if([type isEqualToString:@"ACHIEVEMENT"])
                 {
-                    if (instance.unclaimedAchievement.isCustom) {
-                        NSLog(@"Presenting custom achievement");
-                        customActivity = [[CustomAchievementActivity alloc] initWithAchievmentData:instance.unclaimedAchievement];
-                        [customActivity performSelector:@selector(present)];
-                    }
-                    else {
-                        [instance presentActivity:SMActivityTypeAchievement];
-                    }
-
+                    [instance presentActivity:SMActivityTypeAchievement];
                 }
                 else if([type isEqualToString:@"PORTAL"])
                 {
@@ -607,25 +600,37 @@ ANE_FUNCTION(presentActivity)
 	return NULL;
 }
 
-ANE_FUNCTION(dismissActivity)
+ANE_FUNCTION(initCustomActivity)
 {
+    NSLog(@"Entering initCustomActivity()");
     SessionM *instance = [SessionM sharedInstance];
+    
     if(instance)
     {
-        if (instance.unclaimedAchievement.isCustom) {
-            NSLog(@"Dismissing custom achievement");
-            customActivity = [[CustomAchievementActivity alloc] initWithAchievmentData:instance.unclaimedAchievement];
-            [customActivity performSelector:@selector(dismiss)];
-        }
-        else {
-            [instance dismissActivity];
-        }
+        NSLog(@"Presenting custom achievement");
+        customActivity = [[CustomAchievementActivity alloc] initWithAchievmentData:instance.unclaimedAchievement];
+        [customActivity performSelector:@selector(present)];
     }
     else
     {
         NSLog(@"SessionM is not supported on this platform");
     }
+    
+	return NULL;
+}
 
+ANE_FUNCTION(dismissActivity)
+{
+    SessionM *instance = [SessionM sharedInstance];
+    if(instance)
+    {
+        [instance dismissActivity];
+    }
+    else
+    {
+        NSLog(@"SessionM is not supported on this platform");
+    }
+    
     return NULL;
 }
 
