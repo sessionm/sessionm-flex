@@ -13,7 +13,6 @@
 
 @interface CustomAchievementActivity : SMAchievementActivity
 
-@property(nonatomic) UIAlertView *alertView;
 @property(nonatomic) BOOL isLastCallSuccessful;
 
 - (void)present;

@@ -1,14 +1,21 @@
 package {
 
 import flash.display.StageAlign;
+import flash.display.Sprite;
+import flash.display.BitmapData;
+import flash.display.Loader;
 import flash.geom.Rectangle;
+import flash.geom.Matrix;
 import flash.text.TextField;
 import flash.text.TextFormat;
+import flash.events.Event;
+import flash.events.IOErrorEvent;
+import flash.events.MouseEvent;
+import flash.net.URLRequest;
 
-/*doc-start*/
-import flash.display.Sprite;
 import ludia.sessionm.ActivityType;
 import ludia.sessionm.SessionM;
+import ludia.sessionm.data.Achievement;
 import ludia.sessionm.event.AchievementEvent;
 import ludia.sessionm.event.ActivityEvent;
 import ludia.sessionm.event.SessionEvent;
@@ -123,7 +130,11 @@ public class Main extends Sprite {
         sessionM.addEventListener(ActivityEvent.ACTIVITY_UNAVAILABLE, sessionM_activityUnavailableHandler);
         sessionM.addEventListener(ActivityEvent.USER_ACTION, sessionM_userActionHandler);
 
-        if (sessionM.getUnclaimedAchievement().isCustom) {
+	var ach:Achievement = sessionM.getUnclaimedAchievement();
+
+        if (ach.isCustom) {
+           displayCustomAchievement(ach);
+           prependText("displayCustomAchievement succeeded");
            sessionM.initCustomActivity();
         }
         else {
@@ -146,8 +157,6 @@ public class Main extends Sprite {
     protected function sessionM_userActionHandler(event:ActivityEvent):void {
         prependText("User action: " + event.userAction);
     }
-
-    /*doc-end*/
 
     private function clearLog():void {
         txtStatus.text = "";
@@ -230,6 +239,38 @@ public class Main extends Sprite {
                 layout.removeButton(rewardsBadge);
                 layout.update(buttonContainer);
             }
+        }
+    }
+
+    public function displayCustomAchievement(ach:Achievement):void {
+        var achIcon:Sprite = new Sprite();
+        var loader:Loader = new Loader();
+        loader.load(new URLRequest(ach.achievementIconURL));
+        loader.contentLoaderInfo.addEventListener(Event.COMPLETE, drawAchievement);
+        loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+        achIcon.addEventListener(MouseEvent.CLICK, onClick);
+
+
+        function drawAchievement(event:Event):void {
+            var bitmap:BitmapData = new BitmapData(loader.width, loader.height, false);
+            bitmap.draw(loader);
+
+            achIcon.graphics.beginBitmapFill(bitmap);
+            achIcon.graphics.drawRect(0, 0, loader.width, loader.height);
+            achIcon.graphics.endFill();
+
+            prependText("Presenting custom achievement");
+            addChild(achIcon);
+        }
+
+        function ioErrorHandler(event:IOErrorEvent):void {
+            prependText("Unable to load achievement icon");
+        }
+
+        function onClick(event:MouseEvent):void {
+            prependText("Dismissing custom achievement");
+            removeChild(achIcon);
+            sessionM.dismissCustomAchievement("CANCELED");
         }
     }
 }

@@ -10,6 +10,7 @@ public interface ISessionM extends IEventDispatcher {
     function logAction(action:String):void;
     function initActivity(type:String):void;
     function initCustomActivity():void;
+    function dismissCustomAchievement(dismissalType:String):void;
     function startSession(appID:String):void;
     function getUser():User;
     function getUnclaimedAchievement():Achievement;

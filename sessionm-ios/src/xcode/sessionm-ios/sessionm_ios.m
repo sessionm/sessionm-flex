@@ -96,6 +96,7 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
         MAP_FUNCTION(logAction, NULL),
         MAP_FUNCTION(initActivity, NULL),
         MAP_FUNCTION(initCustomActivity, NULL),
+        MAP_FUNCTION(dismissCustomAchievement, NULL),
         MAP_FUNCTION(dismissActivity, NULL),
         MAP_FUNCTION(getSDKVersion, NULL),
         MAP_FUNCTION(getUser, NULL),
@@ -610,6 +611,51 @@ ANE_FUNCTION(initCustomActivity)
         NSLog(@"Presenting custom achievement");
         customActivity = [[CustomAchievementActivity alloc] initWithAchievmentData:instance.unclaimedAchievement];
         [customActivity performSelector:@selector(present)];
+    }
+    else
+    {
+        NSLog(@"SessionM is not supported on this platform");
+    }
+    
+	return NULL;
+}
+
+ANE_FUNCTION(dismissCustomAchievement)
+{
+    NSLog(@"Entering dismissCustomAchievement()");
+    SessionM *instance = [SessionM sharedInstance];
+    
+    if(instance)
+    {
+        if(argc > 0) {
+            uint32_t len;
+            const uint8_t* token = 0;
+            
+            if(FRE_OK == FREGetObjectAsUTF8(argv[0], &len, &token)) {
+                NSLog(@"Received dismissal type %s", token);
+                NSString *type = [NSString stringWithUTF8String:(char *)token];
+                customActivity = [[CustomAchievementActivity alloc] initWithAchievmentData:instance.unclaimedAchievement];
+                
+                if([type isEqualToString:@"CANCELED"]) {
+                    NSLog(@"Dismissing custom achievement");
+                    [customActivity performSelector:@selector(dismiss)];
+                }
+                else if([type isEqualToString:@"CLAIMED"]) {
+                    NSLog(@"Claiming custom achievement");
+                    [customActivity performSelector:@selector(claim)];
+                }
+                else {
+                    NSLog(@"Invalid dismissal type %s", token);
+                    customActivity = nil;
+                }
+            }
+            else {
+                NSLog(@"Error when reading dismissal type");
+            }
+        }
+        else {
+            NSLog(@"Missing dismissal type argument");
+        }
     }
     else
     {

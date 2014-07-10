@@ -60,6 +60,11 @@ public class SessionM extends EventDispatcher implements ISessionM {
     	context.call("initCustomActivity");
     }
 
+    public function dismissCustomAchievement(dismissalType:String):void {
+    	callExtension("dismissCustomAchievement", dismissalType);
+    }
+
+
     public function startSession(appID:String):void {
         callExtension("startSession", appID);
     }
