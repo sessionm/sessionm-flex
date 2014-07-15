@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE application [
-<!ENTITY airVersion "14.0">
-<!ENTITY appVersion "0.0.2">
-<!ENTITY appID "com.sessionm.ludiaTest">
-]>
 
 <!-- Adobe AIR Application Descriptor File Template.
  Specifies parameters for identifying, installing, and launching AIR applications.
@@ -13,25 +8,25 @@
  
  minimumPatchLevel - The minimum patch level of the AIR runtime required to run the application. Optional. -->
 
-<application xmlns="http://ns.adobe.com/air/application/&airVersion;">
+<application xmlns="http://ns.adobe.com/air/application/14.0">
     
     <!-- A universally unique application identifier. Must be unique across all AIR applications.
      Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-    <id>&appID;</id>
+    <id>com.sessionm.ludiaTest</id>
     
     <!-- Used as the filename for the application. Required. -->
     <filename>SessionM AIR Example</filename>
     
     <!-- The name that is displayed in the AIR application installer. May have multiple values for each language. See samples or xsd schema file. Optional. -->
-    <name>SessionmAirExample iOS</name>
+    <name>SessionmAirExample</name>
     
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade.
      Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
      An updated version of application must have a versionNumber value higher than the previous version. Required for namespace >= 2.5. -->
-    <versionNumber>&appVersion;</versionNumber>
+    <versionNumber>0.0.2</versionNumber>
     
     <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
-    <versionLabel>&appVersion;</versionLabel>
+    <versionLabel>0.0.2</versionLabel>
     
     <!-- An application version designator (such as "v1", "2.5", or "Alpha 1"). Required for namespace < 2.5. -->
     <!-- <version></version> -->
@@ -104,7 +99,7 @@
         <fullScreen>true</fullScreen>
         
         <!-- The render mode for the app (either auto, cpu, gpu, or direct). Optional. Default auto -->
-        <renderMode>direct</renderMode>
+        <renderMode>auto</renderMode>
         
         <!-- Whether the default direct mode rendering context allocates storage for depth and stencil buffers.  Optional.  Default false. -->
         <!--<depthAndStencil></depthAndStencil>-->
@@ -115,7 +110,7 @@
     
     <!-- We recommend omitting the supportedProfiles element, which in turn permits your application to be deployed to all devices supported by AIR.
      If you wish to restrict deployment (i.e., to only mobile devices) then add this element and list only the profiles which your application does support. -->
-    <supportedProfiles>extendedDesktop mobileDevice extendedMobileDevice</supportedProfiles>
+    <!-- <supportedProfiles>extendedDesktop mobileDevice extendedMobileDevice</supportedProfiles> -->
     
     
     
@@ -237,7 +232,6 @@
                 <uses-permission android:name="android.permission.CAMERA"/>
                 <uses-permission android:name="android.permission.RECORD_AUDIO"/>
                 <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-                <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
                 
                 <uses-feature android:required="true" android:name="android.hardware.touchscreen.multitouch"/>
                 <application android:enabled="true" android:debuggable="true" >
@@ -255,13 +249,15 @@
                 android:theme="@android:style/Theme.Black.NoTitleBar.Fullscreen"
                 android:windowSoftInputMode="adjustPan" >
                 </activity>
+                <activity android:name="com.sessionm.ui.SessionMVideoActivity"
+                android:configChanges="keyboard|orientation|screenSize"/>
                 <receiver android:name="com.sessionm.api.ConnectionReceiver">
                 <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE">
                 </action>
                 </intent-filter>
                 </receiver>
-                <meta-data android:name="com.sessionm.appid" android:value="3f07ab1fa36c7232fd7f8d9c39abd4ba77336fe3" />
+                <meta-data android:name="com.sessionm.appid" android:value="5f58f84c93e3f670d1260115ab87be661f276e66" />
                 </application>
                 </manifest>
             ]]>

@@ -1,7 +1,7 @@
 # Build Main.swf and SessionmAirExample #
 
 ## Configuration
-CONFIG_FILE = ../Makefile.config
+CONFIG_FILE = ../Makefile.config.example
 include $(CONFIG_FILE)
 
 ## Build rules and recipes
@@ -14,9 +14,8 @@ iPhone: Main.swf
 
 android: Main.swf
 	cd src/main/flex
-	$(AIR-SDK)/bin/adt -package -target apk-debug -keystore $(CERTIFICATE) \
-	-storetype pkcs12 ../build/SessionmAirExample.apk src/main/resources/app-descriptor.xml \
-	Main.swf -extdir ../build
+	$(AIR-SDK)/bin/adt -certificate -validityPeriod 25 -cn SelfSigned 1024-RSA androidCert.pfx androidPassword
+	$(AIR-SDK)/bin/adt -package -target apk -keystore androidCert.pfx -storetype pkcs12 ../build/SessionmAirExample.apk src/main/resources/app-descriptor.xml Main.swf -extdir ../build
 
 Main.swf: 
 	cd src/main/flex
@@ -25,6 +24,7 @@ Main.swf:
 
 clean:
 	rm -f Main.swf
+	rm -f androidCert.pfx
 
 
 

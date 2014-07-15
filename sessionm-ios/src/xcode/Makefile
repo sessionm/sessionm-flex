@@ -1,7 +1,7 @@
 # Build libsessionm-ios.a #
 
 ## Configuration
-CONFIG_FILE = ../../../Makefile.config
+CONFIG_FILE = ../../../Makefile.config.example
 include $(CONFIG_FILE)
 
 ## Build rules and recipes

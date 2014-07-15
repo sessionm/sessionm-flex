@@ -1,7 +1,7 @@
 # Top level Makefile for SessionmAirExample #
 
 ## Configuration
-CONFIG_FILE = Makefile.config
+CONFIG_FILE = Makefile.config.example
 include $(CONFIG_FILE)
 
 ## Build rules and recipes

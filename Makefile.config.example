@@ -15,8 +15,11 @@ CERTIFICATE = src/main/flex/Certificates.p12
 ## iOS Developer provisioning profile ## 
 PROVISION = src/main/flex/SessionM_AIR_Example_Profile.mobileprovision
 
+## Path to android sdk ##
+ANDROID-SDK = /Users/tdaniels/Downloads/android-sdk-macosx
+
 ## Path to SessionM iOS sdk ##
 IOS-SDK = /Users/tdaniels/Downloads/SessionM_iOS_v1.11.4_Release/SessionM-SDK
 
 ## Path to SessionM android sdk ##
-ANDROID-SDK = /Users/tdaniels/Downloads/SessionM_android_v1.9.5/SessionM.1.9.5.jar
+SESSIONM-ANDROID-SDK = /Users/tdaniels/Downloads/SessionM_android_v1.9.5

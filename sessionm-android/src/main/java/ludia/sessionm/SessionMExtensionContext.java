@@ -78,7 +78,7 @@ public class SessionMExtensionContext extends FREContext implements SessionListe
         }
     }
 
-    @Override
+    // @Override
     public void onUnclaimedAchievement(SessionM sessionM, AchievementData achievementData) {
         JSONObject json = null;
         try {

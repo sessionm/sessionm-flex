@@ -26,7 +26,7 @@ public class Main extends Sprite {
     private var sessionM:SessionM;
 
     // Replace this by your SessionM App ID
-    private var appID:String = "7dbc26b02482e29f1798ff448af2c04388ae8e44";
+    private var appID:String = "5f58f84c93e3f670d1260115ab87be661f276e66";
 
     public function Main()
     {
@@ -116,12 +116,13 @@ public class Main extends Sprite {
         sessionM.addEventListener(ActivityEvent.ACTIVITY_PRESENTED, sessionM_activityPresentedHandler);
         sessionM.addEventListener(ActivityEvent.ACTIVITY_UNAVAILABLE, sessionM_activityUnavailableHandler);
         sessionM.addEventListener(ActivityEvent.USER_ACTION, sessionM_userActionHandler);
-        sessionM.initActivity(ActivityType.PORTAL);
+        sessionM.presentActivity(ActivityType.PORTAL);
     }
 
     /**
      * Calling initActivity() with ActivityType.ACHIEVEMENT opens an achievement popup,
-     * if the user has unclaimed achievements.
+     * if the user has non-native unclaimed achievements.
+     * initCustomActivity() will be called instead if the user has native unclaimed achievements.
      * You can subscribe to events of the ActivityEvent class to perform some custom logic.
      */
     private function presentAchievement():void {
@@ -133,12 +134,12 @@ public class Main extends Sprite {
 	var ach:Achievement = sessionM.getUnclaimedAchievement();
 
         if (ach.isCustom) {
-           displayCustomAchievement(ach);
+           // displayCustomAchievement(ach);
            prependText("displayCustomAchievement succeeded");
-           sessionM.initCustomActivity();
+           // sessionM.presentCustomActivity();
         }
         else {
-           sessionM.initActivity(ActivityType.ACHIEVEMENT);
+           sessionM.presentActivity(ActivityType.ACHIEVEMENT);
        }
     }
 
@@ -239,38 +240,6 @@ public class Main extends Sprite {
                 layout.removeButton(rewardsBadge);
                 layout.update(buttonContainer);
             }
-        }
-    }
-
-    public function displayCustomAchievement(ach:Achievement):void {
-        var achIcon:Sprite = new Sprite();
-        var loader:Loader = new Loader();
-        loader.load(new URLRequest(ach.achievementIconURL));
-        loader.contentLoaderInfo.addEventListener(Event.COMPLETE, drawAchievement);
-        loader.contentLoaderInfo.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
-        achIcon.addEventListener(MouseEvent.CLICK, onClick);
-
-
-        function drawAchievement(event:Event):void {
-            var bitmap:BitmapData = new BitmapData(loader.width, loader.height, false);
-            bitmap.draw(loader);
-
-            achIcon.graphics.beginBitmapFill(bitmap);
-            achIcon.graphics.drawRect(0, 0, loader.width, loader.height);
-            achIcon.graphics.endFill();
-
-            prependText("Presenting custom achievement");
-            addChild(achIcon);
-        }
-
-        function ioErrorHandler(event:IOErrorEvent):void {
-            prependText("Unable to load achievement icon");
-        }
-
-        function onClick(event:MouseEvent):void {
-            prependText("Dismissing custom achievement");
-            removeChild(achIcon);
-            sessionM.dismissCustomAchievement("CANCELED");
         }
     }
 }
