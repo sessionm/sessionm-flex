@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE extension [
+    <!ENTITY airVersion "14.0">
+    <!ENTITY extVersion "0.0.2">
+]>
 
-<extension xmlns="http://ns.adobe.com/air/extension/14.0">
+
+<extension xmlns="http://ns.adobe.com/air/extension/&airVersion;">
     <id>com.ludia.client.sessionm</id>
-    <versionNumber>0.0.2</versionNumber>
+    <versionNumber>&extVersion;</versionNumber>
     <platforms>
         <platform name="Android-ARM">
             <applicationDeployment>

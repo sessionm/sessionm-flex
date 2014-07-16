@@ -40,7 +40,6 @@ public class SessionM extends EventDispatcher implements ISessionM {
         catch (error:Error) {
             logger = new FallbackLogger();
         } */
-
         if(!context) {
             throw new Error("Un-supported platform, use isSupported property before creating a SessionM object");
         }
@@ -53,29 +52,17 @@ public class SessionM extends EventDispatcher implements ISessionM {
         callExtension("logAction", action);
     }
 
-    public function presentActivity(activity:String):void {
-    	callExtension("presentActivity", activity);
+    public function initActivity(activity:String):void {
+    	callExtension("initActivity", activity);
     }
 
-    /** 
-     * @public
-     *
-     * Notifies the SessionM SDK that a custom achievement has been presented
-     */
-    /* public function initCustomActivity():void {
+    public function initCustomActivity():void {
     	context.call("initCustomActivity");
-    } */
+    }
 
-    /** 
-     * @public
-     * @param dismissType
-     *
-     * Notifies the SessionM SDK that a custom achievement has been dismissed
-     * if dismissType is "CANCELED", or claimed if dismissType is "CLAIMED"
-     */
-    /* public function notifyDismissedAchievement(dismissType:String):void {
-    	callExtension("notifyDismissedAchievement", dismissType);
-    } */
+    public function dismissCustomAchievement(dismissalType:String):void {
+    	callExtension("dismissCustomAchievement", dismissalType);
+    }
 
 
     public function startSession(appID:String):void {

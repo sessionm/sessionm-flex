@@ -1,7 +1,7 @@
 # Build sessionm-actionscript.swc #
 
 ## Configuration
-CONFIG_FILE = ../Makefile.config.example
+CONFIG_FILE = ../Makefile.config
 include $(CONFIG_FILE)
 
 ## Build rules and recipes
@@ -22,6 +22,7 @@ $(SWC):
 	cp ../sessionm-ane/library.swf ../sessionm-ane/iPhone-ARM/library.swf 
 	cp ../sessionm-ane/library.swf ../sessionm-ane/default/library.swf 
 	cp ../sessionm-ane/library.swf ../sessionm-ane/Android-ARM/library.swf
+
 
 clean:
 	rm -f ../sessionm-ane/library.swf

@@ -86,7 +86,7 @@ ANE_FUNCTION(startSession);
 ANE_FUNCTION(logAction);
 ANE_FUNCTION(initActivity);
 ANE_FUNCTION(initCustomActivity);
-ANE_FUNCTION(notifyDismissedAchievement);
+ANE_FUNCTION(dismissCustomAchievement);
 ANE_FUNCTION(dismissActivity);
 ANE_FUNCTION(isSupportedPlatform);
 ANE_FUNCTION(getSDKVersion);

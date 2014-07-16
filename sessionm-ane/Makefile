@@ -1,7 +1,7 @@
 # Build sessionm.ane #
 
 ## Configuration
-CONFIG_FILE = ../Makefile.config.example
+CONFIG_FILE = ../Makefile.config
 include $(CONFIG_FILE)
 
 ## Build rules and recipes
