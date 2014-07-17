@@ -14,7 +14,6 @@ import ludia.sessionm.event.ActivityEvent;
 import ludia.sessionm.event.SessionEvent;
 import ludia.sessionm.event.UserEvent;
 
-// import mx.logging.Log;
 
 [Event(type="ludia.sessionm.event.AchievementEvent", name="unclaimedAchievement")]
 [Event(type="ludia.sessionm.event.ActivityEvent", name="activityPresented")]
@@ -31,15 +30,9 @@ public class SessionM extends EventDispatcher implements ISessionM {
     private var globalState:String = "STARTED_OFFLINE";
 
     public function SessionM() {
-        this.context = ExtensionContext.createExtensionContext(ID, null);
+        context = ExtensionContext.createExtensionContext(ID, null);
         logger = new FallbackLogger();
 
-        /* try {
-            logger = Log.getLogger(ID);
-        }
-        catch (error:Error) {
-            logger = new FallbackLogger();
-        } */
         if(!context) {
             throw new Error("Un-supported platform, use isSupported property before creating a SessionM object");
         }
@@ -56,12 +49,24 @@ public class SessionM extends EventDispatcher implements ISessionM {
     	callExtension("initActivity", activity);
     }
 
+    /** 
+     * @public
+     *
+     * Notifies the SessionM SDK that a custom achievement has been presented
+     */
     public function initCustomActivity():void {
     	context.call("initCustomActivity");
     }
 
-    public function dismissCustomAchievement(dismissalType:String):void {
-    	callExtension("dismissCustomAchievement", dismissalType);
+    /** 
+     * @public
+     * @param dismissType
+     *
+     * Notifies the SessionM SDK that a custom achievement has been dismissed
+     * if dismissType is "CANCELED", or claimed if dismissType is "CLAIMED"
+     */
+    public function notifyDismissedAchievement(dismissType:String):void {
+    	callExtension("notifyDismissedAchievement", dismissType);
     }
 
 

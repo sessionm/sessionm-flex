@@ -11,9 +11,9 @@ import org.json.JSONObject;
 
 import java.util.Map;
 
-public class PresentActivityActivity extends BaseActivity{
+public class InitActivityActivity extends BaseActivity{
 
-    private static final String TAG = "ludia.sessionm.PresentActivityActivity";
+    private static final String TAG = "ludia.sessionm.InitActivityActivity";
 
     public static String ACTIVITY_PRESENTED = "ACTIVITY_PRESENTED";
     public static String ACTIVITY_DISMISSED = "ACTIVITY_DISMISSED";
@@ -26,32 +26,32 @@ public class PresentActivityActivity extends BaseActivity{
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        Log.d(TAG, "PresentActivityActivity.onCreate()");
+        Log.d(TAG, "InitActivityActivity.onCreate()");
         this.type = SessionM.ActivityType.valueOf(getIntent().getStringExtra("ACT_TYPE"));
     }
 
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
-        Log.d(TAG, "PresentActivityActivity.onNewIntent()");
+        Log.d(TAG, "InitActivityActivity.onNewIntent()");
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Log.d(TAG, "PresentActivityActivity.onStart()");
+        Log.d(TAG, "InitActivityActivity.onStart()");
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-        Log.d(TAG, "PresentActivityActivity.onRestart()");
+        Log.d(TAG, "InitActivityActivity.onRestart()");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        Log.d(TAG, "PresentActivityActivity.onResume() presented=" + presented);
+        Log.d(TAG, "InitActivityActivity.onResume() presented=" + presented);
         if(!this.presented) {
             SessionM.getInstance().presentActivity(type);
             this.presented = true;
@@ -65,44 +65,44 @@ public class PresentActivityActivity extends BaseActivity{
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(TAG, "PresentActivityActivity.onPause()");
+        Log.d(TAG, "InitActivityActivity.onPause()");
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(TAG, "PresentActivityActivity.onStop()");
+        Log.d(TAG, "InitActivityActivity.onStop()");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "PresentActivityActivity.onDestroy()");
+        Log.d(TAG, "InitActivityActivity.onDestroy()");
     }
 
     @Override
     public void onPresented(SessionM sessionM) {
-        Log.d(TAG, "PresentActivityActivity.onPresented()");
+        Log.d(TAG, "InitActivityActivity.onPresented()");
         SessionMExtension.context.dispatchStatusEventAsync(ACTIVITY_PRESENTED, "");
     }
 
     @Override
     public void onDismissed(SessionM sessionM) {
-        Log.d(TAG, "PresentActivityActivity.onDismissed()");
+        Log.d(TAG, "InitActivityActivity.onDismissed()");
         SessionMExtension.context.dispatchStatusEventAsync(ACTIVITY_DISMISSED, "");
         finish();
     }
 
     @Override
     public void onUnavailable(SessionM sessionM) {
-        Log.d(TAG, "PresentActivityActivity.onUnavailable()");
+        Log.d(TAG, "InitActivityActivity.onUnavailable()");
         SessionMExtension.context.dispatchStatusEventAsync(ACTIVITY_UNAVAILABLE, "");
         finish();
     }
 
     @Override
     public void onUserAction(SessionM sessionM, UserAction userAction, Map<String, String> stringStringMap) {
-        Log.d(TAG, "PresentActivityActivity.onUserAction()");
+        Log.d(TAG, "InitActivityActivity.onUserAction()");
         super.onUserAction(sessionM, userAction, stringStringMap);
 
         JSONObject jsonObject = null;

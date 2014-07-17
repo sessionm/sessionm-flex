@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!DOCTYPE platform [
-<!ENTITY airVersion "14.0">
-<!ENTITY sdkVersion "7.1">
-]>
 
-<platform xmlns="http://ns.adobe.com/air/extension/&airVersion;">
+<platform xmlns="http://ns.adobe.com/air/extension/14.0">
     <description>iOS linking options</description>
     <copyright>Ludia Inc.</copyright>
-    <sdkVersion>&sdkVersion;</sdkVersion>
+    <sdkVersion>7.1</sdkVersion>
     <packagedDependencies>
         <!-- <packagedDependency>sessionm-ios-packaged-dep.a</packagedDependency> -->
         <!-- <packagedDependency>libsessionm-ios.a</packagedDependency> -->

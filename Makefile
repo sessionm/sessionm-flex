@@ -5,20 +5,26 @@ CONFIG_FILE = Makefile.config
 include $(CONFIG_FILE)
 
 ## Build rules and recipes
-.PHONY: default ane iPhone android 
+.PHONY: default build/sessionm.ane iPhone android 
 
-default: build ane iPhone android
+default: build build/sessionm.ane iPhone android
 
-ane:
-	$(MAKE) -C sessionm-actionscript
-	$(MAKE) -C sessionm-android/src/main/java/ludia/sessionm
-	$(MAKE) -C sessionm-ios/src/xcode
+build/sessionm.ane: build/$(SWC) sessionm-ane/Android-ARM/sessionm-android.jar sessionm-ane/iPhone-ARM/libsessionm-ios.a
 	$(MAKE) -C sessionm-ane
 
-iPhone: build ane
+build/$(SWC):
+	$(MAKE) -C sessionm-actionscript
+
+sessionm-ane/Android-ARM/sessionm-android.jar:
+	$(MAKE) -C sessionm-android/src/main/java/ludia/sessionm
+
+sessionm-ane/iPhone-ARM/libsessionm-ios.a:
+	$(MAKE) -C sessionm-ios/src/xcode
+
+iPhone: build build/sessionm.ane
 	$(MAKE) -C sessionm-example iPhone
 
-android: build ane
+android: build build/sessionm.ane
 	$(MAKE) -C sessionm-example android
 
 build:

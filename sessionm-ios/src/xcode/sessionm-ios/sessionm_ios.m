@@ -96,7 +96,7 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
         MAP_FUNCTION(logAction, NULL),
         MAP_FUNCTION(initActivity, NULL),
         MAP_FUNCTION(initCustomActivity, NULL),
-        MAP_FUNCTION(dismissCustomAchievement, NULL),
+        MAP_FUNCTION(notifyDismissedAchievement, NULL),
         MAP_FUNCTION(dismissActivity, NULL),
         MAP_FUNCTION(getSDKVersion, NULL),
         MAP_FUNCTION(getUser, NULL),
@@ -620,9 +620,9 @@ ANE_FUNCTION(initCustomActivity)
 	return NULL;
 }
 
-ANE_FUNCTION(dismissCustomAchievement)
+ANE_FUNCTION(notifyDismissedAchievement)
 {
-    NSLog(@"Entering dismissCustomAchievement()");
+    NSLog(@"Entering notifyDismissedAchievement()");
     SessionM *instance = [SessionM sharedInstance];
     
     if(instance)
@@ -632,7 +632,7 @@ ANE_FUNCTION(dismissCustomAchievement)
             const uint8_t* token = 0;
             
             if(FRE_OK == FREGetObjectAsUTF8(argv[0], &len, &token)) {
-                NSLog(@"Received dismissal type %s", token);
+                NSLog(@"Received dismiss type %s", token);
                 NSString *type = [NSString stringWithUTF8String:(char *)token];
                 customActivity = [[CustomAchievementActivity alloc] initWithAchievmentData:instance.unclaimedAchievement];
                 
@@ -645,16 +645,16 @@ ANE_FUNCTION(dismissCustomAchievement)
                     [customActivity performSelector:@selector(claim)];
                 }
                 else {
-                    NSLog(@"Invalid dismissal type %s", token);
+                    NSLog(@"Invalid dismiss type %s", token);
                     customActivity = nil;
                 }
             }
             else {
-                NSLog(@"Error when reading dismissal type");
+                NSLog(@"Error when reading dismiss type");
             }
         }
         else {
-            NSLog(@"Missing dismissal type argument");
+            NSLog(@"Missing dismiss type argument");
         }
     }
     else

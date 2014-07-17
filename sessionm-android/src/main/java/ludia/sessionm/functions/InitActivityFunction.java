@@ -5,21 +5,21 @@ import android.content.Intent;
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.adobe.fre.FREObject;
-import ludia.sessionm.PresentActivityActivity;
+import ludia.sessionm.InitActivityActivity;
 import ludia.sessionm.SessionMExtension;
 
-public class PresentActivityFunction implements FREFunction {
+public class InitActivityFunction implements FREFunction {
 
     @Override
     public FREObject call(FREContext freContext, FREObject[] freObjects)
     {
 
-        SessionMExtension.log("PresentActivityFunction.call()");
+        SessionMExtension.log("InitActivityFunction.call()");
 
         String type = readActivityType(freObjects);
 
         Activity activity = freContext.getActivity();
-        Intent intent = new Intent(activity.getApplicationContext(), PresentActivityActivity.class);
+        Intent intent = new Intent(activity.getApplicationContext(), InitActivityActivity.class);
         intent.putExtra("ACT_TYPE", type);
 
         try {

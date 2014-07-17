@@ -33,9 +33,9 @@ public class Main extends Sprite {
         // This extension is not supported in the AIR emulator
         if(!SessionM.isSupported) {
             throw new Error("SessionM is not supported on this platform!");
-        }
-        sessionM = new SessionM();
+        } 
 
+        sessionM = new SessionM();
         createUI();
     }
 
@@ -121,7 +121,8 @@ public class Main extends Sprite {
 
     /**
      * Calling initActivity() with ActivityType.ACHIEVEMENT opens an achievement popup,
-     * if the user has unclaimed achievements.
+     * if the user has non-native unclaimed achievements.
+     * initCustomActivity() will be called instead if the user has native unclaimed achievements.
      * You can subscribe to events of the ActivityEvent class to perform some custom logic.
      */
     private function presentAchievement():void {
@@ -242,6 +243,7 @@ public class Main extends Sprite {
         }
     }
 
+    /** Display custom achievement */
     public function displayCustomAchievement(ach:Achievement):void {
         var achIcon:Sprite = new Sprite();
         var loader:Loader = new Loader();
@@ -270,7 +272,7 @@ public class Main extends Sprite {
         function onClick(event:MouseEvent):void {
             prependText("Dismissing custom achievement");
             removeChild(achIcon);
-            sessionM.dismissCustomAchievement("CANCELED");
+            sessionM.notifyDismissedAchievement("CANCELED");
         }
     }
 }

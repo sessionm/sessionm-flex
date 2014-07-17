@@ -18,7 +18,7 @@ public class SessionMExtension implements FREExtension {
     }
 
     @Override
-    public com.adobe.fre.FREContext createContext(java.lang.String string)
+    public FREContext createContext(java.lang.String string)
     {
         log("createContext");
         context = new SessionMExtensionContext();
