@@ -4,19 +4,26 @@
 CONFIG_FILE = ../Makefile.config
 include $(CONFIG_FILE)
 
+IOS_IPA = ../build/SessionmAirExample.ipa
+ANDROID_APK = ../build/SessionmAirExample.apk
+
 ## Build rules and recipes
 build: iPhone android
 
-iPhone: Main.swf
+iPhone: $(IOS_IPA)
+
+$(IOS_IPA): Main.swf
 	cd src/main/flex
 	$(AIR-SDK)/bin/adt -package -target ipa-test -keystore $(CERTIFICATE) \
 	-storetype pkcs12 -provisioning-profile $(PROVISION) \
-	../build/SessionmAirExample.ipa src/main/resources/app-descriptor.xml \
+	$(IOS_IPA) src/main/resources/app-descriptor.xml \
 	Main.swf -extdir ../build
 
-android: Main.swf androidCert.pfx
+android: $(ANDROID_APK)
+
+$(ANDROID_APK): Main.swf androidCert.pfx
 	cd src/main/flex
-	$(AIR-SDK)/bin/adt -package -target apk-captive-runtime -keystore androidCert.pfx -storetype pkcs12 ../build/SessionmAirExample.apk src/main/resources/app-descriptor.xml Main.swf -extdir ../build
+	$(AIR-SDK)/bin/adt -package -target apk-captive-runtime -keystore androidCert.pfx -storetype pkcs12 $(ANDROID_APK) src/main/resources/app-descriptor.xml Main.swf -extdir ../build
 
 androidCert.pfx: 
 	$(AIR-SDK)/bin/adt -certificate -validityPeriod 25 -cn SelfSigned 1024-RSA androidCert.pfx p
