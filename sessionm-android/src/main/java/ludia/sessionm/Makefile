@@ -1,6 +1,5 @@
 # Build sessionm-android.jar #
 ROOT = ../../../../../..
-JAVA-6 = /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Commands
 
 ## Configuration
 CONFIG_FILE = $(ROOT)/Makefile.config

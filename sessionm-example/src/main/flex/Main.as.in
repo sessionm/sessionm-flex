@@ -25,8 +25,11 @@ public class Main extends Sprite {
 
     private var sessionM:SessionM;
 
-    // Replace this by your SessionM App ID
-    private var appID:String = "7dbc26b02482e29f1798ff448af2c04388ae8e44";
+    // Replace these by your SessionM App IDs
+    private var iosAppID:String = "$(IOS-APP-ID)";
+    private var androidAppID:String = "$(ANDROID-APP-ID)";
+    private var platform:String;
+
 
     public function Main()
     {
@@ -36,6 +39,7 @@ public class Main extends Sprite {
         } 
 
         sessionM = new SessionM();
+        platform = sessionM.getPlatform();
         createUI();
     }
 
@@ -62,7 +66,16 @@ public class Main extends Sprite {
         sessionM.addEventListener(SessionEvent.SESSION_STATE_CHANGED, sessionM_sessionStateChangedHandler);
         sessionM.addEventListener(UserEvent.USER_UPDATED, sessionM_userUpdatedHandler);
         sessionM.addEventListener(AchievementEvent.UNCLAIMED_ACHIEVEMENT, sessionM_unclaimedAchievementHandler);
-        sessionM.startSession(appID);
+
+        if (platform == "iOS") {
+            sessionM.startSession(iosAppID);
+        }
+        else if (platform == "Android") {
+            sessionM.startSession(androidAppID);
+        }
+        else {
+            throw new Error("Unsupported platform, use isSupported property before creating a SessionM object");
+        }
     }
 
     /**

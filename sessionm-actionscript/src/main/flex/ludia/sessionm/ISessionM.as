@@ -17,5 +17,6 @@ public interface ISessionM extends IEventDispatcher {
     function isSupportedPlatform():Boolean;
     function getSDKVersion():String;
     function getExtensionVersion():String;
+    function getPlatform():String;
 }
 }

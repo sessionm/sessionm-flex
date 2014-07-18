@@ -9,7 +9,7 @@ include $(CONFIG_FILE)
 build: libsessionm-ios.a
 
 libsessionm-ios.a:
-	xcodebuild -workspace sessionm-ios.xcodeproj/project.xcworkspace -scheme sessionm-ios -configuration Release build -derivedDataPath . OTHER_LDFLAGS="$(IOS-SDK)/libSessionM.1.11.4.a" HEADER_SEARCH_PATHS="$(IOS-SDK)/API"
+	xcodebuild -workspace sessionm-ios.xcodeproj/project.xcworkspace -scheme sessionm-ios -configuration Release build -derivedDataPath . OTHER_LDFLAGS="$(IOS-SDK)/libSessionM.$(IOS-SDK-VERSION).a" HEADER_SEARCH_PATHS="$(IOS-SDK)/API"
 	mkdir -p $(ROOT)/sessionm-ane/iPhone-ARM/
 	cp build/Products/Release-iphoneos/libsessionm-ios.a $(ROOT)/sessionm-ane/iPhone-ARM/libsessionm-ios.a
 

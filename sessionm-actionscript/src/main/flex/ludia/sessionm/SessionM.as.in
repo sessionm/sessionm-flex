@@ -34,7 +34,7 @@ public class SessionM extends EventDispatcher implements ISessionM {
         logger = new FallbackLogger();
 
         if(!context) {
-            throw new Error("Un-supported platform, use isSupported property before creating a SessionM object");
+            throw new Error("Unsupported platform, use isSupported property before creating a SessionM object");
         }
         else {
             this.context.addEventListener(StatusEvent.STATUS, statusHandler);
@@ -136,7 +136,7 @@ public class SessionM extends EventDispatcher implements ISessionM {
     }
 
     public function getExtensionVersion():String {
-        return "unknown";
+        return "$(EXT-VERSION)";
     }
 
     /** 
@@ -157,6 +157,26 @@ public class SessionM extends EventDispatcher implements ISessionM {
         }
 
         return display;
+    }
+
+    /**
+     * @public
+     * @returns String
+     *
+     * Returns "iOS" if the application is running on an iOS device, "Android" if the
+     * application is running on an Android device, or null otherwise
+     */
+    public function getPlatform():String {
+        var platform:String;
+
+        if (Capabilities.manufacturer.indexOf("iOS") > -1) {
+            platform = "iOS";
+        }
+        else if (Capabilities.manufacturer.indexOf("Android") > -1) {
+            platform = "Android";
+        }
+
+        return platform;
     }
 
     /**

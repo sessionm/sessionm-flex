@@ -8,25 +8,25 @@
  
  minimumPatchLevel - The minimum patch level of the AIR runtime required to run the application. Optional. -->
 
-<application xmlns="http://ns.adobe.com/air/application/14.0">
+<application xmlns="http://ns.adobe.com/air/application/$(AIR-VERSION)">
     
     <!-- A universally unique application identifier. Must be unique across all AIR applications.
      Using a reverse DNS-style name as the id is recommended. (Eg. com.example.ExampleApplication.) Required. -->
-    <id>com.sessionm.ludiaTest</id>
+    <id>$(APP-ID)</id>
     
     <!-- Used as the filename for the application. Required. -->
-    <filename>SessionM AIR Example</filename>
+    <filename>$(APP-NAME)</filename>
     
     <!-- The name that is displayed in the AIR application installer. May have multiple values for each language. See samples or xsd schema file. Optional. -->
-    <name>SessionmAirExample</name>
+    <name>$(APP-NAME)</name>
     
     <!-- A string value of the format <0-999>.<0-999>.<0-999> that represents application version which can be used to check for application upgrade.
      Values can also be 1-part or 2-part. It is not necessary to have a 3-part value.
      An updated version of application must have a versionNumber value higher than the previous version. Required for namespace >= 2.5. -->
-    <versionNumber>0.0.2</versionNumber>
+    <versionNumber>$(APP-VERSION)</versionNumber>
     
     <!-- A string value (such as "v1", "2.5", or "Alpha 1") that represents the version of the application, as it should be shown to users. Optional. -->
-    <versionLabel>0.0.2</versionLabel>
+    <versionLabel>$(APP-VERSION)</versionLabel>
     
     <!-- An application version designator (such as "v1", "2.5", or "Alpha 1"). Required for namespace < 2.5. -->
     <!-- <version></version> -->
@@ -42,7 +42,7 @@
     
     <!-- Identifies the ActionScript extensions used by an application. -->
     <extensions>
-        <extensionID>com.ludia.client.sessionm</extensionID>
+        <extensionID>$(EXT-ID)</extensionID>
     </extensions>
     
     <!-- Settings for the application's initial window. Required. -->
@@ -256,7 +256,7 @@
                 </action>
                 </intent-filter>
                 </receiver>
-                <meta-data android:name="com.sessionm.appid" android:value="5f58f84c93e3f670d1260115ab87be661f276e66" />
+                <meta-data android:name="com.sessionm.appid" android:value="$(ANDROID-APP-ID)" />
                 </application>
                 </manifest>
             ]]>

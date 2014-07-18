@@ -5,9 +5,9 @@ CONFIG_FILE = ../Makefile.config
 include $(CONFIG_FILE)
 
 ## Build rules and recipes
-build: $(SWC)
+build: sessionm-actionscript.swc
 
-$(SWC):
+sessionm-actionscript.swc:
 	rm -f ../sessionm-ane/library.swf
 	rm -f ../sessionm-ane/catalog.xml
 	$(AIR-SDK)/bin/acompc -source-path src/main/flex/ \
@@ -19,8 +19,8 @@ $(SWC):
 	ludia.sessionm.event.ActivityEvent \
 	ludia.sessionm.event.SessionEvent \
 	ludia.sessionm.event.UserEvent -output \
-	../build/$(SWC)
-	unzip ../build/$(SWC) -d ../sessionm-ane/
+	../build/sessionm-actionscript.swc
+	unzip ../build/sessionm-actionscript.swc -d ../sessionm-ane/
 	cp ../sessionm-ane/library.swf ../sessionm-ane/iPhone-ARM/library.swf 
 	cp ../sessionm-ane/library.swf ../sessionm-ane/default/library.swf 
 	cp ../sessionm-ane/library.swf ../sessionm-ane/Android-ARM/library.swf
@@ -28,5 +28,5 @@ $(SWC):
 clean:
 	rm -f ../sessionm-ane/library.swf
 	rm -f ../sessionm-ane/catalog.xml
-	rm -f ../build/$(SWC)
+	rm -f ../build/sessionm-actionscript.swc
 
