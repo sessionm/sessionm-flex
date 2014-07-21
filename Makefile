@@ -7,7 +7,7 @@ include $(CONFIG_FILE)
 ## Build rules and recipes
 .PHONY: default build/sessionm.ane iPhone android 
 
-default: build build/sessionm.ane iPhone android
+default: config build build/sessionm.ane iPhone android
 
 build/sessionm.ane: build/sessionm-actionscript.swc sessionm-ane/Android-ARM/sessionm-android.jar sessionm-ane/iPhone-ARM/libsessionm-ios.a
 	$(MAKE) -C sessionm-ane
