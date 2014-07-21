@@ -2,7 +2,7 @@
 SessionM for Adobe AIR
 ======================
 
-Unofficial Adobe AIR Native Extension for the SessionM SDKs (iOS & Android).
+Adobe AIR Native Extension for the SessionM SDKs (iOS & Android).
 License: MIT
 
 #####
@@ -23,21 +23,19 @@ In order to build this extension, the following programs must be available:
 * Android SDK (can be specified with ``android.sdk`` Java options)
 * SessionM iOS and Android SDKs. Available for download from: http://www.sessionm.com/documentation/downloads.php
  
-Create a Makefile.config file based on the provided Makefile.config.example. This includes setting your certificates for iOS and Android and your iOS mobile provisioning profile. If you do not have an iOS certificate or provisioning profile, follow the instructions for setting up the iOS development environment at https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ProvisioningDevelopment.html. If you do not have an Android certificate, you can create one by running ``make android-certificate`` in the top-level directory. 
+Create a Makefile.config file based on the provided Makefile.config.example. This includes setting your certificates for iOS and Android and your iOS mobile provisioning profile. 
 
-In addition, run ``make config`` in the top-level directory to edit the following files, reflecting changes to settings such as the Adobe AIR SDK version and the application ID:
- 
-* sessionm-actionscript/src/main/flex/ludia/sessionm/SessionM.as
-* sessionm-ane/extension.xml
-* sessionm-ane/iPhone-ARM/platform.xml
-* sessionm-example/src/main/flex/Main.as
-* sessionm-example/src/main/resources/app-descriptor.xml
+If you do not have an iOS certificate or provisioning profile, follow the instructions for setting up the iOS development environment at https://developer.apple.com/library/ios/documentation/NetworkingInternet/Conceptual/RemoteNotificationsPG/Chapters/ProvisioningDevelopment.html. 
+
+If you do not have an Android certificate, follow the instructions for the Android application signing process at http://developer.android.com/tools/publishing/app-signing.html, or create a default certificate by running ``make android-certificate`` in the top-level directory. 
+
+Once you have finished editing your Makefile.config, run ``make config`` in the top-level directory to to the reflect the changes made to settings such as the Adobe AIR SDK version and the application ID.
 
  
-Otherwise it's a regular build process: ::
+Otherwise it's a regular build process:
     make
 
-When done: ::
+When done:
     make clean
 
 Note: The XCode build in sessionm-ios may fail the first time around after retrieving the repository with the following error:
