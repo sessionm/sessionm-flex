@@ -7,19 +7,19 @@ AIR-SDK = </absolute/path/to/air_sdk_directory>
 AIR-VERSION = <X.X>
 
 ## Extension version ##
-EXT-VERSION = <X.X.X>
+EXT-VERSION = 1.0.1
 
 ## Extension id ##
-EXT-ID = <com.extension.id>
+EXT-ID = com.ludia.client.sessionm
 
 ## Application version ##
-APP-VERSION = <X.X.X>
+APP-VERSION = 0.0.2
 
 ## Application id ##
 APP-ID = <com.application.id>
 
 ## Application name ##
-APP-NAME = <exampleApplicationName>
+APP-NAME = SessionmAirExample
 
 ## iOS SessionM application id ##
 IOS-APP-ID = <ios_app_id_from_developer_portal>
