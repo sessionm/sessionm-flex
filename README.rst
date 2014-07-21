@@ -43,5 +43,3 @@ Note: The XCode build in sessionm-ios may fail the first time around after retri
 xcodebuild: error: The workspace 'sessionm-ios' does not contain a scheme named 'sessionm-ios'.
 
 A workaround is simply to load the  sessionm-ios/src/xcode/sessionm-ios.xcodeproj project in XCode and save it.
-
-Note: There is also a known issue where the Android application loses focus after exiting from the rewards portal. The application can be brought back into focusing by pressing the  device's back button.

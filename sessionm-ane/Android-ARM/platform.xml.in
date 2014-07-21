@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<platform xmlns="http://ns.adobe.com/air/extension/$(AIR-VERSION)">
+    <description>Android linking options</description>
+    <copyright>Ludia Inc.</copyright>
+    <packagedDependencies>
+        <packagedDependency>SessionM.jar</packagedDependency>
+    </packagedDependencies>
+</platform>

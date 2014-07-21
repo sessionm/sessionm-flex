@@ -52,6 +52,8 @@ config:
 
 	sed -e 's/$$(AIR-VERSION)/$(AIR-VERSION)/g' sessionm-ane/iPhone-ARM/platform.xml.in > sessionm-ane/iPhone-ARM/platform.xml
 
+	sed -e 's/$$(AIR-VERSION)/$(AIR-VERSION)/g' sessionm-ane/Android-ARM/platform.xml.in > sessionm-ane/Android-ARM/platform.xml
+
 	sed -e 's/$$(AIR-VERSION)/$(AIR-VERSION)/g' -e 's/$$(APP-ID)/$(APP-ID)/g' -e 's/$$(APP-NAME)/$(APP-NAME)/g' -e 's/$$(APP-VERSION)/$(APP-VERSION)/g' -e 's/$$(EXT-ID)/$(EXT-ID)/g' -e 's/$$(ANDROID-APP-ID)/$(ANDROID-APP-ID)/g' sessionm-example/src/main/resources/app-descriptor.xml.in > sessionm-example/src/main/resources/app-descriptor.xml
 
 	sed -e 's/$$(IOS-APP-ID)/$(IOS-APP-ID)/g' -e 's/$$(ANDROID-APP-ID)/$(ANDROID-APP-ID)/g' sessionm-example/src/main/flex/Main.as.in > sessionm-example/src/main/flex/Main.as

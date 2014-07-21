@@ -59,6 +59,7 @@ public class InitActivityActivity extends BaseActivity{
         else {
 //            SessionM.getInstance().dismissActivity();
             this.presented = false;
+            finish();
         }
     }
 
