@@ -5,9 +5,9 @@ CONFIG_FILE = ../Makefile.config
 include $(CONFIG_FILE)
 
 ## Build rules and recipes
-build: sessionm-actionscript.swc
+build: ../build/sessionm-actionscript.swc
 
-sessionm-actionscript.swc:
+../build/sessionm-actionscript.swc: src/main/flex/ludia/sessionm/SessionM.as
 	rm -f ../sessionm-ane/library.swf
 	rm -f ../sessionm-ane/catalog.xml
 	$(AIR-SDK)/bin/acompc -source-path src/main/flex/ \
@@ -25,8 +25,11 @@ sessionm-actionscript.swc:
 	cp ../sessionm-ane/library.swf ../sessionm-ane/default/library.swf 
 	cp ../sessionm-ane/library.swf ../sessionm-ane/Android-ARM/library.swf
 
+src/main/flex/ludia/sessionm/SessionM.as:
+	sed -e 's/$$(EXT-VERSION)/$(EXT-VERSION)/g' src/main/flex/ludia/sessionm/SessionM.as.in > src/main/flex/ludia/sessionm/SessionM.as
+
 clean:
 	rm -f ../sessionm-ane/library.swf
 	rm -f ../sessionm-ane/catalog.xml
 	rm -f ../build/sessionm-actionscript.swc
-
+	rm -f src/main/flex/ludia/sessionm/SessionM.as

@@ -29,7 +29,7 @@ If you do not have an iOS certificate or provisioning profile, follow the instru
 
 If you do not have an Android certificate, follow the instructions for the Android application signing process at http://developer.android.com/tools/publishing/app-signing.html, or create a default certificate by running ``make android-certificate`` in the top-level directory. 
 
-Once you have finished editing your Makefile.config, run ``make config`` in the top-level directory to to the reflect the changes made to settings such as the Adobe AIR SDK version and the application ID.
+Once you have finished editing your Makefile.config, running ``make`` in the top-level directory will reflect the changes made to settings such as the Adobe AIR SDK version and the application ID.
 
  
 Otherwise it's a regular build process:
@@ -37,6 +37,12 @@ Otherwise it's a regular build process:
 
 When done:
     make clean
+
+The following files are created during the build process and can be found in the build directory:
+
+* The Adobe AIR native extension package (sessionm.ane)
+* The ActionScript library (sessionm-actionscript.swc)
+* The Android & iOS sample applications (SessionmAirExample.apk & SessionmAirExample.ipa)
 
 Note: The XCode build in sessionm-ios may fail the first time around after retrieving the repository with the following error:
 

@@ -7,7 +7,7 @@ include $(CONFIG_FILE)
 ## Build rules and recipes
 build:  ../build/sessionm.ane
 
-../build/sessionm.ane:
+../build/sessionm.ane: extension.xml iPhone-ARM/platform.xml Android-ARM/platform.xml
 	cp $(SESSIONM-ANDROID-SDK)/*.jar Android-ARM/SessionM.jar
 	$(AIR-SDK)/bin/adt -package -target ane ../build/sessionm.ane \
 	extension.xml -swc ../build/sessionm-actionscript.swc -platform iPhone-ARM -C \
@@ -15,7 +15,18 @@ build:  ../build/sessionm.ane
 	iPhone-ARM/platform.xml -platform default -C default . -platform \
 	Android-ARM -C Android-ARM library.swf sessionm-android.jar SessionM.jar -platformoptions Android-ARM/platform.xml
 
+extension.xml:
+	sed -e 's/$$(AIR-VERSION)/$(AIR-VERSION)/g' -e 's/$$(EXT-ID)/$(EXT-ID)/g' -e 's/$$(EXT-VERSION)/$(EXT-VERSION)/g' extension.xml.in > extension.xml
+
+iPhone-ARM/platform.xml:
+	sed -e 's/$$(AIR-VERSION)/$(AIR-VERSION)/g' iPhone-ARM/platform.xml.in > iPhone-ARM/platform.xml
+
+Android-ARM/platform.xml:
+	sed -e 's/$$(AIR-VERSION)/$(AIR-VERSION)/g' Android-ARM/platform.xml.in > Android-ARM/platform.xml
+
 clean:
 	rm -f ../build/sessionm.ane 
 	rm -f Android-ARM/SessionM.jar
-
+	rm -f extension.xml
+	rm -f iPhone-ARM/platform.xml
+	rm -f Android-ARM/platform.xml
