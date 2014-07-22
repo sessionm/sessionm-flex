@@ -31,7 +31,7 @@ ANDROID-APP-ID = <android_app_id_from_developer_portal>
 IOS-CERTIFICATE = </absolute/path/to/certificate.p12>
 
 ## Android keystore certificate (default androidCert.pfx has password 'p') ##
-ANDROID-CERTIFICATE = ../build/androidCert.pfx
+ANDROID-CERTIFICATE = ../androidCert.pfx
 
 ## iOS Developer provisioning profile ## 
 PROVISION = </absolute/path/to/profile.mobileprovision>
