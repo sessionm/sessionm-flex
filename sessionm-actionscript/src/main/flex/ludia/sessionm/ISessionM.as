@@ -15,6 +15,7 @@ import ludia.sessionm.data.User;
 public interface ISessionM extends IEventDispatcher {
     function shouldDisplayRewardsBadge():Boolean;
     function logAction(action:String):void;
+    function logDebug(msg:String):void;
     function initActivity(type:String):void;
     function initCustomActivity():void;
     function notifyDismissedAchievement(dismissType:String):void;

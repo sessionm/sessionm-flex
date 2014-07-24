@@ -94,13 +94,14 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
         MAP_FUNCTION(startSession, NULL),
         MAP_FUNCTION(isSupportedPlatform, NULL),
         MAP_FUNCTION(logAction, NULL),
+        MAP_FUNCTION(logDebug, NULL),
         MAP_FUNCTION(initActivity, NULL),
         MAP_FUNCTION(initCustomActivity, NULL),
         MAP_FUNCTION(notifyDismissedAchievement, NULL),
         MAP_FUNCTION(dismissActivity, NULL),
         MAP_FUNCTION(getSDKVersion, NULL),
         MAP_FUNCTION(getUser, NULL),
-        MAP_FUNCTION(getUnclaimedAchievement, NULL),
+        MAP_FUNCTION(getUnclaimedAchievement, NULL)
     };
     
     *numFunctionsToTest = sizeof(func) / sizeof(FRENamedFunction);
@@ -545,6 +546,40 @@ ANE_FUNCTION(logAction)
         NSLog(@"SessionM is not supported on this platform");
     }
     
+	return NULL;
+}
+
+ANE_FUNCTION(logDebug)
+{
+    NSLog(@"Entering logDebug()");
+
+    SessionM *instance = [SessionM sharedInstance];
+
+    if(instance)
+    {
+        if(argc > 0)
+        {
+            uint32_t len;
+            const uint8_t* token = 0;
+            if(FRE_OK == FREGetObjectAsUTF8(argv[0], &len, &token))
+            {
+                NSLog(@"%s", token);
+            }
+            else
+            {
+                NSLog(@"Error when reading debug message");
+            }
+        }
+        else
+        {
+            NSLog(@"Missing debug message argument");
+        }
+    }
+    else
+    {
+        NSLog(@"SessionM is not supported on this platform");
+    }
+
 	return NULL;
 }
 

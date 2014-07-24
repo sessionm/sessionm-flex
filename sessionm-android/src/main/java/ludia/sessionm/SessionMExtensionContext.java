@@ -36,6 +36,7 @@ public class SessionMExtensionContext extends FREContext implements SessionListe
         HashMap<String, FREFunction> map = new HashMap<String, FREFunction>();
         map.put("startSession", new StartSessionFunction());
         map.put("logAction", new LogActionFunction());
+        map.put("logDebug", new LogDebugFunction());
         map.put("initActivity", new InitActivityFunction());
         map.put("initCustomActivity", new InitCustomActivityFunction());
         map.put("notifyDismissedAchievement", new NotifyDismissedAchievementFunction());

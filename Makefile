@@ -9,6 +9,7 @@ include $(CONFIG_FILE)
 
 default: build build/sessionm.ane iPhone android
 
+# If you receive "Error: This Java instance does not support a 32-bit JVM" when building this target, remove all references to the -d32 flag from the $(AIR-SDK)/bin/asdoc script
 doc: build/sessionm-actionscript.swc
 	$(AIR-SDK)/bin/aasdoc -source-path sessionm-actionscript/src/main/flex/ -doc-sources sessionm-actionscript/src/main/flex/
 

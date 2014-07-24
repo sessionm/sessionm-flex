@@ -84,6 +84,7 @@ void dispatchAchievement(SMAchievementData *achievementData);
 ANE_FUNCTION(shouldDisplayUI);
 ANE_FUNCTION(startSession);
 ANE_FUNCTION(logAction);
+ANE_FUNCTION(logDebug);
 ANE_FUNCTION(initActivity);
 ANE_FUNCTION(initCustomActivity);
 ANE_FUNCTION(notifyDismissedAchievement);

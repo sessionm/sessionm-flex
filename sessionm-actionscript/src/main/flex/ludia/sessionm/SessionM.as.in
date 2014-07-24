@@ -131,6 +131,16 @@ public class SessionM extends EventDispatcher implements ISessionM {
     }
 
     /**
+     * Logs a message to the native platform's debug console.
+     *
+     * @public
+     * @param msg the debug message
+     */
+    public function logDebug(msg:String):void {
+        callExtension("logDebug", msg);
+    }
+
+    /**
      * Notifies the SessionM SDK that the activity specified by the
      * <code>activity</code> parameter has been presented. When activity is
      * equal to <code>"PORTAL"</code> the SDK is notified that the rewards
