@@ -6,6 +6,7 @@ import flash.external.ExtensionContext;
 import flash.system.Capabilities;
 
 import ludia.sessionm.data.Achievement;
+import ludia.sessionm.data.State;
 import ludia.sessionm.data.User;
 import ludia.sessionm.data.UserAction;
 
@@ -15,20 +16,96 @@ import ludia.sessionm.event.SessionEvent;
 import ludia.sessionm.event.UserEvent;
 
 
+/**
+ * Dispatched when the user has an unclaimed achievement that has not already
+ * been presented.
+ *
+ * @eventType ludia.sessionm.event.AchievementEvent.UNCLAIMED_ACHIEVEMENT
+ */
 [Event(type="ludia.sessionm.event.AchievementEvent", name="unclaimedAchievement")]
-[Event(type="ludia.sessionm.event.ActivityEvent", name="activityPresented")]
-[Event(type="ludia.sessionm.event.ActivityEvent", name="activityDismissed")]
-[Event(type="ludia.sessionm.event.ActivityEvent", name="userAction")]
-[Event(type="ludia.sessionm.event.SessionEvent", name="sessionStateChanged")]
-[Event(type="ludia.sessionm.event.UserEvent", name="userUpdated")]
-public class SessionM extends EventDispatcher implements ISessionM {
 
+/**
+ * Dispatched when either the rewards portal or a standard (non-custom)
+ * achievement is presented.
+ *
+ * @eventType ludia.sessionm.event.ActivityEvent.ACTIVITY_PRESENTED
+ */
+[Event(type="ludia.sessionm.event.ActivityEvent", name="activityPresented")]
+
+/**
+ * Dispatched when the user dimisses either the rewards portal or a standard
+ * (non-custom) achievement.
+ *
+ * @eventType ludia.sessionm.event.ActivityEvent.ACTIVITY_DISMISSED
+ */
+[Event(type="ludia.sessionm.event.ActivityEvent", name="activityDismissed")]
+
+/**
+ * Dispatched when the user performs one of several actions such as signing in.
+ *
+ * @eventType ludia.sessionm.event.ActivityEvent.USER_ACTION
+ */
+[Event(type="ludia.sessionm.event.ActivityEvent", name="userAction")]
+
+/**
+ * Dispatched when the session state changes.
+ *
+ * @eventType ludia.sessionm.event.SessionEvent.SESSION_STATE_CHANGED
+ */
+[Event(type="ludia.sessionm.event.SessionEvent", name="sessionStateChanged")]
+
+/**
+ * Dispatched when user data such as the number of unclaimed achievements is
+ * updated.
+ *
+ * @eventType ludia.sessionm.event.UserEvent.USER_UPDATED
+ */
+[Event(type="ludia.sessionm.event.UserEvent", name="userUpdated")]
+
+/**
+ * Implements the <code>ISessionM</code> interface.
+ *
+ * @see ISessionM
+ */
+public class SessionM extends EventDispatcher implements ISessionM {
+    /**
+     * The extension ID for the SessionM Adobe AIR native extension.
+     *
+     * @public
+     */
     public static const ID:String = "com.ludia.client.sessionm";
+
+    /**
+     * The logger to be used for debugging.
+     *
+     * @public
+     * @default null
+     */
     public var logger:* = null;
 
+    /**
+     * The context for the native extension.
+     *
+     * @private
+     * @default null
+     */
     private var context:ExtensionContext;
-    private var globalState:String = "STARTED_OFFLINE";
 
+    /**
+     * The current session state.
+     *
+     * @private
+     * @default "STARTED_OFFLINE"
+     */
+    private var globalState:String = State.STARTED_OFFLINE;
+
+    /**
+     * The <code>SessionM</code> constructor. Initializes the context for the
+     * native extension, the debug logger, and the <code>StatusEvent</code>
+     * event listener for events dispatched by the SessionM SDK.
+     *
+     * @public
+     */
     public function SessionM() {
         context = ExtensionContext.createExtensionContext(ID, null);
         logger = new FallbackLogger();
@@ -41,39 +118,76 @@ public class SessionM extends EventDispatcher implements ISessionM {
         }
     }
 
+    /**
+     * Notifies the SessionM SDK that the user has performed the action
+     * specified by the <code>action</code> parameter.
+     *
+     * @public
+     * @param action the name of the action to be logged. Action names can be
+     * configured through the SessionM Developer Portal.
+     */
     public function logAction(action:String):void {
         callExtension("logAction", action);
     }
 
+    /**
+     * Notifies the SessionM SDK that the activity specified by the
+     * <code>activity</code> parameter has been presented. When activity is
+     * equal to <code>"PORTAL"</code> the SDK is notified that the rewards
+     * portal has been presented to the user. When activity is equal to
+     * <code>"ACHIEVEMENT"</code> the SDK is notified that a standard
+     * (non-custom) achievement has been presented to the user.
+     *
+     * @public
+     * @param activity the activity type (<code>"PORTAL"</code> or
+     * <code>"ACHIEVEMENT"</code>).
+     */
     public function initActivity(activity:String):void {
     	callExtension("initActivity", activity);
     }
 
-    /** 
-     * @public
+    /**
+     * Notifies the SessionM SDK that a custom achievement has been
+     * presented.
      *
-     * Notifies the SessionM SDK that a custom achievement has been presented
+     * @public
      */
     public function initCustomActivity():void {
     	context.call("initCustomActivity");
     }
 
     /** 
-     * @public
-     * @param dismissType
-     *
      * Notifies the SessionM SDK that a custom achievement has been dismissed
-     * if dismissType is "CANCELED", or claimed if dismissType is "CLAIMED"
+     * if dismissType is <code>"CANCELED"</code>, or claimed if dismissType is
+     * <code>"CLAIMED"</code>.
+     *
+     * @public
+     * @param dismissType the dismiss type (<code>"CANCELED"</code> or
+     * <code>"CLAIMED"</code>).
      */
     public function notifyDismissedAchievement(dismissType:String):void {
     	callExtension("notifyDismissedAchievement", dismissType);
     }
 
 
+    /**
+     * Attempts to start a session for the SessionM application specified by
+     * the <code>appID</code> parameter.
+     *
+     * @public
+     * @param appID the application ID as specified in the SessionM Developer
+     * Portal.
+     */
     public function startSession(appID:String):void {
         callExtension("startSession", appID);
     }
 
+    /**
+     * Returns the user associated with the current session.
+     *
+     * @public
+     * @return the current user.
+     */
     public function getUser():User {
         var user:User;
         var userString:String;
@@ -91,6 +205,15 @@ public class SessionM extends EventDispatcher implements ISessionM {
         return user;
     }
 
+    /**
+     * Returns the most recent unclaimed achievement that the user has
+     * earned. Returns <code>null</code> if the user has no unclaimed
+     * achievements or if the most recent unclaimed achievement has already been
+     * presented.
+     *
+     * @public
+     * @return the most recent unclaimed achievement.
+     */
     public function getUnclaimedAchievement():Achievement {
         var achievement:Achievement;
         var achievementStr:String;
@@ -108,6 +231,14 @@ public class SessionM extends EventDispatcher implements ISessionM {
         return achievement;
     }
 
+    /**
+     * Returns <code>true</code> if the application is running on a supported
+     * platform (Android or iOS) with at least the minimum required OS version.
+     *
+     * @public
+     * @return represents whether the application is running on a
+     * supported platform with at least the minimum required OS version.
+     */
     public function isSupportedPlatform():Boolean {
         var supported:Boolean = false;
         try {
@@ -122,6 +253,13 @@ public class SessionM extends EventDispatcher implements ISessionM {
     }
 
 
+    /**
+     * Returns the version number of the SessionM Android or iOS SDK that was
+     * used when compiling the SessionM Adobe AIR native extension package.
+     *
+     * @public
+     * @return the SessionM SDK version number.
+     */
     public function getSDKVersion():String {
         var version:String = "unknown";
         try {
@@ -135,24 +273,35 @@ public class SessionM extends EventDispatcher implements ISessionM {
         return version;
     }
 
+    /**
+     * Returns the version number of the SessionM Adobe AIR native extension
+     * package.
+     *
+     * @public
+     * @return the SessionM native extension version number.
+     */
     public function getExtensionVersion():String {
         return "$(EXT-VERSION)";
     }
 
     /** 
-     * @public
-     * @returns Boolean
+     * Returns <code>true</code> if the rewards badge should be displayed
+     * (when the session state is <code>"STARTED_ONLINE"</code> and the user
+     * has not opted out of rewards).
      *
-     * Returns true if the rewards icon should be displayed, i.e. when the session state
-     * is "STARTED_ONLINE" and the user has not opted out of rewards
+     * @public
+     * @return represents whether the rewards badge should be
+     * displayed.
      */
     public function shouldDisplayRewardsBadge():Boolean {
         var display:Boolean = false;
  
-        if (globalState == "STARTED_ONLINE" && getUser().optedOut == false) {
+        if (globalState == State.STARTED_ONLINE && getUser().optedOut == false)
+        {
             display = true;
         }
-        else {
+        else
+        {
             display = false;
         }
 
@@ -160,11 +309,12 @@ public class SessionM extends EventDispatcher implements ISessionM {
     }
 
     /**
-     * @public
-     * @returns String
+     * Returns <code>"iOS"</code> if the application is running on an iOS
+     * device, <code>"Android"</code> if the application is running on an
+     * Android device, or <code>null</code> otherwise.
      *
-     * Returns "iOS" if the application is running on an iOS device, "Android" if the
-     * application is running on an Android device, or null otherwise
+     * @public
+     * @return the platform the application is running on.
      */
     public function getPlatform():String {
         var platform:String;
@@ -180,8 +330,15 @@ public class SessionM extends EventDispatcher implements ISessionM {
     }
 
     /**
-     * @private
-     * @param event
+     * The handler for various events that are dispatched by the SessionM
+     * SDK. This method delegates the event handling to a lower-level handler
+     * based on the input event's <code>code</code> field.
+     *
+     * @protected
+     * @param event an event of type <code>StatusEvent</code>. The event's code
+     * can either hold an instance of <code>SessionEvent</code>,
+     * <code>UserEvent</code>, <code>AchievementEvent</code>, or
+     * <code>ActivityEvent</code>, or it can hold the string <code>"LOG"</code>.
      */
     protected function statusHandler(event:StatusEvent):void {
 
@@ -206,10 +363,19 @@ public class SessionM extends EventDispatcher implements ISessionM {
         }
     }
 
+    /**
+     * @private
+     * @param cls
+     * @param name
+     */
     private function hasConstant(cls:Class, name:String):Boolean {
         return cls[name] != null;
     }
 
+    /**
+     * @private
+     * @param event
+     */
     private function manageStateChange(event:StatusEvent):void {
         var sessionEvent:SessionEvent = new SessionEvent(SessionEvent.SESSION_STATE_CHANGED, event.level);
 
@@ -217,11 +383,19 @@ public class SessionM extends EventDispatcher implements ISessionM {
         dispatchEvent(sessionEvent);
     }
 
+    /**
+     * @private
+     * @param event
+     */
     private function manageAchievement(event:StatusEvent):void {
         var achievement:Achievement = new Achievement(JSON.parse(event.level));
         dispatchEvent(new AchievementEvent(AchievementEvent.UNCLAIMED_ACHIEVEMENT, achievement));
     }
 
+    /**
+     * @private
+     * @param event
+     */
     private function manageActivity(event:StatusEvent):void {
         var userAction:UserAction;
         if(event.level) {
@@ -231,19 +405,27 @@ public class SessionM extends EventDispatcher implements ISessionM {
         dispatchEvent(new ActivityEvent(eventType, userAction));
     }
 
+    /**
+     * @private
+     * @param event
+     */
     private function manageUser(event:StatusEvent):void {
         var user:User = new User(JSON.parse(event.level));
         dispatchEvent(new UserEvent(UserEvent.USER_UPDATED, user));
     }
 
     /**
-     * Logs call to <code>ExtensionContext.call</code>
+     * Logs call to <code>ExtensionContext.call</code>.
      *
-     * @param method
-     * @param args
-     * @throws Error
+     * @protected
+     * @param method the native function to be called.
+     * @param args (optional) the arguments the native function will be called
+     * with.
+     * @return represents whether the call to the native
+     * function succeeded.
+     * @throws Error the error thrown by the native function.
      */
-    protected function callExtension(method:String, ...args):* {
+    protected function callExtension(method:String, ...args):Boolean {
         try {
             if(args && args.length > 0) {
                 logger.debug("Calling " + method + " with " + args);
@@ -267,10 +449,21 @@ public class SessionM extends EventDispatcher implements ISessionM {
         return true;
     }
 
+    /**
+     * Represents whether the application is running on a supported platform (
+     * Note: does not check for minimum required OS version).
+     *
+     * @public
+     */
     public static function get isSupported():Boolean {
         return Capabilities.manufacturer.indexOf("Android") > -1 || Capabilities.manufacturer.indexOf("iOS") > -1;
     }
 
+    /**
+     * Disposes of the extension context, setting it to <code>null</code>.
+     *
+     * @public
+     */
     public function dispose():void {
         if(context) {
             context.dispose();

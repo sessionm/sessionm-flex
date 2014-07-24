@@ -9,6 +9,9 @@ include $(CONFIG_FILE)
 
 default: build build/sessionm.ane iPhone android
 
+doc: build/sessionm-actionscript.swc
+	$(AIR-SDK)/bin/aasdoc -source-path sessionm-actionscript/src/main/flex/ -doc-sources sessionm-actionscript/src/main/flex/
+
 build/sessionm.ane: build/sessionm-actionscript.swc sessionm-ane/Android-ARM/sessionm-android.jar sessionm-ane/iPhone-ARM/libsessionm-ios.a
 	$(MAKE) -C sessionm-ane
 

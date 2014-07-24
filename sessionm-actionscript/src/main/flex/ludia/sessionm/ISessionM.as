@@ -5,6 +5,13 @@ import ludia.sessionm.data.Achievement;
 
 import ludia.sessionm.data.User;
 
+/**
+ * Provides access to the SessionM Adobe AIR native extension package's
+ * functions to an ActionScript application (implemented by
+ * <code>SessionM</code>).
+ *
+ * @see SessionM
+ */
 public interface ISessionM extends IEventDispatcher {
     function shouldDisplayRewardsBadge():Boolean;
     function logAction(action:String):void;
