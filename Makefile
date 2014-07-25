@@ -49,4 +49,5 @@ clean:
 	$(MAKE) -C sessionm-ios/src/xcode clean
 	$(MAKE) -C sessionm-ane clean
 	$(MAKE) -C sessionm-example clean
+	rm -R -f asdoc-output
 	rm -R -f build
