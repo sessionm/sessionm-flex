@@ -243,7 +243,7 @@
                 </intent-filter>
                 </activity>
                 <activity android:theme="@android:style/Theme.Translucent"
-                android:name="ludia.sessionm.InitActivityActivity">
+                android:name="sessionm.flex.InitActivityActivity">
                 </activity>
                 <activity android:name="com.sessionm.ui.SessionMActivity"
                 android:configChanges="keyboard|orientation|screenSize"

@@ -7,10 +7,10 @@ AIR-SDK = </absolute/path/to/air_sdk_directory>
 AIR-VERSION = <X.X>
 
 ## Extension version ##
-EXT-VERSION = 1.1.0
+EXT-VERSION = 1.1.1
 
 ## Extension id ##
-EXT-ID = com.ludia.client.sessionm
+EXT-ID = com.sessionm.flex
 
 ## Application version ##
 APP-VERSION = 0.0.2

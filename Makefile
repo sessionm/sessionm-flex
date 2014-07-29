@@ -20,7 +20,7 @@ build/sessionm-actionscript.swc:
 	$(MAKE) -C sessionm-actionscript
 
 sessionm-ane/Android-ARM/sessionm-android.jar:
-	$(MAKE) -C sessionm-android/src/main/java/ludia/sessionm
+	$(MAKE) -C sessionm-android/src/main/java/sessionm/flex
 
 sessionm-ane/iPhone-ARM/libsessionm-ios.a:
 	$(MAKE) -C sessionm-ios/src/xcode
@@ -45,7 +45,7 @@ build:
 
 clean:
 	$(MAKE) -C sessionm-actionscript clean
-	$(MAKE) -C sessionm-android/src/main/java/ludia/sessionm clean
+	$(MAKE) -C sessionm-android/src/main/java/sessionm/flex clean
 	$(MAKE) -C sessionm-ios/src/xcode clean
 	$(MAKE) -C sessionm-ane clean
 	$(MAKE) -C sessionm-example clean

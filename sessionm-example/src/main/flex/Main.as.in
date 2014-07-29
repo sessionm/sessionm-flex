@@ -13,13 +13,13 @@ import flash.events.IOErrorEvent;
 import flash.events.MouseEvent;
 import flash.net.URLRequest;
 
-import ludia.sessionm.ActivityType;
-import ludia.sessionm.SessionM;
-import ludia.sessionm.data.Achievement;
-import ludia.sessionm.event.AchievementEvent;
-import ludia.sessionm.event.ActivityEvent;
-import ludia.sessionm.event.SessionEvent;
-import ludia.sessionm.event.UserEvent;
+import sessionm.flex.ActivityType;
+import sessionm.flex.SessionM;
+import sessionm.flex.data.Achievement;
+import sessionm.flex.event.AchievementEvent;
+import sessionm.flex.event.ActivityEvent;
+import sessionm.flex.event.SessionEvent;
+import sessionm.flex.event.UserEvent;
 
 public class Main extends Sprite {
 

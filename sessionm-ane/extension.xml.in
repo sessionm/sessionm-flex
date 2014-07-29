@@ -7,8 +7,8 @@
         <platform name="Android-ARM">
             <applicationDeployment>
                 <nativeLibrary>sessionm-android.jar</nativeLibrary>
-                <initializer>ludia.sessionm.SessionMExtension</initializer>
-                <finalizer>ludia.sessionm.SessionMExtension</finalizer>
+                <initializer>sessionm.flex.SessionMExtension</initializer>
+                <finalizer>sessionm.flex.SessionMExtension</finalizer>
             </applicationDeployment>
         </platform>
         <platform name="iPhone-ARM">

@@ -7,29 +7,29 @@ include $(CONFIG_FILE)
 ## Build rules and recipes
 build: ../build/sessionm-actionscript.swc
 
-../build/sessionm-actionscript.swc: src/main/flex/ludia/sessionm/SessionM.as
+../build/sessionm-actionscript.swc: src/main/flex/sessionm/flex/SessionM.as
 	rm -f ../sessionm-ane/library.swf
 	rm -f ../sessionm-ane/catalog.xml
 	$(AIR-SDK)/bin/acompc -source-path src/main/flex/ \
-	-include-classes ludia.sessionm.ISessionM ludia.sessionm.SessionM \
-	ludia.sessionm.ActivityType ludia.sessionm.FallbackLogger \
-	ludia.sessionm.data.Achievement ludia.sessionm.data.State \
-	ludia.sessionm.data.User ludia.sessionm.data.UserAction \
-	ludia.sessionm.event.AchievementEvent \
-	ludia.sessionm.event.ActivityEvent \
-	ludia.sessionm.event.SessionEvent \
-	ludia.sessionm.event.UserEvent -output \
+	-include-classes sessionm.flex.ISessionM sessionm.flex.SessionM \
+	sessionm.flex.ActivityType sessionm.flex.FallbackLogger \
+	sessionm.flex.data.Achievement sessionm.flex.data.State \
+	sessionm.flex.data.User sessionm.flex.data.UserAction \
+	sessionm.flex.event.AchievementEvent \
+	sessionm.flex.event.ActivityEvent \
+	sessionm.flex.event.SessionEvent \
+	sessionm.flex.event.UserEvent -output \
 	../build/sessionm-actionscript.swc
 	unzip ../build/sessionm-actionscript.swc -d ../sessionm-ane/
 	cp ../sessionm-ane/library.swf ../sessionm-ane/iPhone-ARM/library.swf 
 	cp ../sessionm-ane/library.swf ../sessionm-ane/default/library.swf 
 	cp ../sessionm-ane/library.swf ../sessionm-ane/Android-ARM/library.swf
 
-src/main/flex/ludia/sessionm/SessionM.as:
-	sed -e 's/$$(EXT-VERSION)/$(EXT-VERSION)/g' src/main/flex/ludia/sessionm/SessionM.as.in > src/main/flex/ludia/sessionm/SessionM.as
+src/main/flex/sessionm/flex/SessionM.as:
+	sed -e 's/$$(EXT-VERSION)/$(EXT-VERSION)/g' src/main/flex/sessionm/flex/SessionM.as.in > src/main/flex/sessionm/flex/SessionM.as
 
 clean:
 	rm -f ../sessionm-ane/library.swf
 	rm -f ../sessionm-ane/catalog.xml
 	rm -f ../build/sessionm-actionscript.swc
-	rm -f src/main/flex/ludia/sessionm/SessionM.as
+	rm -f src/main/flex/sessionm/flex/SessionM.as
