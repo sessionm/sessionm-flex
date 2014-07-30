@@ -6,12 +6,6 @@ AIR-SDK = </absolute/path/to/air_sdk_directory>
 ## Adobe AIR version ##
 AIR-VERSION = <X.X>
 
-## Extension version ##
-EXT-VERSION = 1.1.1
-
-## Extension id ##
-EXT-ID = com.sessionm.flex
-
 ## Application version ##
 APP-VERSION = 0.0.2
 

@@ -5,6 +5,8 @@ SessionM for Adobe AIR
 Adobe AIR Native Extension for the SessionM SDKs (iOS & Android).
 License: MIT
 
+Based on an initial version created by Ludia, inc. and available at: http://air-sessionm.readthedocs.org/en/latest/
+
 #####
 Usage
 #####

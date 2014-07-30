@@ -1,0 +1,7 @@
+# Variables available to sub-makefiles #
+
+## Extension version ##
+EXT-VERSION = 1.1.1
+
+## Extension id ##
+EXT-ID = com.sessionm.flex

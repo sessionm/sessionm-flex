@@ -3,6 +3,7 @@
 ## Configuration
 CONFIG_FILE = ../Makefile.config
 include $(CONFIG_FILE)
+include ../Makefile.extversion
 
 IOS_IPA = ../build/$(APP-NAME).ipa
 ANDROID_APK = ../build/$(APP-NAME).apk

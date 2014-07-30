@@ -3,6 +3,7 @@
 ## Configuration
 CONFIG_FILE = ../Makefile.config
 include $(CONFIG_FILE)
+include ../Makefile.extversion
 
 ## Build rules and recipes
 build:  ../build/sessionm.ane
