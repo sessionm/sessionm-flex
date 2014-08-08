@@ -11,7 +11,9 @@ Based on an initial version created by Ludia, inc. and available at: http://air-
 Usage
 #####
 
-Please see http://air-sessionm.readthedocs.org/en/latest/#api-usage
+Please see  http://www.sessionm.com/documentation/adobeair-integration.php
+
+Full online API documentation is also available at  http://devdoc.sessionm.com/adobeair/index.html
 
 ##################
 Build dependencies
