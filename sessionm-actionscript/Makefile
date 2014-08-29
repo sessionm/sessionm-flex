@@ -22,6 +22,7 @@ build: ../build/sessionm-actionscript.swc
 	sessionm.flex.event.UserEvent -output \
 	../build/sessionm-actionscript.swc
 	unzip ../build/sessionm-actionscript.swc -d ../sessionm-ane/
+	cp ../build/sessionm-actionscript.swc ../sessionm-ane/default/sessionm.swc
 	cp ../sessionm-ane/library.swf ../sessionm-ane/iPhone-ARM/library.swf 
 	cp ../sessionm-ane/library.swf ../sessionm-ane/default/library.swf 
 	cp ../sessionm-ane/library.swf ../sessionm-ane/Android-ARM/library.swf
@@ -31,6 +32,10 @@ src/main/flex/sessionm/flex/SessionM.as:
 
 clean:
 	rm -f ../sessionm-ane/library.swf
+	rm -f ../sessionm-ane/iPhone-ARM/library.swf
+	rm -f ../sessionm-ane/default/library.swf
+	rm -f ../sessionm-ane/Android-ARM/library.swf
 	rm -f ../sessionm-ane/catalog.xml
+	rm -f ../sessionm-ane/default/sessionm.swc
 	rm -f ../build/sessionm-actionscript.swc
 	rm -f src/main/flex/sessionm/flex/SessionM.as
