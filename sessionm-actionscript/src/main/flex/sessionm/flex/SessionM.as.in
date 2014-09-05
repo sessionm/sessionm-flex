@@ -216,6 +216,16 @@ public class SessionM extends EventDispatcher implements ISessionM {
     }
 
     /**
+     * Updates the user's opted-out status. Users that are opted out will not be
+     * able to earn achievements.
+     *
+     * @public
+     * @param optedOut the user's new opted-out status.
+     */
+    public function setUserIsOptedOut(optedOut:Boolean):void {
+        callExtension("setUserIsOptedOut", optedOut);
+    }
+    /**
      * Returns the most recent unclaimed achievement that the user has
      * earned. Returns <code>null</code> if the user has no unclaimed
      * achievements or if the most recent unclaimed achievement has already been
@@ -296,22 +306,41 @@ public class SessionM extends EventDispatcher implements ISessionM {
 
     /** 
      * Returns <code>true</code> if the rewards badge should be displayed
-     * (when the session state is <code>"STARTED_ONLINE"</code> and the user
-     * has not opted out of rewards).
+     * (when the session state is <code>"STARTED_ONLINE"</code>). This version
+     * of the method should be used if the user does not have a way to opt in
+     * to rewards from outside the portal.
      *
      * @public
      * @return represents whether the rewards badge should be
      * displayed.
      */
     public function shouldDisplayRewardsBadge():Boolean {
+        return shouldDisplayRewardsBadgeEx(false);
+    }
+
+    /**
+     * Returns <code>true</code> if the rewards badge should be displayed
+     * (when the session state is <code>"STARTED_ONLINE"</code>, and optionally
+     * if the user has not opted out of rewards).
+     *
+     * @public
+     * @param testeOptedOut represents whether the user's opted-out status
+     * should be tested.
+     * @return represents whether the rewards badge should be
+     * displayed.
+     */
+    public function shouldDisplayRewardsBadgeEx(testOptedOut:Boolean):Boolean {
         var display:Boolean = false;
+        var userOptedOutStatus:Boolean = false;
+
+        if (testOptedOut) {
+            userOptedOutStatus = getUser().optedOut;
+        }
  
-        if (globalState == State.STARTED_ONLINE && getUser().optedOut == false)
-        {
+        if (globalState == State.STARTED_ONLINE && !userOptedOutStatus) {
             display = true;
         }
-        else
-        {
+        else {
             display = false;
         }
 

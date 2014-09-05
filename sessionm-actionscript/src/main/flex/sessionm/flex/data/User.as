@@ -74,6 +74,16 @@ public class User {
     }
 
     /**
+     * Sets whether the user has opted out of rewards.
+     *
+     * @public
+     * @param optOut the new opted-out status.
+     */
+    public function set optedOut(optOut:Boolean):void {
+        _optedOut = optOut;
+    }
+
+    /**
      * The user's unclaimed achievement points total.
      *
      * @public

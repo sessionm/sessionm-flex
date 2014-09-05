@@ -14,6 +14,7 @@ import sessionm.flex.data.User;
  */
 public interface ISessionM extends IEventDispatcher {
     function shouldDisplayRewardsBadge():Boolean;
+    function shouldDisplayRewardsBadgeEx(testOptedOut:Boolean):Boolean;
     function logAction(action:String):void;
     function logDebug(msg:String):void;
     function initActivity(type:String):void;
@@ -21,6 +22,7 @@ public interface ISessionM extends IEventDispatcher {
     function notifyDismissedAchievement(dismissType:String):void;
     function startSession(appID:String):void;
     function getUser():User;
+    function setUserIsOptedOut(optedOut:Boolean):void;
     function getUnclaimedAchievement():Achievement;
     function isSupportedPlatform():Boolean;
     function getSDKVersion():String;

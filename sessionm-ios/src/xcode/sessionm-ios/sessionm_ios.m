@@ -101,6 +101,7 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
         MAP_FUNCTION(dismissActivity, NULL),
         MAP_FUNCTION(getSDKVersion, NULL),
         MAP_FUNCTION(getUser, NULL),
+        MAP_FUNCTION(setUserIsOptedOut, NULL),
         MAP_FUNCTION(getUnclaimedAchievement, NULL)
     };
     
@@ -780,6 +781,41 @@ ANE_FUNCTION(getUser)
         NSLog(@"Invalid FRE result code %i", result);
         return NULL;
     }
+}
+
+ANE_FUNCTION(setUserIsOptedOut)
+{
+    NSLog(@"Entering setUserIsOptedOut()");
+    SessionM *instance = [SessionM sharedInstance];
+
+    if(!instance)
+    {
+        NSLog(@"SessionM is not supported on this platform");
+        return NULL;
+    }
+
+    if(!instance.user)
+    {
+        NSLog(@"SessionM instance has no user");
+        return NULL;
+    }
+
+    if(argc > 0) {
+        uint32_t optedOut = 0;
+
+        if(FRE_OK == FREGetObjectAsBool(argv[0], &optedOut)) {
+            NSLog(@"Received new opted-out status: %u", optedOut);
+            instance.user.isOptedOut = optedOut;
+        }
+        else {
+            NSLog(@"Error when reading new opted-out status");
+        }
+    }
+    else {
+        NSLog(@"Missing new opted-out status argument");
+    }
+
+    return NULL;
 }
 
 ANE_FUNCTION(getUnclaimedAchievement)

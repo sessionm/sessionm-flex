@@ -16,6 +16,7 @@ import flash.net.URLRequest;
 import sessionm.flex.ActivityType;
 import sessionm.flex.SessionM;
 import sessionm.flex.data.Achievement;
+import sessionm.flex.data.User;
 import sessionm.flex.event.AchievementEvent;
 import sessionm.flex.event.ActivityEvent;
 import sessionm.flex.event.SessionEvent;
@@ -120,6 +121,17 @@ public class Main extends Sprite {
     }
 
     /**
+     * Toggles the user's opted-out status
+     */
+    public function toggleOptedOutStatus():void {
+        var user:User = sessionM.getUser();
+        sessionM.setUserIsOptedOut(!user.optedOut);
+        user = sessionM.getUser();
+
+        prependText("User's opted-out status: " + user.optedOut);
+    }
+
+    /**
      * Calling initActivity() with ActivityType.PORTAL opens the main SessionM overlay,
      * where the user can engage with various offers.
      * You can subscribe to events of the ActivityEvent class to perform some custom logic.
@@ -219,6 +231,7 @@ public class Main extends Sprite {
         layout.addButton(new SimpleButton(new Command("Present portal", presentPortal)));
         layout.addButton(new SimpleButton(new Command("Present achievement", presentAchievement)));
         layout.addButton(new SimpleButton(new Command("Get user info", getUserInfo)));
+        layout.addButton(new SimpleButton(new Command("Toggle opted-out status", toggleOptedOutStatus)));
         layout.addButton(new SimpleButton(new Command("Is supported platform", isSupportedPlatform)));
         layout.addButton(new SimpleButton(new Command("Get versions", getVersions)));
         layout.addButton(new SimpleButton(new Command("Clear log", clearLog)));
