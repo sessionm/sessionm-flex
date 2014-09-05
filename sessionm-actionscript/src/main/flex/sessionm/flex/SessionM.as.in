@@ -296,8 +296,7 @@ public class SessionM extends EventDispatcher implements ISessionM {
 
     /** 
      * Returns <code>true</code> if the rewards badge should be displayed
-     * (when the session state is <code>"STARTED_ONLINE"</code> and the user
-     * has not opted out of rewards).
+     * (when the session state is <code>"STARTED_ONLINE"</code>).
      *
      * @public
      * @return represents whether the rewards badge should be
@@ -306,7 +305,7 @@ public class SessionM extends EventDispatcher implements ISessionM {
     public function shouldDisplayRewardsBadge():Boolean {
         var display:Boolean = false;
  
-        if (globalState == State.STARTED_ONLINE && getUser().optedOut == false)
+        if (globalState == State.STARTED_ONLINE)
         {
             display = true;
         }
