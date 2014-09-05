@@ -18,6 +18,7 @@ public interface ISessionM extends IEventDispatcher {
     function logDebug(msg:String):void;
     function initActivity(type:String):void;
     function initCustomActivity():void;
+    function isActivityPresented():Boolean;
     function notifyDismissedAchievement(dismissType:String):void;
     function startSession(appID:String):void;
     function getUser():User;

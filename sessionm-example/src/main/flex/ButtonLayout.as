@@ -51,6 +51,7 @@ class ButtonLayout
         var btnY:Number=rect.y;
         for each( var btn:SimpleButton in this.buttons)
         {
+            btn.height=rect.height/this.buttons.length;
             btn.width=rect.width-(padding*2);
             btnY+=this.padding;
             btn.x=btnX;

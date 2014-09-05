@@ -166,6 +166,26 @@ public class SessionM extends EventDispatcher implements ISessionM {
     	context.call("initCustomActivity");
     }
 
+    /**
+     * Returns <code>true</code> if an activity is currently being presented.
+     *
+     * @public
+     * @return represents whether an activity is currently being presented by
+     * the SessionM SDK.
+     */
+    public function isActivityPresented():Boolean {
+        var presented:Boolean = false;
+        try {
+            var returnVal:* = context.call("isActivityPresented");
+            presented = Boolean(returnVal);
+        }
+        catch (error:Error) {
+            logger.error("Unknown error: {0}", error);
+            presented = false;
+        }
+        return presented;
+    }
+
     /** 
      * Notifies the SessionM SDK that a custom achievement has been dismissed
      * if dismissType is <code>"CANCELED"</code>, or claimed if dismissType is
