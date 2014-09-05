@@ -26,6 +26,13 @@ public class Achievement {
      */
     private var _message:String;
     /**
+     * The amount of mPoints earned when the achievement is claimed.
+     *
+     * @private
+     * @default <code>NaN</code>
+     */
+    private var _mpointValue:Number;
+    /**
      * The last date the achievement was earned.
      *
      * @private
@@ -58,6 +65,7 @@ public class Achievement {
         this._achievementIconURL = String(source.achievementIconURL);
         this._action = String(source.action);
         this._message = String(source.message);
+        this._mpointValue = Number(source.mpointValue)
         var timestamp:int = int(source.lastEarnedDate);
         if(timestamp > 0) {
             this._lastEarnedDate = new Date(timestamp);
@@ -94,6 +102,16 @@ public class Achievement {
      */
     public function get message():String {
         return _message;
+    }
+
+    /**
+     * The amount of mPoints earned when the achievement is claimed.
+     *
+     * @public
+     * @default <code>NaN</code>
+     */
+    public function get mpointValue():Number {
+        return _mpointValue;
     }
 
     /**
@@ -134,7 +152,7 @@ public class Achievement {
      * @return the <code>String</code> representation of the achievement.
      */
     public function toString():String {
-        return "Achievement{achievementIconURL=" + String(achievementIconURL) + ",action=" + String(action) + ",message=" + String(message) + ",lastEarnedDate=" + String(lastEarnedDate) + ",isCustom=" + String(isCustom) + ",name=" + String(name) + "}";
+        return "Achievement{achievementIconURL=" + String(achievementIconURL) + ",action=" + String(action) + ",message=" + String(message) + ",mpointValue=" + String(mpointValue) + ",lastEarnedDate=" + String(lastEarnedDate) + ",isCustom=" + String(isCustom) + ",name=" + String(name) + "}";
     }
 }
 }
