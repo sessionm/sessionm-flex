@@ -97,6 +97,7 @@ void ContextInitializer(void* extData, const uint8_t* ctxType, FREContext ctx, u
         MAP_FUNCTION(logDebug, NULL),
         MAP_FUNCTION(initActivity, NULL),
         MAP_FUNCTION(initCustomActivity, NULL),
+        MAP_FUNCTION(isActivityPresented, NULL),
         MAP_FUNCTION(notifyDismissedAchievement, NULL),
         MAP_FUNCTION(dismissActivity, NULL),
         MAP_FUNCTION(getSDKVersion, NULL),
@@ -654,6 +655,34 @@ ANE_FUNCTION(initCustomActivity)
     }
     
 	return NULL;
+}
+
+ANE_FUNCTION(isActivityPresented)
+{
+    NSLog(@"Entering isActivityPresented()");
+    BOOL isActivityPresented = NO;
+
+    SessionM *instance = [SessionM sharedInstance];
+    if(instance)
+    {
+        NSLog(@"Checking if activity is currently being presented");
+        isActivityPresented = ([SessionM sharedInstance].currentActivity != nil);
+    }
+    else
+    {
+        NSLog(@"SessionM is not supported on this platform");
+    }
+
+    FREObject returnVal;
+
+    if(FRE_OK == FRENewObjectFromBool(isActivityPresented, &returnVal))
+    {
+        return returnVal;
+    }
+    else
+    {
+        return NULL;
+    }
 }
 
 ANE_FUNCTION(notifyDismissedAchievement)

@@ -61,6 +61,13 @@ public class Main extends Sprite {
     }
 
     /**
+     * Used to test the isActivityPresented method
+     */
+    public function isActivityPresented():void {
+        prependText("Is activity presented: " + sessionM.isActivityPresented());
+    }
+
+    /**
     * Starting a session is mandatory before calling activity methods.
     */
     private function startSession():void {
@@ -233,6 +240,7 @@ public class Main extends Sprite {
         layout.addButton(new SimpleButton(new Command("Get user info", getUserInfo)));
         layout.addButton(new SimpleButton(new Command("Toggle opted-out status", toggleOptedOutStatus)));
         layout.addButton(new SimpleButton(new Command("Is supported platform", isSupportedPlatform)));
+        layout.addButton(new SimpleButton(new Command("Is activity presented", isActivityPresented)));
         layout.addButton(new SimpleButton(new Command("Get versions", getVersions)));
         layout.addButton(new SimpleButton(new Command("Clear log", clearLog)));
 

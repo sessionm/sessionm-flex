@@ -87,6 +87,7 @@ ANE_FUNCTION(logAction);
 ANE_FUNCTION(logDebug);
 ANE_FUNCTION(initActivity);
 ANE_FUNCTION(initCustomActivity);
+ANE_FUNCTION(isActivityPresented);
 ANE_FUNCTION(notifyDismissedAchievement);
 ANE_FUNCTION(dismissActivity);
 ANE_FUNCTION(isSupportedPlatform);
