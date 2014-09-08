@@ -437,6 +437,7 @@ NSString* achievementToJSON(SMAchievementData *achievementData)
                            @"action": achievementData.action,
                            @"name": achievementData.name,
                            @"message": achievementData.message,
+                           @"mpointValue": [[NSNumber alloc] initWithInteger:achievementData.mpointValue],
                            @"isCustom": achievementData.isCustom ? @"true" : @"false",
                            @"lastEarnedDate": [[NSNumber alloc] initWithDouble:time]
                            };

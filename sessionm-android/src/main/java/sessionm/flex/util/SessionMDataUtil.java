@@ -14,6 +14,7 @@ public class SessionMDataUtil {
         json.put("name", achievementData.getName());
         json.put("message", achievementData.getMessage());
         json.put("action", achievementData.getAction());
+        json.put("mpointValue", achievementData.getMpointValue());
         json.put("achievementIconURL", achievementData.getAchievementIconURL());
         json.put("isCustom", achievementData.isCustom());
         Date lastEarnedDate = achievementData.lastEarnedDate();
