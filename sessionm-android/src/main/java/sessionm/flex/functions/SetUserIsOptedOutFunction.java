@@ -12,15 +12,30 @@ public class SetUserIsOptedOutFunction implements FREFunction{
     public FREObject call(FREContext freContext, FREObject[] freObjects)
     {
         SessionMExtension.log("SetUserIsOptedOutFunction.call()");
-        boolean optedOut = readOptedOutStatusFromArgument(freObjects);
         SessionM sessionM = SessionM.getInstance();
+
+        //if (sessionM.getUser().isOptedOut()){
+        //   SessionMExtension.log("SetUserIsOptedOutFunction: User optedout = true");
+        //} else {
+        //   SessionMExtension.log("SetUserIsOptedOutFunction: User optedout = false");
+        //}
+
+        boolean optedOut = readOptedOutStatusFromArgument(freObjects);
         sessionM.getUser().setOptedOut(freContext.getActivity().getApplicationContext(), optedOut);
+
+
+        //if (sessionM.getUser().isOptedOut()){
+        //   SessionMExtension.log("SetUserIsOptedOutFunction: User optedout after = true");
+        //} else {
+        //   SessionMExtension.log("SetUserIsOptedOutFunction: User optedout after = false");
+        //}
+
         return null;
     }
 
     private boolean readOptedOutStatusFromArgument(FREObject[] freObjects)
     {
-        Boolean optedOut = null;
+        boolean optedOut = false;
 
         try
         {
@@ -32,12 +47,15 @@ public class SetUserIsOptedOutFunction implements FREFunction{
             SessionMExtension.logError("Couldn't retrieve new opted-out status : " + e.getMessage());
         }
 
-        boolean optedOutB = false;
-        if (optedOut) {
-            optedOutB = optedOut.booleanValue();
-        }
+        //if (optedOut) {
+	//    SessionMExtension.log("SetUserIsOptedOutFunction new state: true");
+        //} else {
+	//    SessionMExtension.log("SetUserIsOptedOutFunction new state: false");
+        //}
 
-        return optedOutB;
+
+
+        return optedOut;
     }
 
 }

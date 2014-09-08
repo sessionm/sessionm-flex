@@ -40,9 +40,10 @@ public class User {
      * instance.
      */
     public function User(source:Object) {
+
         this._pointBalance = Number(source.pointBalance);
 
-        if (source.optedOut == "true") {
+        if ((source.optedOut == "true") || (source.optedOut == true)) {
           this._optedOut = true;
         }
         else {

@@ -30,6 +30,14 @@ public class GetUserFunction implements FREFunction{
                 json = null;
             }
 
+        //if (user.isOptedOut()){
+        //   SessionMExtension.log("GetUserFunction: User optedout = true");
+        //} else {
+        //   SessionMExtension.log("GetUserFunction: User optedout = false");
+        //}
+        //SessionMExtension.log("GetUserFunction - json: " + json.toString());
+
+
             if(json != null) {
                 try {
                     freObject =  FREObject.newObject(json.toString());
