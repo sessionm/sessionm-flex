@@ -12,13 +12,13 @@ public class SetUserIsOptedOutFunction implements FREFunction{
     public FREObject call(FREContext freContext, FREObject[] freObjects)
     {
         SessionMExtension.log("SetUserIsOptedOutFunction.call()");
-        Boolean optedOut = readOptedOutStatusFromArgument(freObjects);
+        boolean optedOut = readOptedOutStatusFromArgument(freObjects);
         SessionM sessionM = SessionM.getInstance();
         sessionM.getUser().setOptedOut(freContext.getActivity().getApplicationContext(), optedOut);
         return null;
     }
 
-    private Boolean readOptedOutStatusFromArgument(FREObject[] freObjects)
+    private boolean readOptedOutStatusFromArgument(FREObject[] freObjects)
     {
         Boolean optedOut = null;
 
@@ -31,10 +31,13 @@ public class SetUserIsOptedOutFunction implements FREFunction{
         {
             SessionMExtension.logError("Couldn't retrieve new opted-out status : " + e.getMessage());
         }
-        finally
-        {
-            return optedOut;
+
+        boolean optedOutB = false;
+        if (optedOut) {
+            optedOutB = optedOut.booleanValue();
         }
+
+        return optedOutB;
     }
 
 }

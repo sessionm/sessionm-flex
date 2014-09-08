@@ -6,9 +6,12 @@ include $(CONFIG_FILE)
 include ../Makefile.extversion
 
 ## Build rules and recipes
-build:  ../build/sessionm.ane
+build:  default ../build/sessionm.ane 
 
-../build/sessionm.ane: extension.xml iPhone-ARM/platform.xml Android-ARM/platform.xml
+default: 
+	mkdir default
+
+../build/sessionm.ane: extension.xml iPhone-ARM/platform.xml Android-ARM/platform.xml library.swf Android-ARM/sessionm-android.jar iPhone-ARM/libsessionm-ios.a ../build/sessionm-actionscript.swc
 	cp $(SESSIONM-ANDROID-SDK)/*.jar Android-ARM/SessionM.jar
 	$(AIR-SDK)/bin/adt -package -target ane ../build/sessionm.ane \
 	extension.xml -swc ../build/sessionm-actionscript.swc -platform iPhone-ARM -C \

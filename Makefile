@@ -5,9 +5,9 @@ CONFIG_FILE = Makefile.config
 include $(CONFIG_FILE)
 
 ## Build rules and recipes
-.PHONY: default build/sessionm.ane iPhone android 
+.PHONY: default build-all iPhone android 
 
-default: build build/sessionm.ane iPhone android
+default: build-all
 
 # If you receive "Error: This Java instance does not support a 32-bit JVM" when building this target, remove all references to the -d32 flag from the $(AIR-SDK)/bin/asdoc script
 doc: build/sessionm-actionscript.swc
@@ -39,6 +39,14 @@ uninstall-android:
 
 android: build build/sessionm.ane
 	$(MAKE) -C sessionm-example android
+
+build-all:  build  
+	$(MAKE) -C sessionm-actionscript build
+	$(MAKE) -C sessionm-ios/src/xcode
+	$(MAKE) -C sessionm-android/src/main/java/sessionm/flex
+	$(MAKE) -C sessionm-ane build
+	$(MAKE) -C sessionm-example build
+	
 
 build:
 	mkdir build

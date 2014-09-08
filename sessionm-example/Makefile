@@ -13,7 +13,7 @@ build: iPhone android
 
 iPhone: $(IOS_IPA)
 
-$(IOS_IPA): Main.swf src/main/resources/app-descriptor.xml
+$(IOS_IPA): Main.swf src/main/resources/app-descriptor.xml ../build/sessionm.ane ../build/sessionm-actionscript.swc
 	cd src/main/flex
 	$(AIR-SDK)/bin/adt -package -target ipa-test -keystore $(IOS-CERTIFICATE) \
 	-storetype pkcs12 -provisioning-profile $(PROVISION) \
@@ -31,7 +31,7 @@ uninstall-android:
 
 android: $(ANDROID_APK)
 
-$(ANDROID_APK): Main.swf src/main/resources/app-descriptor.xml
+$(ANDROID_APK): Main.swf src/main/resources/app-descriptor.xml ../build/sessionm.ane ../build/sessionm-actionscript.swc
 	cd src/main/flex
 	$(AIR-SDK)/bin/adt -package -target apk-captive-runtime -keystore $(ANDROID-CERTIFICATE) -storetype pkcs12 $(ANDROID_APK) src/main/resources/app-descriptor.xml Main.swf -extdir ../build
 
@@ -39,7 +39,7 @@ Main.swf: src/main/flex/Main.as
 	cd src/main/flex
 	$(AIR-SDK)/bin/amxmlc src/main/flex/Main.as -include-libraries=../build/sessionm.ane -output Main.swf
 
-src/main/flex/Main.as:
+src/main/flex/Main.as: src/main/flex/Main.as.in
 	sed -e 's/$$(IOS-APP-ID)/$(IOS-APP-ID)/g' -e 's/$$(ANDROID-APP-ID)/$(ANDROID-APP-ID)/g' src/main/flex/Main.as.in > src/main/flex/Main.as
 
 src/main/resources/app-descriptor.xml:

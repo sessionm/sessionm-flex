@@ -805,7 +805,7 @@ ANE_FUNCTION(setUserIsOptedOut)
 
         if(FRE_OK == FREGetObjectAsBool(argv[0], &optedOut)) {
             NSLog(@"Received new opted-out status: %u", optedOut);
-            instance.user.isOptedOut = optedOut;
+            instance.user.isOptedOut = optedOut != 0;
         }
         else {
             NSLog(@"Error when reading new opted-out status");

@@ -8,7 +8,7 @@ include ../Makefile.extversion
 ## Build rules and recipes
 build: ../build/sessionm-actionscript.swc
 
-../build/sessionm-actionscript.swc: src/main/flex/sessionm/flex/SessionM.as
+../build/sessionm-actionscript.swc: src/main/flex/sessionm/flex/SessionM.as src/main/flex/sessionm/flex/ISessionM.as src/main/flex/sessionm/flex/data/User.as 
 	rm -f ../sessionm-ane/library.swf
 	rm -f ../sessionm-ane/catalog.xml
 	$(AIR-SDK)/bin/acompc -source-path src/main/flex/ \
@@ -27,7 +27,7 @@ build: ../build/sessionm-actionscript.swc
 	cp ../sessionm-ane/library.swf ../sessionm-ane/default/library.swf 
 	cp ../sessionm-ane/library.swf ../sessionm-ane/Android-ARM/library.swf
 
-src/main/flex/sessionm/flex/SessionM.as:
+src/main/flex/sessionm/flex/SessionM.as: src/main/flex/sessionm/flex/SessionM.as.in
 	sed -e 's/$$(EXT-VERSION)/$(EXT-VERSION)/g' src/main/flex/sessionm/flex/SessionM.as.in > src/main/flex/sessionm/flex/SessionM.as
 
 clean:
