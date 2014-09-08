@@ -306,9 +306,7 @@ public class SessionM extends EventDispatcher implements ISessionM {
 
     /** 
      * Returns <code>true</code> if the rewards badge should be displayed
-     * (when the session state is <code>"STARTED_ONLINE"</code>). This version
-     * of the method should be used if the user does not have a way to opt in
-     * to rewards from outside the portal.
+     * (when the session state is <code>"STARTED_ONLINE"</code>).
      *
      * @public
      * @return represents whether the rewards badge should be
@@ -337,7 +335,8 @@ public class SessionM extends EventDispatcher implements ISessionM {
             userOptedOutStatus = getUser().optedOut;
         }
  
-        if (globalState == State.STARTED_ONLINE && !userOptedOutStatus) {
+        if (globalState == State.STARTED_ONLINE)
+        {
             display = true;
         }
         else {
