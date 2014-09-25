@@ -22,7 +22,7 @@ Build dependencies
 In order to build this extension, the following programs must be available:
 
 * A copy of the Adobe AIR SDK (Tested with Adobe Air 14)
-* XCode (Tested on XCode 5.1.1)
+* XCode (Tested on XCode 6.0.0)
 * Java JDK 6.0
 * Android SDK (can be specified with ``android.sdk`` Java options)
 * SessionM iOS and Android SDKs. Available for download from: http://www.sessionm.com/documentation/downloads.php
