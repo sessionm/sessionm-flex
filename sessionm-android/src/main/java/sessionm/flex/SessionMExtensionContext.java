@@ -3,6 +3,7 @@ package sessionm.flex;
 import com.adobe.fre.FREContext;
 import com.adobe.fre.FREFunction;
 import com.sessionm.api.AchievementData;
+import com.sessionm.api.message.data.MessageData;
 import com.sessionm.api.SessionListener;
 import com.sessionm.api.SessionM;
 import com.sessionm.api.User;
@@ -82,6 +83,21 @@ public class SessionMExtensionContext extends FREContext implements SessionListe
             }
         }
     }
+
+    @Override
+    public void onOrderStatusUpdated(SessionM sessionM, String status) {}
+
+    @Override
+    public void onReceiptUpdated(SessionM sessionM, String status) {}
+
+    @Override
+    public void onNotificationMessage(SessionM sessionM, MessageData message) {}
+
+    @Override
+    public void onUserActivitiesUpdated(SessionM sessionM) {}
+
+    @Override
+    public void onMessageUpdated(SessionM sessionM, MessageData message) {}
 
     public void onUnclaimedAchievement(SessionM sessionM, AchievementData achievementData) {
         JSONObject json = null;
