@@ -42,5 +42,5 @@ IOS-SDK-VERSION = <X.X.X>
 ## Path to SessionM android sdk ##
 SESSIONM-ANDROID-SDK = </absolute/path/to/SessioM_android_vX.X.X>
 
-## Path to Java JDK 8.0 Commands ##
-JAVA-COMMANDS = </absolute/path/to/java_jdk_8.0_directory/Commands>
+## Path to Java JDK 7 Commands ##
+JAVA-COMMANDS = </absolute/path/to/java_jdk_7_directory/Commands>

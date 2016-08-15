@@ -21,7 +21,7 @@ Build dependencies
 
 In order to build this extension, the following programs must be available:
 
-* A copy of the Adobe AIR SDK (Tested with Adobe Air 17)
+* A copy of the Adobe AIR SDK (Tested with Adobe Air 22)
 * XCode (Tested on XCode 7.3.1)
 * Java JDK 8.0
 * Android SDK (can be specified with ``android.sdk`` Java options)
