@@ -13,7 +13,7 @@ Usage
 
 Please see https://documentation.sessionm.com/sdk-integrations/adobe-air-integration/
 
-Full online API documentation is also available at https://devdoc.sessionm.com/adobeair/index.html
+Full online API documentation is also available at http://devdoc.sessionm.com/adobeair/index.html
 
 ##################
 Build dependencies
